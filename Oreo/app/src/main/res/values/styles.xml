@@ -1,0 +1,46 @@
+<resources>
+
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:fontFamily">@font/baloo_bhai</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">4sp</item>
+        <item name="android:elevation">1.5dp</item>
+    </style>
+
+    <style name="AppTheme.ButtonPrimary" parent="AppTheme.Button">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/button_rounded_primary</item>
+    </style>
+
+    <style name="AppTheme.ButtonSecondary" parent="AppTheme.Button">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/button_rounded_secondary</item>
+    </style>
+
+    <style name="AppTheme.ButtonWhite" parent="AppTheme.Button">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:background">@drawable/button_rounded_white</item>
+    </style>
+
+    <style name="AppTheme.ButtonGreen" parent="AppTheme.Button">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/button_rounded_green</item>
+    </style>
+
+    <style name="AppTheme.ButtonBlue" parent="AppTheme.ButtonWhite">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:background">@drawable/button_rounded_blue</item>
+    </style>
+
+</resources>
