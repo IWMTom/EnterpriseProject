@@ -38,9 +38,24 @@
         <item name="android:background">@drawable/button_rounded_green</item>
     </style>
 
-    <style name="AppTheme.ButtonBlue" parent="AppTheme.ButtonWhite">
+    <style name="AppTheme.ButtonBlue" parent="AppTheme.Button">
         <item name="android:textColor">@color/colorWhite</item>
         <item name="android:background">@drawable/button_rounded_blue</item>
+    </style>
+
+    <style name="AppTheme.ButtonDisabled" parent="AppTheme.Button">
+        <item name="android:textColor">@color/colorDarkGrey</item>
+        <item name="android:background">@drawable/button_rounded_disabled</item>
+    </style>
+
+    <style name="AppTheme.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/edittext_rounded</item>
+        <item name="android:paddingLeft">20dp</item>
+        <item name="android:paddingRight">20dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+        <item name="android:fontFamily">@font/varela_round</item>
+        <item name="android:textColor">@color/colorAccent</item>
     </style>
 
 </resources>

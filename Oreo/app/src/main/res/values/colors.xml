@@ -5,6 +5,9 @@
     <color name="colorAccent">#15202D</color>
     <color name="colorAccentDark">#000000</color>
     <color name="colorLightBackground">#F4F8FA</color>
+    <color name="colorLightBorder">#D4DCE1</color>
+    <color name="colorLightGrey">#e6ebed</color>
+    <color name="colorDarkGrey">#a2a8b1</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorWhiteDark">#F5F5F5</color>
