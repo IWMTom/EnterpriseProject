@@ -23,7 +23,7 @@ proguard/
 *.log
 
 # IntelliJ
-.idea/workspace.xml
+**/.idea/workspace.xml
 
 # Android Studio Navigation editor temp files
 .navigation/
