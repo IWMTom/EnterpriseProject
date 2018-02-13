@@ -12,10 +12,10 @@ public class StyleGuideActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(R.layout.activity_style_guide);
 
         // Part of the fix for Google issue #63250768 relating to custom fonts for switches
-        DataBindingUtil.setContentView(this, R.layout.activity_welcome);
+        DataBindingUtil.setContentView(this, R.layout.activity_style_guide);
 
         Spinner spinner = findViewById(R.id.spinner2);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.demo_spinner_day, R.layout.spinner_rounded_layout);

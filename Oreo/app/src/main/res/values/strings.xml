@@ -1,5 +1,13 @@
 <resources>
-    <string name="app_name">Oreo</string>
+    <string name="app_name">Shipr</string>
+
+    <string name="activity_welcome_sign_up_text">Not got an account yet? \n It\'s super simple to join Shipr!</string>
+    <string name="activity_welcome_sign_up_button">Sign Up</string>
+    <string name="activity_welcome_login_email">Email Address</string>
+    <string name="activity_welcome_login_password">Password</string>
+    <string name="activity_welcome_login_forgot_password">Forgotten your password?</string>
+    <string name="activity_welcome_login_button">Log In</string>
+
     <string-array name="demo_spinner_day">
         <item>1</item>
         <item>2</item>
