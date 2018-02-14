@@ -16,7 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorWhite"
-            tools:context="uk.ac.tees.com2060.oreo.StyleGuideActivity">
+            tools:context="uk.ac.tees.com2060.oreo.StyleGuideActivity"
+            android:focusableInTouchMode="true">
 
             <Spinner
                 android:id="@+id/spinner4"
