@@ -5,7 +5,8 @@
     android:id="@+id/register_fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="uk.ac.tees.com2060.oreo.RegisterActivity">
+    tools:context="uk.ac.tees.com2060.oreo.RegisterActivity"
+    android:background="@color/colorWhite">
 
 
 </android.support.constraint.ConstraintLayout>

@@ -12,6 +12,12 @@
 
     <string name="activity_register_step1_title">Step 1 of 2</string>
     <string name="activity_register_step2_title">Step 2 of 2</string>
+    <string name="activity_register_step1_full_name">Full name (e.g. John Doe)</string>
+    <string name="activity_register_step1_known_as">Known as (e.g. John)</string>
+    <string name="activity_register_step1_location">Location (e.g. London)</string>
+    <string name="activity_register_step1_dob">Date of Birth</string>
+    <string name="activity_register_step1_well_info">We just need to know a little bit about you - be sure to upload a profile photo!</string>
+    <string name="activity_register_step1_well_next_step">Next Step</string>
 
     <string-array name="demo_spinner_day">
         <item>1</item>

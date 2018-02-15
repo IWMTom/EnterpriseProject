@@ -40,14 +40,14 @@ public class RegisterStep2Fragment extends Fragment
     {
         View view = inflater.inflate(R.layout.fragment_register_step2, container, false);
 
-        Button nextStep = (Button) view.findViewById(R.id.button10);
-        nextStep.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v)
-            {
-                mCallback.step2Listener();
-            }
-        });
+//        Button nextStep = (Button) view.findViewById(R.id.button10);
+//        nextStep.setOnClickListener(new View.OnClickListener()
+//        {
+//            public void onClick(View v)
+//            {
+//                mCallback.step2Listener();
+//            }
+//        });
 
         return view;
     }
