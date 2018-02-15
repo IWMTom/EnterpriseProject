@@ -87,13 +87,13 @@
             android:ems="10"
             android:hint="@string/activity_register_step1_known_as"
             android:inputType="textCapWords|textPersonName"
-            app:layout_constraintBottom_toTopOf="@+id/editText_location"
+            app:layout_constraintBottom_toTopOf="@+id/editText_postcode"
             app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
             app:layout_constraintTop_toBottomOf="@+id/editText_full_name" />
 
         <EditText
-            android:id="@+id/editText_location"
+            android:id="@+id/editText_postcode"
             style="@style/AppTheme.EditText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -103,7 +103,7 @@
             android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="@string/activity_register_step1_location"
-            android:inputType="textCapWords|textPersonName"
+            android:inputType="textCapCharacters|textPostalAddress"
             app:layout_constraintBottom_toTopOf="@+id/editText_dob"
             app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
             app:layout_constraintHorizontal_bias="0.0"
@@ -128,7 +128,7 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
-            app:layout_constraintTop_toBottomOf="@+id/editText_location" />
+            app:layout_constraintTop_toBottomOf="@+id/editText_postcode" />
 
     </android.support.constraint.ConstraintLayout>
 
