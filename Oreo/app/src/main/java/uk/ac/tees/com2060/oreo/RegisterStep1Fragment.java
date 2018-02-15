@@ -111,22 +111,32 @@ public class RegisterStep1Fragment extends Fragment
         {
             public void onClick(View v)
             {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setMessage(R.string.activity_register_step1_no_profile_photo)
-                    .setPositiveButton(R.string.activity_register_step1_no_profile_photo_no,
-                            new DialogInterface.OnClickListener()
+                if (profile_photo == null)
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage(R.string.activity_register_step1_no_profile_photo)
+                            .setPositiveButton(R.string.activity_register_step1_no_profile_photo_no,
+                                    new DialogInterface.OnClickListener()
+                                    {
+                                        public void onClick(DialogInterface dialog, int id)
+                                        {
+                                            if (validateFields())
+                                            {
+                                                mCallback.step1Listener();
+                                            }
+                                        }
+                                    })
+                            .setNegativeButton(R.string.activity_register_step1_no_profile_photo_yes, null);
+                    builder.create();
+                    builder.show();
+                }
+                else
+                {
+                    if (validateFields())
                     {
-                        public void onClick(DialogInterface dialog, int id)
-                        {
-                            if (validateFields())
-                            {
-                                mCallback.step1Listener();
-                            }
-                        }
-                    })
-                    .setNegativeButton(R.string.activity_register_step1_no_profile_photo_yes, null);
-                builder.create();
-                builder.show();
+                        mCallback.step1Listener();
+                    }
+                }
             }
         });
 

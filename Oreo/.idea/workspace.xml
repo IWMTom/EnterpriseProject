@@ -23,14 +23,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b55971d3-c5cd-4514-87b6-80a1b0a039b7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/logo_test.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep1Fragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep1Fragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Utils.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Utils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register_step1.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register_step1.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -124,24 +117,25 @@
       <file leaf-file-name="RegisterStep1Fragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep1Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="129" column="13" lean-forward="false" selection-start-line="129" selection-start-column="13" selection-end-line="129" selection-end-column="13" />
+            <state relative-caret-position="638">
+              <caret line="138" column="17" lean-forward="true" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2514#2986#0" expanded="true" />
                 <element signature="e#2985#2986#0" expanded="true" />
                 <element signature="e#3145#3504#0" expanded="true" />
                 <element signature="e#3503#3504#0" expanded="true" />
-                <element signature="e#3884#4838#0" expanded="true" />
-                <element signature="e#4096#4145#0" expanded="true" />
-                <element signature="e#4186#4238#0" expanded="true" />
-                <element signature="e#4268#4646#0" expanded="true" />
-                <element signature="e#4645#4646#0" expanded="true" />
-                <element signature="e#4687#4740#0" expanded="true" />
-                <element signature="e#5113#5149#0" expanded="true" />
+                <element signature="e#3884#5295#0" expanded="true" />
+                <element signature="e#4165#4214#0" expanded="true" />
+                <element signature="e#4263#4315#0" expanded="true" />
+                <element signature="e#4353#4875#0" expanded="true" />
+                <element signature="e#4874#4875#0" expanded="true" />
+                <element signature="e#4924#4977#0" expanded="true" />
+                <element signature="e#5294#5295#0" expanded="true" />
+                <element signature="e#5570#5606#0" expanded="true" />
                 <element signature="class#RegisterStep1Listener#0;class#RegisterStep1Fragment#0" expanded="false" />
                 <element signature="method#onAttach#0;class#RegisterStep1Fragment#0" expanded="false" />
-                <element signature="class#5921:7208" expanded="false" />
+                <element signature="class#6378:7665" expanded="false" />
                 <element signature="method#onCreateOptionsMenu#0;class#RegisterStep1Fragment#0" expanded="false" />
                 <element signature="method#onOptionsItemSelected#0;class#RegisterStep1Fragment#0" expanded="false" />
                 <element signature="method#onActivityResult#0;class#RegisterStep1Fragment#0" expanded="false" />
@@ -2192,7 +2186,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Android App.Emulator">
+  <component name="RunManager" selected="Android App.Device">
     <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -2263,7 +2257,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518736817226" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518737066211" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2311,7 +2305,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518736817226" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518737066211" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2494,7 +2488,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518736817227" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518737066212" />
       </method>
     </configuration>
     <configuration default="false" name="Device" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -2543,7 +2537,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518736817227" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518737066212" />
       </method>
     </configuration>
     <list size="2">
@@ -3020,24 +3014,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep1Fragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="129" column="13" lean-forward="false" selection-start-line="129" selection-start-column="13" selection-end-line="129" selection-end-column="13" />
+        <state relative-caret-position="638">
+          <caret line="138" column="17" lean-forward="true" selection-start-line="138" selection-start-column="17" selection-end-line="138" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2514#2986#0" expanded="true" />
             <element signature="e#2985#2986#0" expanded="true" />
             <element signature="e#3145#3504#0" expanded="true" />
             <element signature="e#3503#3504#0" expanded="true" />
-            <element signature="e#3884#4838#0" expanded="true" />
-            <element signature="e#4096#4145#0" expanded="true" />
-            <element signature="e#4186#4238#0" expanded="true" />
-            <element signature="e#4268#4646#0" expanded="true" />
-            <element signature="e#4645#4646#0" expanded="true" />
-            <element signature="e#4687#4740#0" expanded="true" />
-            <element signature="e#5113#5149#0" expanded="true" />
+            <element signature="e#3884#5295#0" expanded="true" />
+            <element signature="e#4165#4214#0" expanded="true" />
+            <element signature="e#4263#4315#0" expanded="true" />
+            <element signature="e#4353#4875#0" expanded="true" />
+            <element signature="e#4874#4875#0" expanded="true" />
+            <element signature="e#4924#4977#0" expanded="true" />
+            <element signature="e#5294#5295#0" expanded="true" />
+            <element signature="e#5570#5606#0" expanded="true" />
             <element signature="class#RegisterStep1Listener#0;class#RegisterStep1Fragment#0" expanded="false" />
             <element signature="method#onAttach#0;class#RegisterStep1Fragment#0" expanded="false" />
-            <element signature="class#5921:7208" expanded="false" />
+            <element signature="class#6378:7665" expanded="false" />
             <element signature="method#onCreateOptionsMenu#0;class#RegisterStep1Fragment#0" expanded="false" />
             <element signature="method#onOptionsItemSelected#0;class#RegisterStep1Fragment#0" expanded="false" />
             <element signature="method#onActivityResult#0;class#RegisterStep1Fragment#0" expanded="false" />
