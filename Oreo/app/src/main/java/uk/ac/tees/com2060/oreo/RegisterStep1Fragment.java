@@ -29,7 +29,6 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
-import java.util.regex.Pattern;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -39,9 +38,9 @@ public class RegisterStep1Fragment extends Fragment
     Bitmap profile_photo;
     EditText editText_full_name;
     EditText editText_known_as;
-    EditText editText_postcode;
     EditText editText_dob;
     Button button_next_step;
+    ImageView profilePhoto;
 
     /**
      * Required empty constructor
@@ -52,19 +51,25 @@ public class RegisterStep1Fragment extends Fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        getActivity().setTitle(R.string.activity_register_step1_title);
+
         View view = inflater.inflate(R.layout.fragment_register_step1, container, false);
         setHasOptionsMenu(true);
 
+        profilePhoto = (ImageView) view.findViewById(R.id.imageView_profile_photo);
         editText_dob = (EditText) view.findViewById(R.id.editText_dob);
         editText_full_name = (EditText) view.findViewById(R.id.editText_full_name);
         editText_known_as = (EditText) view.findViewById(R.id.editText_known_as);
-        editText_postcode = (EditText) view.findViewById(R.id.editText_postcode);
         button_next_step = (Button) view.findViewById(R.id.button_next_step);
 
         editText_full_name.addTextChangedListener(watcher);
         editText_known_as.addTextChangedListener(watcher);
-        editText_postcode.addTextChangedListener(watcher);
         editText_dob.addTextChangedListener(watcher);
+
+        if (profile_photo != null)
+        {
+            profilePhoto.setImageBitmap(profile_photo);
+        }
 
         /**
          * Listens for when the date picker dialog has been used, and sets the text
@@ -122,7 +127,7 @@ public class RegisterStep1Fragment extends Fragment
                                         {
                                             if (validateFields())
                                             {
-                                                mCallback.step1Listener();
+                                                callbackToActivity();
                                             }
                                         }
                                     })
@@ -134,7 +139,7 @@ public class RegisterStep1Fragment extends Fragment
                 {
                     if (validateFields())
                     {
-                        mCallback.step1Listener();
+                        callbackToActivity();
                     }
                 }
             }
@@ -145,19 +150,26 @@ public class RegisterStep1Fragment extends Fragment
 
     public boolean validateFields()
     {
-        if (!editText_postcode.getText().toString().matches(
-                "^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\\s*[0-9][a-zA-Z]{2}$"))
-        {
-            Utils.displayMessage(getActivity(), R.string.validation_invalid_postcode, R.string.okay);
-            return false;
-        }
+//        if (!editText_postcode.getText().toString().matches(
+//                "^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\\s*[0-9][a-zA-Z]{2}$"))
+//        {
+//            Utils.displayMessage(getActivity(), R.string.validation_invalid_postcode, R.string.okay);
+//            return false;
+//        }
 
         return true;
     }
 
+    public void callbackToActivity()
+    {
+        mCallback.step1Listener(profile_photo, editText_full_name.getText().toString(),
+                editText_known_as.getText().toString(), editText_dob.getText().toString());
+    }
+
     public interface RegisterStep1Listener
     {
-        public void step1Listener();
+        public void step1Listener(Bitmap profile_photo, String full_name,
+                                  String known_as, String dob);
     }
 
     @Override
@@ -193,7 +205,6 @@ public class RegisterStep1Fragment extends Fragment
         {
             if (editText_full_name.getText().toString().length() != 0
                     && editText_known_as.getText().toString().length() != 0
-                    && editText_postcode.getText().toString().length() != 0
                     && editText_dob.getText().toString().length() != 0)
             {
                 // Enable button, set style to primary
@@ -251,7 +262,6 @@ public class RegisterStep1Fragment extends Fragment
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                 profile_photo = BitmapFactory.decodeStream(imageStream);
 
-                ImageView profilePhoto = (ImageView) getView().findViewById(R.id.imageView_profile_photo);
                 profilePhoto.setImageBitmap(profile_photo);
             }
             catch (FileNotFoundException e)

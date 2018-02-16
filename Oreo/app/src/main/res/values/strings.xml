@@ -3,7 +3,9 @@
 
     <string name="okay">Okay</string>
 
-    <string name="validation_invalid_postcode">Your postcode is invalid!</string>
+    <string name="validation_invalid_postcode">You\'ve entered an invalid postcode - please check it</string>
+    <string name="validation_invalid_phone_number">You\'ve entered an invalid mobile number - please check it</string>
+    <string name="validation_invalid_password">You\'ve entered passwords that do not match - please check them</string>
 
     <string name="activity_style_guide_title">Style Guide</string>
 
@@ -15,16 +17,24 @@
     <string name="activity_welcome_login_button">Log In</string>
 
     <string name="activity_register_step1_title">Step 1 of 2</string>
-    <string name="activity_register_step2_title">Step 2 of 2</string>
     <string name="activity_register_step1_full_name">Full name (e.g. John Doe)</string>
     <string name="activity_register_step1_known_as">Known as (e.g. John)</string>
-    <string name="activity_register_step1_location">Postcode (e.g. W1A 1AA)</string>
     <string name="activity_register_step1_dob">Date of Birth</string>
     <string name="activity_register_step1_well_info">We just need to know a little bit about you - be sure to upload a profile photo!</string>
     <string name="activity_register_step1_well_next_step">Next Step</string>
     <string name="activity_register_step1_no_profile_photo">You haven\'t set a profile photo - would you like to set one before continuing?</string>
     <string name="activity_register_step1_no_profile_photo_yes">Yep!</string>
     <string name="activity_register_step1_no_profile_photo_no">No thanks</string>
+
+    <string name="activity_register_step2_title">Step 2 of 2</string>
+    <string name="activity_register_step2_nearly_there">You\'re nearly there, %1$s!</string>
+    <string name="activity_register_step2_postcode">Postcode</string>
+    <string name="activity_register_step2_phone_number">Mobile Number</string>
+    <string name="activity_register_step2_email_address">Email Address</string>
+    <string name="activity_register_step2_password">Password</string>
+    <string name="activity_register_step2_confirm_password">Confirm Password</string>
+    <string name="activity_register_step2_well_info">By completing registration, you agree to follow our Terms and Conditions</string>
+    <string name="activity_register_step2_well_sign_up">Sign Up</string>
 
 
     <string-array name="demo_spinner_day">
