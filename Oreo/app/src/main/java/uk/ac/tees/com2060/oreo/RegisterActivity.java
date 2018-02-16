@@ -16,7 +16,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
     RegisterStep2Fragment step2Fragment = new RegisterStep2Fragment();
 
     Bitmap profile_photo;
-    String full_name, known_as, dob;
+    String full_name, known_as, dob, postcode, phone_number, email_address, password, confirm_password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,8 +55,13 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
     }
 
     @Override
-    public void step2Listener()
+    public void step2Listener(String postcode, String phone_number,
+                              String email_address, String password, String confirm_password)
     {
-
+        this.postcode = postcode;
+        this.phone_number = phone_number;
+        this.email_address = email_address;
+        this.password = password;
+        this.confirm_password = confirm_password;
     }
 }

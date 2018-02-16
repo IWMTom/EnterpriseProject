@@ -10,10 +10,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b55971d3-c5cd-4514-87b6-80a1b0a039b7" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/android_android_26.xml" afterPath="$PROJECT_DIR$/.idea/libraries/android_android_26.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -59,8 +56,8 @@
       <file leaf-file-name="RegisterActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
-              <caret line="11" column="7" lean-forward="false" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+            <state relative-caret-position="976">
+              <caret line="64" column="49" lean-forward="false" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -69,8 +66,8 @@
       <file leaf-file-name="RegisterStep2Fragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep2Fragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1008">
-              <caret line="47" column="5" lean-forward="false" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
+            <state relative-caret-position="447">
+              <caret line="30" column="96" lean-forward="false" selection-start-line="29" selection-start-column="34" selection-end-line="30" selection-end-column="96" />
               <folding>
                 <element signature="e#3269#3378#0" expanded="true" />
                 <element signature="e#3653#3689#0" expanded="true" />
@@ -1917,9 +1914,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep2Fragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep1Fragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterActivity.java" />
       </list>
     </option>
   </component>
@@ -2156,7 +2153,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518794744187" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518795754098" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2204,7 +2201,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518794744188" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518795754098" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2366,7 +2363,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518794744189" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518795754100" />
       </method>
     </configuration>
     <configuration default="false" name="Device" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -2415,7 +2412,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518794744189" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1518795754100" />
       </method>
     </configuration>
     <list size="2">
@@ -2796,22 +2793,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep2Fragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1008">
-          <caret line="47" column="5" lean-forward="false" selection-start-line="47" selection-start-column="5" selection-end-line="47" selection-end-column="5" />
-          <folding>
-            <element signature="e#3269#3378#0" expanded="true" />
-            <element signature="e#3653#3689#0" expanded="true" />
-            <element signature="e#3691#3704#0" expanded="true" />
-            <element signature="e#3943#3983#0" expanded="true" />
-            <element signature="e#3985#3998#0" expanded="true" />
-            <element signature="e#4209#4245#0" expanded="true" />
-            <element signature="e#4247#4260#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_welcome.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="264">
@@ -2842,10 +2823,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep2Fragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="447">
+          <caret line="30" column="96" lean-forward="false" selection-start-line="29" selection-start-column="34" selection-end-line="30" selection-end-column="96" />
+          <folding>
+            <element signature="e#3269#3378#0" expanded="true" />
+            <element signature="e#3653#3689#0" expanded="true" />
+            <element signature="e#3691#3704#0" expanded="true" />
+            <element signature="e#3943#3983#0" expanded="true" />
+            <element signature="e#3985#3998#0" expanded="true" />
+            <element signature="e#4209#4245#0" expanded="true" />
+            <element signature="e#4247#4260#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="11" column="7" lean-forward="false" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        <state relative-caret-position="976">
+          <caret line="64" column="49" lean-forward="false" selection-start-line="64" selection-start-column="49" selection-end-line="64" selection-end-column="49" />
           <folding />
         </state>
       </provider>
