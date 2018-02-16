@@ -27,7 +27,8 @@ public class RegisterStep2Fragment extends Fragment
 
     public interface RegisterStep2Listener
     {
-        public void step2Listener();
+        public void step2Listener(String postcode, String phone_number,
+                                  String email_address, String password, String confirm_password);
     }
 
     @Override
@@ -73,7 +74,12 @@ public class RegisterStep2Fragment extends Fragment
             {
                 if (validateFields())
                 {
-                    mCallback.step2Listener();
+                    mCallback.step2Listener(
+                            editText_postcode.getText().toString(),
+                            editText_phone_number.getText().toString(),
+                            editText_email_address.getText().toString(),
+                            editText_password.getText().toString(),
+                            editText_confirm_password.getText().toString());
                 }
             }
         });
