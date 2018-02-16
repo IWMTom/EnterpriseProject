@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
@@ -100,7 +101,8 @@ public class RegisterStep1Fragment extends Fragment
             {
                 DatePickerDialog dialog = new DatePickerDialog(view.getContext(), date,
                         c.get(Calendar.YEAR), c.get(Calendar.MONTH), c.get(Calendar.DAY_OF_MONTH));
-
+                c.add(Calendar.YEAR, -18);
+                dialog.getDatePicker().setMaxDate(c.getTime().getTime());
                 dialog.show();
             }
         });
