@@ -16,7 +16,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme"
             android:label="@string/activity_style_guide_title"
-            android:parentActivityName=".WelcomeActivity"></activity>
+            android:parentActivityName=".WelcomeActivity" />
         <activity
             android:name=".WelcomeActivity"
             android:fitsSystemWindows="true"
@@ -32,7 +32,7 @@
         <activity
             android:name=".RegisterActivity"
             android:parentActivityName=".WelcomeActivity"
-            android:label="@string/activity_register_step1_title"></activity>
+            android:label="@string/activity_register_step1_title" />
     </application>
 
 </manifest>
