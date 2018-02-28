@@ -1,15 +1,20 @@
 package uk.ac.tees.com2060.oreo.ApiCallLib;
 
+import android.content.Context;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ApiResponse
 {
+    private Context context;
     private ResponseType type;
     private JSONObject body;
 
-    public ApiResponse(JSONObject response)
+    public ApiResponse(JSONObject response, Context context)
     {
+        this.context = context;
+
         if (response.has("success"))
         {
             this.type = ResponseType.SUCCESS;
@@ -43,5 +48,10 @@ public class ApiResponse
     public JSONObject getBody()
     {
         return this.body;
+    }
+
+    public Context getContext()
+    {
+        return this.context;
     }
 }

@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Shipr</string>
+    <string name="shared_preferences_user_data">uk.ac.tees.com2060.oreo.USER_DATA</string>
+    <string name="shared_preferences_user_data_api_key">uk.ac.tees.com2060.oreo.USER_DATA.API_KEY</string>
 
     <string name="okay">Okay</string>
 

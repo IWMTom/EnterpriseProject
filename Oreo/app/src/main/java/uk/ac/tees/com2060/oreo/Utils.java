@@ -1,7 +1,9 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.support.annotation.FontRes;
 import android.support.v4.content.res.ResourcesCompat;
@@ -24,5 +26,20 @@ public class Utils
                 .setPositiveButton(button_resource, null);
         builder.create();
         builder.show();
+    }
+
+    public static void setUserApiKey(Context context, String key)
+    {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_data), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString(context.getString(R.string.shared_preferences_user_data_api_key), key);
+        editor.apply();
+    }
+
+    public static String getUserApiKey(Context context)
+    {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_data), Context.MODE_PRIVATE);
+
+        return sharedPrefs.getString(context.getString(R.string.shared_preferences_user_data_api_key), null);
     }
 }

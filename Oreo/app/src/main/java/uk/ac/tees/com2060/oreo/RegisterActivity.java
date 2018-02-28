@@ -93,7 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
                 {
                     try
                     {
-                        System.out.println(response.getBody().get("token"));
+                        Utils.setUserApiKey(response.getContext(), response.getBody().get("token").toString());
                     } catch (JSONException e) { e.printStackTrace(); }
                 }
                 else
@@ -103,6 +103,5 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
             }
         });
         doRegister.sendRequest();
-
     }
 }

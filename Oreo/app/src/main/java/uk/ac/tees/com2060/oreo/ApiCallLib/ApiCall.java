@@ -6,7 +6,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
@@ -14,6 +13,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+
+import uk.ac.tees.com2060.oreo.Utils;
 
 public class ApiCall
 {
@@ -76,6 +77,9 @@ public class ApiCall
         if (listener == null)
             throw new NullPointerException("No ResponseListener specified");
 
+        if (auth == true && Utils.getUserApiKey(context) == null)
+            throw new NullPointerException("Authenticated API call requires API key");
+
         RequestQueue requestQueue = Volley.newRequestQueue(context);
 
         StringRequest request = new StringRequest(getMethod(), (API_BASE_URL + this.endpoint), new Response.Listener<String>()
@@ -85,7 +89,7 @@ public class ApiCall
             {
                 try
                 {
-                    listener.responseReceived(new ApiResponse(new JSONObject(response)));
+                    listener.responseReceived(new ApiResponse(new JSONObject(response), context));
                 } catch (JSONException e) { e.printStackTrace(); }
             }
         }, new Response.ErrorListener()
@@ -97,9 +101,22 @@ public class ApiCall
             }
         })
         {
+            @Override
             protected HashMap<String, String> getParams()
             {
                 return parameters;
+            }
+
+            @Override
+            public HashMap<String, String> getHeaders()
+            {
+                if (auth == false)
+                    return null;
+
+                HashMap<String, String> headers = new HashMap<>();
+                headers.put("Authorization", "Bearer " + Utils.getUserApiKey(context));
+
+                return headers;
             }
         };
 
