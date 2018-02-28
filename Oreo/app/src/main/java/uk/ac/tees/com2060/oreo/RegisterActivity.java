@@ -9,6 +9,14 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.EditText;
 
+import org.json.JSONException;
+
+import java.util.HashMap;
+
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
+
 public class RegisterActivity extends AppCompatActivity implements RegisterStep1Fragment.RegisterStep1Listener, RegisterStep2Fragment.RegisterStep2Listener
 {
 
@@ -63,5 +71,38 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
         this.email_address = email_address;
         this.password = password;
         this.confirm_password = confirm_password;
+
+        ApiCall doRegister = new ApiCall("register", this);
+        doRegister.setAuth(false);
+
+        doRegister.addParam("full_name", this.full_name);
+        doRegister.addParam("known_as", this.known_as);
+        doRegister.addParam("dob", this.dob);
+        doRegister.addParam("postcode", this.postcode);
+        doRegister.addParam("phone_number", this.phone_number);
+        doRegister.addParam("email", this.email_address);
+        doRegister.addParam("password", this.password);
+        doRegister.addParam("confirm_password", this.confirm_password);
+
+        doRegister.addResponseListener(new ResponseListener()
+        {
+            @Override
+            public void responseReceived(ApiResponse response)
+            {
+                if (response.success())
+                {
+                    try
+                    {
+                        System.out.println(response.getBody().get("token"));
+                    } catch (JSONException e) { e.printStackTrace(); }
+                }
+                else
+                {
+                    System.out.println("ERROR! - " + response.getBody());
+                }
+            }
+        });
+        doRegister.sendRequest();
+
     }
 }

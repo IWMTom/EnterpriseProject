@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+import uk.ac.tees.com2060.oreo.ApiCallLib.*;
+
 public class StyleGuideActivity extends AppCompatActivity
 {
     @Override

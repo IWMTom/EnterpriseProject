@@ -86,7 +86,7 @@ public class RegisterStep1Fragment extends Fragment
                 c.set(Calendar.MONTH, i1);
                 c.set(Calendar.DAY_OF_MONTH, i2);
 
-                SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
+                SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy", Locale.UK);
                 editText_dob.setText(df.format(c.getTime()));
             }
         };
