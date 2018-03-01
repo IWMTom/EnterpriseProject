@@ -1,6 +1,7 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -94,6 +95,11 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
                     {
                         Utils.setUserApiKey(response.getContext(), response.getBody().get("token").toString());
                     } catch (JSONException e) { e.printStackTrace(); }
+
+                    Intent intent = new Intent(response.getContext(), TestActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
                 }
                 else
                 {
