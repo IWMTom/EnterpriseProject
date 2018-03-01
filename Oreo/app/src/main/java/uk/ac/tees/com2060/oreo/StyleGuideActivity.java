@@ -18,25 +18,6 @@ public class StyleGuideActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_style_guide);
 
-        ApiCall getInfo = new ApiCall("user/details", this);
-
-        getInfo.addResponseListener(new ResponseListener()
-        {
-            @Override
-            public void responseReceived(ApiResponse response)
-            {
-                if (response.success())
-                {
-                    System.out.println(response.getBody().toString());
-                }
-                else
-                {
-                    System.out.println("ERROR! - " + response.getBody());
-                }
-            }
-        });
-        getInfo.sendRequest();
-
         // Part of the fix for Google issue #63250768 relating to custom fonts for switches
         DataBindingUtil.setContentView(this, R.layout.activity_style_guide);
 

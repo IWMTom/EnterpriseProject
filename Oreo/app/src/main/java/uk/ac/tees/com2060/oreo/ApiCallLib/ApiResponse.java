@@ -2,8 +2,12 @@ package uk.ac.tees.com2060.oreo.ApiCallLib;
 
 import android.content.Context;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 public class ApiResponse
 {
@@ -30,7 +34,10 @@ public class ApiResponse
 
             try
             {
-                this.body = (JSONObject) response.get("error");
+                if (response.get("error") instanceof String)
+                    this.body = response;
+                else
+                    this.body = (JSONObject) response.get("error");
             } catch (JSONException e) { e.printStackTrace(); }
         }
     }
@@ -53,5 +60,37 @@ public class ApiResponse
     public Context getContext()
     {
         return this.context;
+    }
+
+    public ArrayList<String> getErrors()
+    {
+        System.out.println(this.body);
+
+        ArrayList<String> errors = new ArrayList<>();
+
+        if (this.body.has("error"))
+        {
+            try
+            {
+                errors.add((String) this.body.get("error"));
+            } catch (JSONException e) { e.printStackTrace(); }
+        }
+        else
+        {
+            Iterator<String> errorsIterator = this.body.keys();
+            while (errorsIterator.hasNext())
+            {
+                JSONArray array = null;
+
+                try
+                {
+                    array = new JSONArray(this.body.optString(errorsIterator.next()));
+                    errors.add(array.getString(0));
+                } catch (JSONException e) { e.printStackTrace(); }
+
+            }
+        }
+
+        return errors;
     }
 }

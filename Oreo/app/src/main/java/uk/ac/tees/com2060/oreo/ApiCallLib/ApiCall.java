@@ -1,6 +1,7 @@
 package uk.ac.tees.com2060.oreo.ApiCallLib;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -97,7 +98,7 @@ public class ApiCall
             @Override
             public void onErrorResponse(VolleyError error)
             {
-                // TODO: handle errors
+                Toast.makeText(context, "Server error!", Toast.LENGTH_LONG);
             }
         })
         {
@@ -110,11 +111,10 @@ public class ApiCall
             @Override
             public HashMap<String, String> getHeaders()
             {
-                if (auth == false)
-                    return null;
-
                 HashMap<String, String> headers = new HashMap<>();
-                headers.put("Authorization", "Bearer " + Utils.getUserApiKey(context));
+
+                if (auth)
+                    headers.put("Authorization", "Bearer " + Utils.getUserApiKey(context));
 
                 return headers;
             }

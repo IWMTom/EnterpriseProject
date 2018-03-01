@@ -1,17 +1,13 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.View;
-import android.widget.EditText;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
+import android.widget.Toast;
 
 import org.json.JSONException;
-
-import java.util.HashMap;
 
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
@@ -84,6 +80,9 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
         doRegister.addParam("password", this.password);
         doRegister.addParam("confirm_password", this.confirm_password);
 
+        if (this.profile_photo != null)
+            doRegister.addParam("profile_photo", Utils.getStringFromImage(this.profile_photo));
+
         doRegister.addResponseListener(new ResponseListener()
         {
             @Override
@@ -98,10 +97,29 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
                 }
                 else
                 {
-                    System.out.println("ERROR! - " + response.getBody());
+                    Utils.displayMessage(RegisterActivity.this, response.getErrors().get(0), R.string.okay);
                 }
             }
         });
         doRegister.sendRequest();
+        Toast.makeText(this, R.string.submitting, Toast.LENGTH_SHORT).show();
+    }
+
+    /**
+     * Enables correct fragment up navigation
+     * @param item
+     * @return
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                this.onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

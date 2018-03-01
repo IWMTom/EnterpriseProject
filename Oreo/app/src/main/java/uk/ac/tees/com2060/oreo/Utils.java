@@ -5,10 +5,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.annotation.FontRes;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
+import android.util.Base64;
 import android.widget.Switch;
+
+import java.io.ByteArrayOutputStream;
 
 public class Utils
 {
@@ -17,6 +22,15 @@ public class Utils
     public static void setLabelTypeface(Switch view, @FontRes int id)
     {
         view.setTypeface(ResourcesCompat.getFont(view.getContext(), id));
+    }
+
+    public static void displayMessage(Activity activity, String message, int button_resource)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setMessage(message)
+                .setPositiveButton(button_resource, null);
+        builder.create();
+        builder.show();
     }
 
     public static void displayMessage(Activity activity, int message_resource, int button_resource)
@@ -41,5 +55,23 @@ public class Utils
         SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_data), Context.MODE_PRIVATE);
 
         return sharedPrefs.getString(context.getString(R.string.shared_preferences_user_data_api_key), null);
+    }
+
+    public static String getStringFromImage(Bitmap img)
+    {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        byte[] imageBytes = baos.toByteArray();
+        String encodedImage = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
+
+        return encodedImage;
+    }
+
+    public static Bitmap getImageFromString(String str)
+    {
+        byte[] decodedString = Base64.decode(str, Base64.NO_WRAP);
+        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
+        return decodedByte;
     }
 }

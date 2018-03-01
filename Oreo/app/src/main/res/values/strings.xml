@@ -4,7 +4,9 @@
     <string name="shared_preferences_user_data_api_key">uk.ac.tees.com2060.oreo.USER_DATA.API_KEY</string>
 
     <string name="okay">Okay</string>
+    <string name="submitting">Submitting...</string>
 
+    <string name="validation_complete_all_fields">You must fill in all of the available fields to proceed!</string>
     <string name="validation_invalid_postcode">You\'ve entered an invalid postcode - please check it</string>
     <string name="validation_invalid_phone_number">You\'ve entered an invalid mobile number - please check it</string>
     <string name="validation_invalid_password">You\'ve entered passwords that do not match - please check them</string>

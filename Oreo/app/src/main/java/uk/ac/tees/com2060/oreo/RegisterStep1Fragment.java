@@ -127,10 +127,7 @@ public class RegisterStep1Fragment extends Fragment
                                     {
                                         public void onClick(DialogInterface dialog, int id)
                                         {
-                                            if (validateFields())
-                                            {
                                                 callbackToActivity();
-                                            }
                                         }
                                     })
                             .setNegativeButton(R.string.activity_register_step1_no_profile_photo_yes, null);
@@ -139,27 +136,12 @@ public class RegisterStep1Fragment extends Fragment
                 }
                 else
                 {
-                    if (validateFields())
-                    {
-                        callbackToActivity();
-                    }
+                    callbackToActivity();
                 }
             }
         });
 
         return view;
-    }
-
-    public boolean validateFields()
-    {
-//        if (!editText_postcode.getText().toString().matches(
-//                "^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\\s*[0-9][a-zA-Z]{2}$"))
-//        {
-//            Utils.displayMessage(getActivity(), R.string.validation_invalid_postcode, R.string.okay);
-//            return false;
-//        }
-
-        return true;
     }
 
     public void callbackToActivity()
