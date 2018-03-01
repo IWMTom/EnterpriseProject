@@ -2,10 +2,7 @@ package uk.ac.tees.com2060.oreo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -16,14 +13,25 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
+/**
+ * WelcomeActivity.java
+ *
+ * The Activity class used to handle the initial application entry point.
+ * If a user is authenticated, they are redirected to the main application - otherwise,
+ * the welcome screen (login and registration) is displayed.
+ */
 public class WelcomeActivity extends AppCompatActivity
 {
     String email, password;
 
+    /**
+     * Overriddes default onCreate() method.
+     * Redirects user if already authenticated - otherwise, displays welcome screen.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        if (Utils.getUserApiKey(this) != null)
+        if (Utils.getUserAccessToken(this) != null)
         {
             Intent intent = new Intent(this, TestActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -35,16 +43,26 @@ public class WelcomeActivity extends AppCompatActivity
         setContentView(R.layout.activity_welcome);
     }
 
+    /**
+     * Validates login fields
+     * @return true if fields are valid
+     */
     private boolean validateFields()
     {
         if (email.length() == 0 || password.length() == 0)
         {
             return false;
         }
-
         return true;
     }
 
+    /**
+     * Called when the login button is clicked.
+     *
+     * Login fields are validated, and if valid, an API call is made to the backend web server
+     * to check the provided credentials. If valid, the access token is stored and the user
+     * navigated to the application - otherwise, an error message is displayed.
+     */
     public void doLogin(View view)
     {
         email       = ((EditText) findViewById(R.id.editText_email)).getText().toString();
@@ -67,9 +85,11 @@ public class WelcomeActivity extends AppCompatActivity
                     {
                         try
                         {
-                            Utils.setUserApiKey(response.getContext(), response.getBody().get("token").toString());
+                            Utils.setUserAccessToken(response.getContext(),
+                                    response.getBody().get("token").toString());
                         } catch (JSONException e) { e.printStackTrace(); }
 
+                        // Navigates to main activity, clearing the navigation back stack
                         Intent intent = new Intent(response.getContext(), TestActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
@@ -77,7 +97,7 @@ public class WelcomeActivity extends AppCompatActivity
                     }
                     else
                     {
-                        Utils.displayMessage(WelcomeActivity.this, response.getErrors().get(0), R.string.okay);
+                        Utils.displayMessage(WelcomeActivity.this, response.getErrors().get(0));
                     }
                 }
             });
@@ -90,12 +110,19 @@ public class WelcomeActivity extends AppCompatActivity
         }
     }
 
+    /**
+     * Called when the register button is clicked.
+     * Navigates the user to the registration activity.
+     */
     public void openRegister(View view)
     {
         Intent intent = new Intent(this, RegisterActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * TESTING - TO REMOVE
+     */
     public void openStyleGuide(View view)
     {
         Intent intent = new Intent(this, StyleGuideActivity.class);

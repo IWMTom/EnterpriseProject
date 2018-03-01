@@ -11,10 +11,17 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
-public class TestActivity extends AppCompatActivity {
+/**
+ * TestActivity.java
+ *
+ * Currently the main application - displays user data using the stored access token.
+ */
+public class TestActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
 

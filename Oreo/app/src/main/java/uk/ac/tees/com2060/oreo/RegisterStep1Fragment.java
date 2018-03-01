@@ -33,6 +33,12 @@ import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
 
+/**
+ * RegisterStep1Fragment.java
+ *
+ * The Fragment class that handles step 1 of user registration.
+ * User data is collected and sent back to the Activity when complete.
+ */
 public class RegisterStep1Fragment extends Fragment
 {
     RegisterStep1Listener mCallback;
@@ -48,7 +54,42 @@ public class RegisterStep1Fragment extends Fragment
      */
     public RegisterStep1Fragment() {}
 
+    /**
+     * Interface for the Activity to implement - enables activity/fragment communication
+     */
+    public interface RegisterStep1Listener
+    {
+        public void step1Listener(Bitmap profile_photo, String full_name,
+                                  String known_as, String dob);
+    }
 
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     * @param activity calling activity
+     */
+    @Override
+    public void onAttach(Activity activity)
+    {
+        super.onAttach(activity);
+
+        try
+        {
+            mCallback = (RegisterStep1Listener) activity;
+        }
+        catch (ClassCastException e)
+        {
+            throw new ClassCastException(activity.toString()
+                    + " must implement RegisterStep1Listener");
+        }
+    }
+
+    /**
+     * Overridden default onCreateView() method
+     * Sets the title in the title bar and displays the fragment layout file.
+     * A TextChangedListener is added to the EditText fields, to allow the continue button
+     * to be disabled until all the fields have been completed fully.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
@@ -144,32 +185,13 @@ public class RegisterStep1Fragment extends Fragment
         return view;
     }
 
+    /**
+     * Callback to the Activity with all user provided data
+     */
     public void callbackToActivity()
     {
         mCallback.step1Listener(profile_photo, editText_full_name.getText().toString(),
                 editText_known_as.getText().toString(), editText_dob.getText().toString());
-    }
-
-    public interface RegisterStep1Listener
-    {
-        public void step1Listener(Bitmap profile_photo, String full_name,
-                                  String known_as, String dob);
-    }
-
-    @Override
-    public void onAttach(Activity activity)
-    {
-        super.onAttach(activity);
-
-        try
-        {
-            mCallback = (RegisterStep1Listener) activity;
-        }
-        catch (ClassCastException e)
-        {
-            throw new ClassCastException(activity.toString()
-                    + " must implement RegisterStep1Listener");
-        }
     }
 
     /**
@@ -206,6 +228,9 @@ public class RegisterStep1Fragment extends Fragment
         }
     };
 
+    /**
+     * Adds the profile photo selection button to the title bar
+     */
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
@@ -215,11 +240,13 @@ public class RegisterStep1Fragment extends Fragment
         super.onCreateOptionsMenu(menu, inflater);
     }
 
+    /**
+     * Called when the profile photo selection button is selected.
+     * Fires off an intent to select an image.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
-        Log.d("TAG", "OI OI!");
-
         Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK);
         pickPhotoIntent.setType("image/*");
         startActivityForResult(pickPhotoIntent, 1);
@@ -228,10 +255,8 @@ public class RegisterStep1Fragment extends Fragment
     }
 
     /**
-     * Used for the profile picture image picker functionality
-     * @param requestCode
-     * @param resultCode
-     * @param imageReturnedIntent
+     * Used for the profile picture image picker functionality.
+     * Receives the selected image and sets it accordingly.
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent imageReturnedIntent)

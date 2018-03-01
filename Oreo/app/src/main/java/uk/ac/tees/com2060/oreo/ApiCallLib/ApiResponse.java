@@ -9,12 +9,25 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * ApiResponse.java (ApiCallLib)
+ * A wrapper that formats an API response.
+ *
+ * The response is broken down, and the type set based on the
+ * first key (success or error). Errors are broken down and put into
+ * an ArrayList of type String so they are more easily accessible.
+ */
 public class ApiResponse
 {
     private Context context;
     private ResponseType type;
     private JSONObject body;
 
+    /**
+     * Class constructor
+     * @param response JSON formatted response
+     * @param context current context (this)
+     */
     public ApiResponse(JSONObject response, Context context)
     {
         this.context = context;
@@ -25,6 +38,7 @@ public class ApiResponse
 
             try
             {
+                // Gets response message after the first key
                 this.body = (JSONObject) response.get("success");
             } catch (JSONException e) { e.printStackTrace(); }
         }
@@ -34,14 +48,21 @@ public class ApiResponse
 
             try
             {
-                if (response.get("error") instanceof String)
-                    this.body = response;
-                else
+                /**
+                 * If there is more than a single error message, the errors
+                 * are converted to a JSONObject for further formatting.
+                 */
+                if (!(response.get("error") instanceof String))
                     this.body = (JSONObject) response.get("error");
+
             } catch (JSONException e) { e.printStackTrace(); }
         }
     }
 
+    /**
+     * Checks if the request was successful
+     * @return success
+     */
     public boolean success()
     {
         if (this.type == ResponseType.SUCCESS)
@@ -52,20 +73,36 @@ public class ApiResponse
         return false;
     }
 
+    /**
+     * Gets response body
+     * @return response body
+     */
     public JSONObject getBody()
     {
         return this.body;
     }
 
+    /**
+     * Gets current context
+     * @return current context
+     */
     public Context getContext()
     {
         return this.context;
     }
 
+    /**
+     * Breaks down errors into an ArrayList of type String.
+     *
+     * If the response body contains the error key, there is only a
+     * single error message to add to the ArrayList, otherwise, the
+     * response body is iterated over and each error message added
+     * to the ArrayList.
+     *
+     * @return ArrayList (String) of errors
+     */
     public ArrayList<String> getErrors()
     {
-        System.out.println(this.body);
-
         ArrayList<String> errors = new ArrayList<>();
 
         if (this.body.has("error"))

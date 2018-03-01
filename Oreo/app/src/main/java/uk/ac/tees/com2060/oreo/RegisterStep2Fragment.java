@@ -12,6 +12,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * RegisterStep2Fragment.java
+ *
+ * The Fragment class that handles step 2 of user registration.
+ * User data is collected, validated, and sent back to the Activity when complete.
+ */
 public class RegisterStep2Fragment extends Fragment
 {
     RegisterStep2Listener mCallback;
@@ -23,14 +29,25 @@ public class RegisterStep2Fragment extends Fragment
     EditText editText_confirm_password;
     Button button_next_step;
 
+    /**
+     * Required empty constructor
+     */
     public RegisterStep2Fragment() {}
 
+    /**
+     * Interface for the Activity to implement - enables activity/fragment communication
+     */
     public interface RegisterStep2Listener
     {
         public void step2Listener(String postcode, String phone_number,
                                   String email_address, String password, String confirm_password);
     }
 
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     * @param activity calling activity
+     */
     @Override
     public void onAttach(Activity activity)
     {
@@ -47,12 +64,24 @@ public class RegisterStep2Fragment extends Fragment
         }
     }
 
+    /**
+     * Overridden default onCreateView() method
+     * Sets the title in the title bar and displays the fragment layout file.
+     * A TextChangedListener is added to the EditText fields, to allow the continue button
+     * to be disabled until all the fields have been completed fully.
+     *
+     * When the continue button is selected, the fields are validated against regex patterns.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         getActivity().setTitle(R.string.activity_register_step2_title);
 
         View view = inflater.inflate(R.layout.fragment_register_step2, container, false);
+
+        textView_hey = (TextView) view.findViewById(R.id.textView_hey);
+        textView_hey.setText(getResources().getString(R.string.activity_register_step2_nearly_there,
+                getArguments().getString("known_as")));
 
         editText_postcode = (EditText) view.findViewById(R.id.editText_postcode);
         editText_phone_number = (EditText) view.findViewById(R.id.editText_phone_number);
@@ -84,12 +113,13 @@ public class RegisterStep2Fragment extends Fragment
             }
         });
 
-        textView_hey = (TextView) view.findViewById(R.id.textView_hey);
-        textView_hey.setText(getResources().getString(R.string.activity_register_step2_nearly_there, getArguments().getString("known_as")));
-
         return view;
     }
 
+    /**
+     * Validates fields against regex patterns - displays an alert dialog if a test fails
+     * @return true if all fields are valid
+     */
     public boolean validateFields()
     {
         if (!editText_postcode.getText().toString().matches(
