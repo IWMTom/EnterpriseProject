@@ -34,7 +34,10 @@
             android:name=".RegisterActivity"
             android:label="@string/activity_register_step1_title"
             android:parentActivityName=".WelcomeActivity" />
-        <activity android:name=".TestActivity"></activity>
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

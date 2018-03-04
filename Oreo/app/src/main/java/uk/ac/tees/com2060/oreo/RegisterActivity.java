@@ -136,7 +136,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
                     } catch (JSONException e) { e.printStackTrace(); }
 
                     // Navigate to main application activity, and clearing the navigation back stack.
-                    Intent intent = new Intent(response.getContext(), TestActivity.class);
+                    Intent intent = new Intent(response.getContext(), MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intent);
                     finish();

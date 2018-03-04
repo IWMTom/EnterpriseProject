@@ -103,7 +103,13 @@
         <item name="android:paddingTop">15dp</item>
         <item name="android:paddingBottom">15dp</item>
         <item name="android:divider">@color/colorDarkGrey</item>
-        <item name="android:dividerHeight">0.5dp</item>    </style>
+        <item name="android:dividerHeight">0.5dp</item>
+    </style>
+
+    <style name="AppTheme.NavigationDrawerText" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/baloo_bhai_fix</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

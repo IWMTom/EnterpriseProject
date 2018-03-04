@@ -33,7 +33,7 @@ public class WelcomeActivity extends AppCompatActivity
     {
         if (Utils.getUserAccessToken(this) != null)
         {
-            Intent intent = new Intent(this, TestActivity.class);
+            Intent intent = new Intent(this, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
@@ -90,7 +90,7 @@ public class WelcomeActivity extends AppCompatActivity
                         } catch (JSONException e) { e.printStackTrace(); }
 
                         // Navigates to main activity, clearing the navigation back stack
-                        Intent intent = new Intent(response.getContext(), TestActivity.class);
+                        Intent intent = new Intent(response.getContext(), MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();

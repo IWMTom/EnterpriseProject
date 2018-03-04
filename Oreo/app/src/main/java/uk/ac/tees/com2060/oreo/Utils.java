@@ -87,6 +87,18 @@ public class Utils
     }
 
     /**
+     * Removes user access token from SharedPreferences
+     * @param context current context
+     */
+    public static void removeUserAccessToken(Context context)
+    {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_data), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.remove(context.getString(R.string.shared_preferences_user_data_api_key));
+        editor.apply();
+    }
+
+    /**
      * Converts a Bitmap image to a Base64 encoded string
      * @param img bitmap image
      * @return Base64 encoded string
