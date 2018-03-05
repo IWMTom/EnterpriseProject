@@ -27,6 +27,16 @@ public class User implements Serializable
         this.profilePhoto = Utils.getImageFromString(profilePhoto);
     }
 
+    public void init(String fullName, String knownAs, String emailAddress, String postcode, String dob, Bitmap profilePhoto) throws ParseException
+    {
+        this.fullName = fullName;
+        this.knownAs = knownAs;
+        this.emailAddress = emailAddress;
+        this.postcode = postcode;
+        this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
+        this.profilePhoto = profilePhoto;
+    }
+
     public static User getUser()
     {
         if (userInstance == null)

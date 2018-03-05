@@ -2,6 +2,8 @@ package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -42,6 +44,19 @@ public class SplashActivity extends AppCompatActivity
                         {
                             JSONObject body = response.getBody();
 
+                            String profilePhoto;
+
+                            if (body.get("profile_photo").toString().equals("null"))
+                            {
+                                profilePhoto = Utils.getStringFromImage(
+                                        BitmapFactory.decodeResource(activity.getResources(),
+                                                R.drawable.default_profile_photo));
+                            }
+                            else
+                            {
+                                profilePhoto = (String) body.get("profile_photo");
+                            }
+
                             User user = User.getUser();
                             user.init(
                                 (String) body.get("full_name"),
@@ -49,7 +64,7 @@ public class SplashActivity extends AppCompatActivity
                                 (String) body.get("email"),
                                 (String) body.get("postcode"),
                                 (String) body.get("dob"),
-                                (String) body.get("profile_photo")
+                                profilePhoto
                             );
                         } catch (JSONException | ParseException e) { e.printStackTrace(); }
 

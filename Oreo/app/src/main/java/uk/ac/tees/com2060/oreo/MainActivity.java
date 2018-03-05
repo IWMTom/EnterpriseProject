@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.text.ParseException;
 
@@ -49,6 +50,16 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        ImageView imageView_nav_header_profile_photo =
+                (ImageView) navigationView.getHeaderView(0)
+                        .findViewById(R.id.imageView_nav_header_profile_photo);
+        TextView textView_nav_header_name =
+                (TextView) navigationView.getHeaderView(0)
+                        .findViewById(R.id.textView_nav_header_name);
+
+        imageView_nav_header_profile_photo.setImageBitmap(User.getUser().profilePhoto());
+        textView_nav_header_name.setText(User.getUser().fullName());
 
         if (findViewById(R.id.main_fragment_container) != null)
         {
