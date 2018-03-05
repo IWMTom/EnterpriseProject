@@ -81,7 +81,7 @@ public class WelcomeActivity extends AppCompatActivity
                         } catch (JSONException e) { e.printStackTrace(); }
 
                         // Navigates to main activity, clearing the navigation back stack
-                        Intent intent = new Intent(response.getContext(), MainActivity.class);
+                        Intent intent = new Intent(response.getContext(), SplashActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();

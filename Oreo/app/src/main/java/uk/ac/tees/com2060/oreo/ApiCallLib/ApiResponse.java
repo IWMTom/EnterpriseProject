@@ -54,6 +54,8 @@ public class ApiResponse
                  */
                 if (!(response.get("error") instanceof String))
                     this.body = (JSONObject) response.get("error");
+                else
+                    this.body = response;
 
             } catch (JSONException e) { e.printStackTrace(); }
         }
