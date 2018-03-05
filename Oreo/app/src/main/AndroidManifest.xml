@@ -11,19 +11,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:screenOrientation="portrait"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".StyleGuideActivity"
-            android:label="@string/activity_style_guide_title"
-            android:parentActivityName=".WelcomeActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme" />
-        <activity
-            android:name=".WelcomeActivity"
-            android:fitsSystemWindows="true"
+            android:name=".SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar.TranslucentStatus">
+            android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -31,13 +25,23 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".WelcomeActivity"
+            android:fitsSystemWindows="true"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar.TranslucentStatus" />
+        <activity
+            android:name=".StyleGuideActivity"
+            android:label="@string/activity_style_guide_title"
+            android:parentActivityName=".WelcomeActivity"
+            android:theme="@style/AppTheme" />
+        <activity
             android:name=".RegisterActivity"
             android:label="@string/activity_register_step1_title"
             android:parentActivityName=".WelcomeActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar.TranslucentStatus" />
     </application>
 
 </manifest>

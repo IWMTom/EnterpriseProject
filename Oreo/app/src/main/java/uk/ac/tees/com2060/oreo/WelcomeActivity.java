@@ -26,19 +26,10 @@ public class WelcomeActivity extends AppCompatActivity
 
     /**
      * Overriddes default onCreate() method.
-     * Redirects user if already authenticated - otherwise, displays welcome screen.
      */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        if (Utils.getUserAccessToken(this) != null)
-        {
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(intent);
-            finish();
-        }
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
     }

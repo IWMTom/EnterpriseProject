@@ -133,4 +133,8 @@
     <string name="menu_list">List an Item</string>
     <string name="menu_dashboard">Dashboard</string>
     <string name="fragment_dashboard_title">Dashboard</string>
+
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

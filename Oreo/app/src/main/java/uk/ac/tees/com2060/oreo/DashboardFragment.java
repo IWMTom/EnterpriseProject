@@ -1,23 +1,16 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
-import android.os.Bundle;
 import android.app.Fragment;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONException;
-
-import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
-import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
-import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
-
 public class DashboardFragment extends Fragment
 {
-
     DashboardListener mCallback;
 
     public DashboardFragment() {}
@@ -65,31 +58,11 @@ public class DashboardFragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         setHasOptionsMenu(true);
 
-        ApiCall getInfo = new ApiCall("user/details", getActivity());
+        ImageView imageView_test    = view.findViewById(R.id.dashboard_imageView);
+        TextView textView_test      = view.findViewById(R.id.dashboard_textView);
 
-        getInfo.addResponseListener(new ResponseListener()
-        {
-            @Override
-            public void responseReceived(ApiResponse response)
-            {
-                if (response.success())
-                {
-                    ImageView imageView_test    = getActivity().findViewById(R.id.imageView_test);
-                    TextView textView_test      = getActivity().findViewById(R.id.textView_test);
-
-                    try
-                    {
-                        textView_test.setText((String) response.getBody().get("full_name"));
-                        imageView_test.setImageBitmap(Utils.getImageFromString((String) response.getBody().get("profile_photo")));
-                    } catch (JSONException e) { e.printStackTrace(); }
-                }
-                else
-                {
-                    System.out.println("ERROR! - " + response.getBody());
-                }
-            }
-        });
-        getInfo.sendRequest();
+        textView_test.setText(User.getUser().fullName());
+        imageView_test.setImageBitmap(User.getUser().profilePhoto());
 
         return view;
     }
