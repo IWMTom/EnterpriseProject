@@ -9,6 +9,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+/**
+ * DashboardFragment.java
+ *
+ * The Fragment class that handles the Dashboard page
+ */
 public class DashboardFragment extends Fragment
 {
     DashboardListener mCallback;
@@ -47,8 +52,6 @@ public class DashboardFragment extends Fragment
     /**
      * Overridden default onCreateView() method
      * Sets the title in the title bar and displays the fragment layout file.
-     * A TextChangedListener is added to the EditText fields, to allow the continue button
-     * to be disabled until all the fields have been completed fully.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -68,7 +71,7 @@ public class DashboardFragment extends Fragment
     }
 
     /**
-     * Callback to the Activity with all user provided data
+     * Callback to the Activity
      */
     public void callbackToActivity()
     {

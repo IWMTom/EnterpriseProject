@@ -17,6 +17,13 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
+/**
+ * SplashActivity.java
+ *
+ * The Activity class for handling the splash screen.
+ * The splash screen will be displayed while user data is being cached for this session.
+ * An API call is made to get user details, and this is cached using the User singleton.
+ */
 public class SplashActivity extends AppCompatActivity
 {
     Activity activity = this;
