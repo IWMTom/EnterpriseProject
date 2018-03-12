@@ -47,9 +47,11 @@
                 android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                android:autoText="false"
                 android:ems="10"
                 android:hint="@string/activity_welcome_login_email"
                 android:inputType="textEmailAddress"
+                android:importantForAutofill="no"
                 app:layout_constraintBottom_toTopOf="@+id/editText_password"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left" />
@@ -93,6 +95,7 @@
                 android:ems="10"
                 android:hint="@string/activity_welcome_login_password"
                 android:inputType="textPassword"
+                android:importantForAutofill="no"
                 app:layout_constraintBottom_toTopOf="@+id/button11"
                 app:layout_constraintEnd_toStartOf="@+id/guideline_right"
                 app:layout_constraintStart_toStartOf="@+id/guideline_left" />
