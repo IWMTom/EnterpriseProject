@@ -2,30 +2,17 @@ package uk.ac.tees.com2060.oreo;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Text;
-
-import java.text.ParseException;
-
-import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
-import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
-import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
+import java.util.List;
 
 /**
  * MainActivity.java
@@ -35,10 +22,12 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
  */
 public class MainActivity extends AppCompatActivity
         implements  NavigationView.OnNavigationItemSelectedListener,
-                    DashboardFragment.DashboardListener
+                    DashboardFragment.DashboardListener,
+                    ListItemFragment.ListItemListener
 {
 
     DashboardFragment dashboardFragment = new DashboardFragment();
+    ListItemFragment listItemFragment = new ListItemFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -75,7 +64,7 @@ public class MainActivity extends AppCompatActivity
             if (savedInstanceState != null)
                 return;
 
-            getFragmentManager().beginTransaction()
+            getSupportFragmentManager().beginTransaction()
                     .add(R.id.main_fragment_container, dashboardFragment).commit();
         }
     }
@@ -100,8 +89,10 @@ public class MainActivity extends AppCompatActivity
         switch (item.getItemId())
         {
             case R.id.nav_dashboard:
+                showDashboard();
                 break;
             case R.id.nav_list:
+                showListItem();
                 break;
             case R.id.nav_past_listings:
                 break;
@@ -116,6 +107,23 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    private void showDashboard()
+    {
+        getSupportFragmentManager().beginTransaction().remove(listItemFragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, dashboardFragment).commit();
+    }
+
+
+    private void showListItem()
+    {
+        getSupportFragmentManager().beginTransaction().remove(dashboardFragment).commit();
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, listItemFragment).commit();
+    }
+    
+
 
     /**
      * Logs out the user by removing the access token in shared preferences
@@ -132,6 +140,12 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void dashboardListener()
+    {
+
+    }
+
+    @Override
+    public void listItemListener()
     {
 
     }

@@ -25,6 +25,12 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="AppTheme.Title" parent="AppTheme.BodyText">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">@font/baloo_bhai</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
     <style name="AppTheme.Header3">
         <item name="android:textColor">@color/colorAccent</item>
         <item name="android:fontFamily">@font/baloo_bhai</item>

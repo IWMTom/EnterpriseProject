@@ -7,6 +7,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.location.places.ui.PlacePicker;
+
 import org.json.JSONException;
 
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
@@ -114,10 +118,14 @@ public class WelcomeActivity extends AppCompatActivity
     /**
      * TESTING - TO REMOVE
      */
-    public void openStyleGuide(View view)
-    {
-        Intent intent = new Intent(this, StyleGuideActivity.class);
-        startActivity(intent);
+    public void openStyleGuide(View view) throws GooglePlayServicesNotAvailableException, GooglePlayServicesRepairableException {
+//        Intent intent = new Intent(this, StyleGuideActivity.class);
+//        startActivity(intent);
+
+        int PLACE_PICKER_REQUEST = 1;
+        PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+
+        startActivityForResult(builder.build(this), PLACE_PICKER_REQUEST);
     }
 
 }
