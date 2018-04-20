@@ -1,20 +1,105 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="uk.ac.tees.com2060.oreo.ListItemStep2Fragment">
 
-    <com.andressantibanez.android.patio.Patio
-        android:id="@+id/patio"
-        android:layout_width="match_parent"
+    <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/radioGroup_itemSize"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        app:thumbnailHeight="200dp"
-        app:thumbnailWidth="200dp"
-        app:thumbnailsContainerPadding="10dp"
-        app:thumbnailsContainerBackground="#ddd"
-        app:maxPictures="3"
-        app:thumbnailsMessage="SOMETHING LOL"
-        app:actionsTextColor="#333"/>
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/editText_importantDetails"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText_itemDescription">
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="How big is it?"
+            android:textAppearance="@style/AppTheme.Title"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radio_small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="@font/varela_round"
+            android:text="Small (e.g. keys, documents, etc.)" />
+
+        <RadioButton
+            android:id="@+id/radio_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="@font/varela_round"
+            android:text="Medium (e.g. laptops, speakers, etc.)" />
+
+        <RadioButton
+            android:id="@+id/radio_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="@font/varela_round"
+            android:text="Large (e.g. TVs, bicycles, etc.)" />
+
+        <RadioButton
+            android:id="@+id/radio_xlarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="@font/varela_round"
+            android:text="Extra Large (e.g. sofas, bookcases, etc.)" />
+
+        <RadioButton
+            android:id="@+id/radio_huge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/colorPrimary"
+            android:fontFamily="@font/varela_round"
+            android:text="Huge (e.g. cars, caravans, etc.)" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editText_itemDescription"
+        style="@style/AppTheme.EditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="What is your item? (e.g. 42 inch TV)"
+        android:inputType="textCapSentences|textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroup_itemSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_importantDetails"
+        style="@style/AppTheme.EditText.MultiLine"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="Any important details to help with your quote? (e.g. steps at either address, urgent delivery required, narrow streets, no parking, etc.)"
+        android:inputType="textCapCharacters|textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup_itemSize" />
 
 </android.support.constraint.ConstraintLayout>

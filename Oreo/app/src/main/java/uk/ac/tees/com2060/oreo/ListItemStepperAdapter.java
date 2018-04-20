@@ -14,20 +14,22 @@ import com.stepstone.stepper.viewmodel.StepViewModel;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class MyStepperAdapter extends AbstractFragmentStepAdapter
+public class ListItemStepperAdapter extends AbstractFragmentStepAdapter
 {
 
     private ArrayList<Step> fragments = new ArrayList<>();
 
-    public MyStepperAdapter(FragmentManager fm, Context context)
+    public ListItemStepperAdapter(FragmentManager fm, Context context)
     {
         super(fm, context);
 
         Step step1 = new ListItemStep1Fragment();
         Step step2 = new ListItemStep2Fragment();
+        Step step3 = new ListItemStep3Fragment();
 
         fragments.add(step1);
         fragments.add(step2);
+        fragments.add(step3);
     }
 
     public ArrayList<Step> getFragments()
@@ -45,6 +47,8 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter
                 return fragments.get(0);
             case 1:
                 return fragments.get(1);
+            case 2:
+                return fragments.get(2);
             default:
                 throw new IllegalArgumentException("Unsupported position: " + position);
         }
@@ -52,7 +56,7 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter
 
     @Override
     public int getCount() {
-        return 2;
+        return 3;
     }
 
     @NonNull
@@ -69,7 +73,11 @@ public class MyStepperAdapter extends AbstractFragmentStepAdapter
                 break;
             case 1:
                 builder
-                        .setTitle("test");
+                        .setTitle("Item Details");
+                break;
+            case 2:
+                builder
+                        .setTitle("Confirm");
                 break;
             default:
                 throw new IllegalArgumentException("Unsupported position: " + position);

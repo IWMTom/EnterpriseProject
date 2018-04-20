@@ -1,65 +1,75 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.provider.SyncStateContract;
-import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
-import com.andressantibanez.android.patio.Patio;
+import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.Step;
+import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
-public class ListItemStep2Fragment extends Fragment implements Step, Patio.PatioCallbacks
+public class ListItemStep2Fragment extends Fragment implements Step
 {
 
-    public static final int REQUEST_CODE_TAKE_PICTURE = 1000;
-    public static final int REQUEST_CODE_ATTACH_PICTURE = 2000;
-
-    Patio mPatio;
-
-    public static ListItemStep2Fragment newInstance()
-    {
-        return new ListItemStep2Fragment();
-    }
+    private EditText itemDescription;
+    private RadioGroup itemSize;
+    private EditText importantDetails;
+    View v;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_list_item_step2, container, false);
+        v = inflater.inflate(R.layout.fragment_list_item_step2, container, false);
+
+        itemDescription = v.findViewById(R.id.editText_itemDescription);
+        itemSize = v.findViewById(R.id.radioGroup_itemSize);
+        importantDetails = v.findViewById(R.id.editText_importantDetails);
 
         return v;
     }
 
     @Override
-    public VerificationError verifyStep() {
-        //return null if the user can go to the next step, create a new VerificationError instance otherwise
-        return null;
+    public VerificationError verifyStep()
+    {
+        if (itemDescription.getText().toString().isEmpty())
+        {
+            return new VerificationError("You must tell us what your item is!");
+        }
+        else if (itemSize.getCheckedRadioButtonId() == -1)
+        {
+            return new VerificationError("You must tell us what size your item is!");
+        }
+        else
+        {
+            RadioButton rb = v.findViewById(itemSize.getCheckedRadioButtonId());
+
+            SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
+            editor.putString("itemDescription", itemDescription.getText().toString());
+            editor.putString("itemSize", rb.getText().toString());
+            editor.putString("importantDetails", importantDetails.getText().toString());
+            editor.commit();
+
+            return null;
+        }
     }
 
     @Override
-    public void onSelected() {
-        mPatio = getActivity().findViewById(R.id.patio);
-        mPatio.setCallbacksListener(this);
-    }
+    public void onSelected() {}
+
 
     @Override
-    public void onError(@NonNull VerificationError error) {
-        //handle error inside of the fragment, e.g. show error on EditText
-    }
-
-    @Override
-    public void onTakePictureClick() {
-        Intent intent = mPatio.getTakePictureIntent();
-        startActivityForResult(intent, REQUEST_CODE_TAKE_PICTURE);
-    }
-
-    @Override
-    public void onAddPictureClick() {
-        Intent intent = mPatio.getAttachPictureIntent();
-        startActivityForResult(intent, REQUEST_CODE_ATTACH_PICTURE);
+    public void onError(@NonNull VerificationError error)
+    {
+        Utils.displayMessage(getActivity(), error.getErrorMessage());
     }
 }

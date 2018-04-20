@@ -1,7 +1,11 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Handler;
+import android.support.annotation.UiThread;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -16,18 +20,15 @@ import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
 import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlacePicker;
+import com.stepstone.stepper.BlockingStep;
 import com.stepstone.stepper.Step;
+import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
 public class ListItemStep1Fragment extends Fragment implements Step
 {
 
     private EditText editText_collection, editText_delivery;
-
-    public static ListItemStep1Fragment newInstance()
-    {
-        return new ListItemStep1Fragment();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -89,19 +90,29 @@ public class ListItemStep1Fragment extends Fragment implements Step
     }
 
     @Override
-    public VerificationError verifyStep() {
-        //return null if the user can go to the next step, create a new VerificationError instance otherwise
-        return null;
+    public VerificationError verifyStep()
+    {
+        if (editText_collection.getText().toString().isEmpty() || editText_collection.getText().toString().isEmpty())
+        {
+            return new VerificationError("You must provide both a collection and delivery location!");
+        }
+        else
+        {
+            SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
+            editor.putString("collectionLocation", editText_collection.getText().toString());
+            editor.putString("deliveryLocation", editText_delivery.getText().toString());
+            editor.commit();
+
+            return null;
+        }
     }
 
     @Override
-    public void onSelected() {
-        //update UI when selected
-    }
+    public void onSelected() {}
 
     @Override
-    public void onError(@NonNull VerificationError error) {
-        //handle error inside of the fragment, e.g. show error on EditText
+    public void onError(@NonNull VerificationError error)
+    {
+        Utils.displayMessage(getActivity(), error.getErrorMessage());
     }
-
 }
