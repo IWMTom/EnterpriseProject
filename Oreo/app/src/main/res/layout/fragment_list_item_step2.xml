@@ -96,7 +96,7 @@
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="Any important details to help with your quote? (e.g. steps at either address, urgent delivery required, narrow streets, no parking, etc.)"
-        android:inputType="textCapCharacters|textMultiLine"
+        android:inputType="textCapSentences|textMultiLine"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -19,7 +19,7 @@ import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
-public class ListItemStep2Fragment extends Fragment implements Step
+public class ListItemStep2Fragment extends Fragment implements BlockingStep
 {
 
     private EditText itemDescription;
@@ -51,14 +51,6 @@ public class ListItemStep2Fragment extends Fragment implements Step
         }
         else
         {
-            RadioButton rb = v.findViewById(itemSize.getCheckedRadioButtonId());
-
-            SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
-            editor.putString("itemDescription", itemDescription.getText().toString());
-            editor.putString("itemSize", rb.getText().toString());
-            editor.putString("importantDetails", importantDetails.getText().toString());
-            editor.commit();
-
             return null;
         }
     }
@@ -71,5 +63,44 @@ public class ListItemStep2Fragment extends Fragment implements Step
     public void onError(@NonNull VerificationError error)
     {
         Utils.displayMessage(getActivity(), error.getErrorMessage());
+    }
+
+    @Override
+    @UiThread
+    public void onNextClicked(final StepperLayout.OnNextClickedCallback callback)
+    {
+        RadioButton rb = v.findViewById(itemSize.getCheckedRadioButtonId());
+
+        SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
+        editor.putString("itemDescription", itemDescription.getText().toString());
+        editor.putString("itemSize", rb.getText().toString());
+        editor.putString("importantDetails", importantDetails.getText().toString());
+        editor.apply();
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callback.goToNextStep();
+            }
+        }, 500L);
+    }
+
+    @Override
+    @UiThread
+    public void onCompleteClicked(final StepperLayout.OnCompleteClickedCallback callback)
+    {
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                callback.complete();
+            }
+        }, 0);
+    }
+
+    @Override
+    @UiThread
+    public void onBackClicked(StepperLayout.OnBackClickedCallback callback)
+    {
+        callback.goToPrevStep();
     }
 }

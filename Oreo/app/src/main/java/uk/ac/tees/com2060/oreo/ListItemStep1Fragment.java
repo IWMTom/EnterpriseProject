@@ -101,7 +101,7 @@ public class ListItemStep1Fragment extends Fragment implements Step
             SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
             editor.putString("collectionLocation", editText_collection.getText().toString());
             editor.putString("deliveryLocation", editText_delivery.getText().toString());
-            editor.commit();
+            editor.apply();
 
             return null;
         }
