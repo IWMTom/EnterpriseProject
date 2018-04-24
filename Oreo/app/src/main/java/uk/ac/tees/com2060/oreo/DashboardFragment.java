@@ -7,7 +7,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 /**
  * DashboardFragment.java
@@ -58,7 +68,7 @@ public class DashboardFragment extends Fragment
     {
         getActivity().setTitle(R.string.fragment_dashboard_title);
 
-        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+        final View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         setHasOptionsMenu(true);
 
         ImageView imageView_test    = view.findViewById(R.id.dashboard_imageView);
@@ -66,6 +76,21 @@ public class DashboardFragment extends Fragment
 
         textView_test.setText(User.getUser().fullName());
         imageView_test.setImageBitmap(User.getUser().profilePhoto());
+
+        ApiCall api = new ApiCall("listing/list", getContext());
+        api.addResponseListener(new ResponseListener()
+        {
+            @Override
+            public void responseReceived(ApiResponse response)
+            {
+                if (response.success())
+                {
+                    ListView listView = view.findViewById(R.id.dashboard_listView);
+                    listView.setAdapter(new ListingAdapter(getContext(), Listing.getListings(response.getBodyArray())));
+                }
+            }
+        });
+        api.sendRequest();
 
         return view;
     }

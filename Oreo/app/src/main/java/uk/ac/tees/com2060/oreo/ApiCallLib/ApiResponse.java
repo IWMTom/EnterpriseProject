@@ -22,6 +22,7 @@ public class ApiResponse
     private Context context;
     private ResponseType type;
     private JSONObject body;
+    private JSONArray bodyArray;
 
     /**
      * Class constructor
@@ -38,8 +39,15 @@ public class ApiResponse
 
             try
             {
-                // Gets response message after the first key
-                this.body = (JSONObject) response.get("success");
+                if (response.get("success") instanceof JSONArray)
+                {
+                    this.bodyArray = (JSONArray) response.get("success");
+                }
+                else
+                {
+                    // Gets response message after the first key
+                    this.body = (JSONObject) response.get("success");
+                }
             } catch (JSONException e) { e.printStackTrace(); }
         }
         else
@@ -82,6 +90,11 @@ public class ApiResponse
     public JSONObject getBody()
     {
         return this.body;
+    }
+
+    public JSONArray getBodyArray()
+    {
+        return this.bodyArray;
     }
 
     /**
