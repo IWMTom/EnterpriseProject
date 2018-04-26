@@ -133,6 +133,8 @@
     <string name="menu_list">List an Item</string>
     <string name="menu_dashboard">Dashboard</string>
     <string name="fragment_dashboard_title">Dashboard</string>
+    <string name="API_BASE_URL">https://getshipr.com/api/</string>
+
 
     <string name="fragment_list_item_title">List an Item</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>

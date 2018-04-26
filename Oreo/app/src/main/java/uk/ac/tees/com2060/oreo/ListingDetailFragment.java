@@ -1,6 +1,7 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,6 +76,16 @@ public class ListingDetailFragment extends Fragment
         final View view = inflater.inflate(R.layout.fragment_listing_detail, container, false);
         setHasOptionsMenu(true);
 
+        FloatingActionButton fab = view.findViewById(R.id.fab_listing_detail);
+        fab.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                //TODO: DISPLAY ADD BID FRAGMENT
+            }
+        });
+
         TextView listing_collection = view.findViewById(R.id.textView_listing_collection);
         listing_collection.setText(selectedListing.collectionCity());
 
@@ -108,6 +120,7 @@ public class ListingDetailFragment extends Fragment
 
                             al.add(new Bid(
                                     object.getInt("id"),
+                                    object.getInt("user_id"),
                                     object.getString("username"),
                                     object.getString("message"),
                                     Double.parseDouble(object.getString("amount"))

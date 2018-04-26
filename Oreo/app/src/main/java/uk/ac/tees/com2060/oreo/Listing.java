@@ -15,14 +15,15 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 public class Listing implements Serializable
 {
-    private int id;
+    private int id, user_id;
     private String item_description, item_size, important_details, collection_city, delivery_city;
     private float distance;
 
-    public Listing (int id, String item_description, String item_size, String important_details,
+    public Listing (int id, int user_id, String item_description, String item_size, String important_details,
                    String collection_city, String delivery_city, float distance)
     {
         this.id = id;
+        this.user_id = user_id;
         this.item_description = item_description;
         this.item_size = item_size;
         this.important_details = important_details;
@@ -43,6 +44,7 @@ public class Listing implements Serializable
 
                 al.add(new Listing(
                         object.getInt("id"),
+                        object.getInt("user_id"),
                         object.getString("item_description"),
                         object.getString("item_size"),
                         object.getString("important_details"),
@@ -58,6 +60,8 @@ public class Listing implements Serializable
     }
 
     public int id() { return this.id; }
+
+    public int user_id() { return this.user_id; }
 
     public String itemDescription()
     {
