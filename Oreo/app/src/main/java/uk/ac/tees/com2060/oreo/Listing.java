@@ -1,27 +1,28 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.content.Context;
-import android.os.Handler;
-import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
-public class Listing
+public class Listing implements Serializable
 {
+    private int id;
     private String item_description, item_size, important_details, collection_city, delivery_city;
     private float distance;
 
-    public Listing(String item_description, String item_size, String important_details,
+    public Listing (int id, String item_description, String item_size, String important_details,
                    String collection_city, String delivery_city, float distance)
     {
+        this.id = id;
         this.item_description = item_description;
         this.item_size = item_size;
         this.important_details = important_details;
@@ -41,6 +42,7 @@ public class Listing
                 JSONObject object = json.getJSONObject(i);
 
                 al.add(new Listing(
+                        object.getInt("id"),
                         object.getString("item_description"),
                         object.getString("item_size"),
                         object.getString("important_details"),
@@ -54,6 +56,8 @@ public class Listing
 
         return al;
     }
+
+    public int id() { return this.id; }
 
     public String itemDescription()
     {
@@ -70,10 +74,7 @@ public class Listing
         return this.important_details;
     }
 
-    public String collectionCity()
-    {
-        return this.collection_city;
-    }
+    public String collectionCity() { return this.collection_city; }
 
     public String deliveryCity()
     {

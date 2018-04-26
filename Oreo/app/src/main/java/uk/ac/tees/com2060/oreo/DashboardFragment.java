@@ -1,11 +1,13 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,7 +37,7 @@ public class DashboardFragment extends Fragment
      */
     public interface DashboardListener
     {
-        public void dashboardListener();
+        public void dashboardListener(Listing selectedListing);
     }
 
     /**
@@ -71,8 +73,10 @@ public class DashboardFragment extends Fragment
         final View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         setHasOptionsMenu(true);
 
-        ImageView imageView_test    = view.findViewById(R.id.dashboard_imageView);
-        TextView textView_test      = view.findViewById(R.id.dashboard_textView);
+        ImageView imageView_test          = view.findViewById(R.id.dashboard_imageView);
+        TextView textView_test            = view.findViewById(R.id.dashboard_textView);
+        final ListView listView           = view.findViewById(R.id.dashboard_listView);
+        final ArrayList[] listings        = new ArrayList[1];
 
         textView_test.setText(User.getUser().fullName());
         imageView_test.setImageBitmap(User.getUser().profilePhoto());
@@ -85,12 +89,24 @@ public class DashboardFragment extends Fragment
             {
                 if (response.success())
                 {
-                    ListView listView = view.findViewById(R.id.dashboard_listView);
-                    listView.setAdapter(new ListingAdapter(getContext(), Listing.getListings(response.getBodyArray())));
+                    listings[0] = Listing.getListings(response.getBodyArray());
+                    listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
                 }
             }
         });
         api.sendRequest();
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Listing selectedListing = ((ArrayList<Listing>) listings[0]).get(position);
+
+                callbackToActivity(selectedListing);
+            }
+
+        });
 
         return view;
     }
@@ -98,8 +114,8 @@ public class DashboardFragment extends Fragment
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity()
+    public void callbackToActivity(Listing selectedListing)
     {
-        mCallback.dashboardListener();
+        mCallback.dashboardListener(selectedListing);
     }
 }

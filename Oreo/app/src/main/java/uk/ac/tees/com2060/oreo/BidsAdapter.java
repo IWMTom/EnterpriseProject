@@ -7,15 +7,16 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class ListingAdapter extends BaseAdapter
+public class BidsAdapter extends BaseAdapter
 {
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<Listing> mDataSource;
+    private ArrayList<Bid> mDataSource;
 
-    public ListingAdapter(Context context, ArrayList<Listing> items)
+    public BidsAdapter(Context context, ArrayList<Bid> items)
     {
         mContext = context;
         mDataSource = items;
@@ -43,17 +44,19 @@ public class ListingAdapter extends BaseAdapter
     @Override
     public View getView(int i, View view, ViewGroup viewGroup)
     {
-        View rowView = mInflater.inflate(R.layout.fragment_dashboard_listview, viewGroup, false);
+        View rowView = mInflater.inflate(R.layout.fragment_listing_detail_listview, viewGroup, false);
 
-        TextView listingListDescription = rowView.findViewById(R.id.bid_list_user);
-        TextView listingListToFrom = rowView.findViewById(R.id.listing_list_to_from);
-        TextView listingListSize = rowView.findViewById(R.id.bid_list_amount);
+        TextView bidUser = rowView.findViewById(R.id.bid_list_user);
+        TextView bidMessage = rowView.findViewById(R.id.bid_list_message);
+        TextView bidAmount = rowView.findViewById(R.id.bid_list_amount);
 
-        Listing listing = (Listing) getItem(i);
+        Bid bid = (Bid) getItem(i);
 
-        listingListDescription.setText(listing.itemDescription());
-        listingListToFrom.setText(listing.collectionCity() + " -> " + listing.deliveryCity() + " (" + listing.distance() + " miles)");
-        listingListSize.setText(listing.itemSize());
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+
+        bidUser.setText(bid.userName());
+        bidMessage.setText(bid.message());
+        bidAmount.setText(formatter.format(bid.amount()));
 
         return rowView;
     }

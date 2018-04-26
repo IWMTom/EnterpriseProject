@@ -27,7 +27,7 @@
         android:maxLines="1"
         android:textAllCaps="true"
         android:textAppearance="@style/AppTheme.Title"
-        android:textSize="12sp"
+        android:textSize="24sp"
         tools:text="Detail" />
 
     <RelativeLayout
@@ -49,7 +49,7 @@
             tools:text="Title" />
 
         <TextView
-            android:id="@+id/listing_list_to_from"
+            android:id="@+id/bid_list_message"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/bid_list_user"

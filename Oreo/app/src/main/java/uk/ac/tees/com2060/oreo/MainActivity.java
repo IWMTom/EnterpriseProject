@@ -23,11 +23,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity
         implements  NavigationView.OnNavigationItemSelectedListener,
                     DashboardFragment.DashboardListener,
-                    ListItemFragment.ListItemListener
+                    ListItemFragment.ListItemListener,
+                    ListingDetailFragment.ListingDetailListener
 {
 
-    DashboardFragment dashboardFragment = new DashboardFragment();
-    ListItemFragment listItemFragment = new ListItemFragment();
+    DashboardFragment dashboardFragment     = new DashboardFragment();
+    ListItemFragment listItemFragment       = new ListItemFragment();
+    ListingDetailFragment listingDetailFragment  = new ListingDetailFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -110,7 +112,6 @@ public class MainActivity extends AppCompatActivity
 
     private void showDashboard()
     {
-        getSupportFragmentManager().beginTransaction().remove(listItemFragment).commit();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, dashboardFragment).commit();
     }
@@ -118,7 +119,6 @@ public class MainActivity extends AppCompatActivity
 
     private void showListItem()
     {
-        getSupportFragmentManager().beginTransaction().remove(dashboardFragment).commit();
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, listItemFragment).commit();
     }
@@ -139,13 +139,25 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void dashboardListener()
+    public void dashboardListener(Listing selectedListing)
+    {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable("selectedListing", selectedListing);
+        listingDetailFragment.setArguments(arguments);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, listingDetailFragment)
+                .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void listItemListener()
     {
 
     }
 
     @Override
-    public void listItemListener()
+    public void listingDetailListener()
     {
 
     }
