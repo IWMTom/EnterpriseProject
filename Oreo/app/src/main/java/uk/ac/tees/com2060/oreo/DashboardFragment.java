@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -77,6 +78,7 @@ public class DashboardFragment extends Fragment
         TextView textView_test            = view.findViewById(R.id.dashboard_textView);
         final ListView listView           = view.findViewById(R.id.dashboard_listView);
         final ArrayList[] listings        = new ArrayList[1];
+        final ProgressBar progress        = view.findViewById(R.id.progressBar_dashboard);
 
         textView_test.setText(User.getUser().fullName());
         imageView_test.setImageBitmap(User.getUser().profilePhoto());
@@ -91,6 +93,7 @@ public class DashboardFragment extends Fragment
                 {
                     listings[0] = Listing.getListings(response.getBodyArray());
                     listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
+                    progress.setVisibility(View.INVISIBLE);
                 }
             }
         });
