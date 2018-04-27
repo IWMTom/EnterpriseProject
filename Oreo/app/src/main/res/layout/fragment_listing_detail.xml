@@ -53,7 +53,7 @@
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView_listing_distance"
                 app:layout_constraintTop_toBottomOf="@+id/textView_listing_size_title" />
 
             <TextView
@@ -67,8 +67,8 @@
                 android:textAppearance="@style/AppTheme.Title"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_distance" />
+                app:layout_constraintStart_toEndOf="@+id/textView_listing_distance_title"
+                app:layout_constraintTop_toBottomOf="@+id/textView_listing_delivery" />
 
             <TextView
                 android:id="@+id/textView_listing_distance"
@@ -76,7 +76,7 @@
                 android:layout_height="21dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView_listing_size"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_listing_distance_title" />
 
@@ -87,13 +87,13 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:text="Distance between locations"
+                android:text="Distance"
                 android:textAppearance="@style/AppTheme.Title"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView_listing_size_title"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_delivery" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_listing_collection" />
 
             <TextView
                 android:id="@+id/textView_listing_important_details"
@@ -126,7 +126,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textView_listing_collection"
                 app:layout_constraintTop_toBottomOf="@+id/textView_listing_delivery_title" />
 
             <TextView
@@ -140,8 +140,9 @@
                 android:textAppearance="@style/AppTheme.Title"
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_collection" />
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textView_listing_collection_title"
+                app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
             <TextView
                 android:id="@+id/textView_listing_collection_title"
@@ -153,7 +154,7 @@
                 android:text="Collection from"
                 android:textAppearance="@style/AppTheme.Title"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView_listing_delivery_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView" />
 
@@ -173,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textView_listing_delivery"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_listing_collection_title" />
 
@@ -202,9 +203,11 @@
             <ListView
                 android:id="@+id/listing_detail_bids"
                 android:layout_width="0dp"
-                android:layout_height="250dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView15" />

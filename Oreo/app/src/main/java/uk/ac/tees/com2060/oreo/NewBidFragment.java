@@ -21,6 +21,7 @@ import com.blackcat.currencyedittext.CurrencyEditText;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
@@ -84,6 +85,16 @@ public class NewBidFragment extends Fragment
 
         final View view = inflater.inflate(R.layout.fragment_new_bid, container, false);
         setHasOptionsMenu(true);
+
+        TextView minimumBid = view.findViewById(R.id.textView_minimum_bid);
+        TextView maximumBid = view.findViewById(R.id.textView_maximum_bid);
+        TextView averageBid = view.findViewById(R.id.textView_average_bid);
+
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        minimumBid.setText(formatter.format(selectedListing.minBid()));
+        maximumBid.setText(formatter.format(selectedListing.maxBid()));
+        averageBid.setText(formatter.format(selectedListing.averageBid()));
+
 
         bid_amount = view.findViewById(R.id.editText_bid_amount);
         bid_message = view.findViewById(R.id.editText_bid_message);
