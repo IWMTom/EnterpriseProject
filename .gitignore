@@ -44,6 +44,7 @@ google-services.json
 freeline.py
 freeline/
 freeline_project_description.json
-*/.idea/workspace.xml
+Oreo/.idea/workspace.xml
 
-*/.idea/libraries
+Oreo/.idea/libraries
+Oreo/.idea/workspace.xml
