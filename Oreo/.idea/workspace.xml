@@ -16,18 +16,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b55971d3-c5cd-4514-87b6-80a1b0a039b7" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/com_android_support_support_annotations_26_1_0_jar.xml" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/NewBidFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_new_bid.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/build.gradle" afterPath="$PROJECT_DIR$/app/build.gradle" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Bid.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Bid.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/BidsAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/BidsAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Listing.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Listing.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListingDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListingDetailFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_listview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_listview.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail_listview.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail_listview.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/MainActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/MainActivity.java" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -70,14 +63,40 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="600">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1404">
-              <caret line="149" column="16" lean-forward="false" selection-start-line="149" selection-start-column="16" selection-end-line="149" selection-end-column="16" />
+            <state relative-caret-position="386">
+              <caret line="168" column="69" lean-forward="false" selection-start-line="168" selection-start-column="69" selection-end-line="168" selection-end-column="69" />
               <folding>
                 <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
                 <element signature="method#doLogout#0;class#MainActivity#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="fragment_new_bid.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_new_bid.xml">
+          <provider selected="true" editor-type-id="android-designer2">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="0">
+              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="NewBidFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/NewBidFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="683">
+              <caret line="88" column="1" lean-forward="false" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
+              <folding>
+                <element signature="e#2337#2338#0" expanded="true" />
+                <element signature="e#2379#2380#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -99,19 +118,19 @@
       <file leaf-file-name="ListingDetailFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListingDetailFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="825">
-              <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="135" selection-end-column="26" />
+            <state relative-caret-position="-2881">
+              <caret line="39" column="65" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
               <folding>
-                <element signature="e#2386#2574#0" expanded="true" />
-                <element signature="e#2573#2574#0" expanded="true" />
-                <element signature="e#3709#4769#0" expanded="true" />
-                <element signature="e#4768#4769#0" expanded="true" />
+                <element signature="e#2409#2601#0" expanded="true" />
+                <element signature="e#2600#2601#0" expanded="true" />
+                <element signature="e#3736#4796#0" expanded="true" />
+                <element signature="e#4795#4796#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BidsAdapter.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="BidsAdapter.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/BidsAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="452">
@@ -1921,7 +1940,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ApiCallLib/RequestType.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ApiCallLib/ResponseListener.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ApiCallLib/ResponseType.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/RegisterStep1Fragment.java" />
@@ -1961,17 +1979,18 @@
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ApiCallLib/ApiResponse.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dashboard_listview.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/DashboardFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/BidsAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Listing.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Bid.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListingDetailFragment.java" />
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ApiCallLib/ApiCall.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/BidsAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail_listview.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListingDetailFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/NewBidFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -2339,7 +2358,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524781731796" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524824920036" />
       </method>
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Instrumented Tests">
@@ -2387,7 +2406,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524781731796" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524824920036" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2570,7 +2589,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524781731796" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524824920036" />
       </method>
     </configuration>
     <configuration default="false" name="Device" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -2619,7 +2638,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524781731796" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1524824920036" />
       </method>
     </configuration>
     <list size="2">
@@ -2747,25 +2766,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_test.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/TestFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="876">
-          <caret line="29" column="13" lean-forward="true" selection-start-line="0" selection-start-column="0" selection-end-line="39" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/StyleGuideActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
@@ -3094,17 +3094,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1404">
-          <caret line="149" column="16" lean-forward="false" selection-start-line="149" selection-start-column="16" selection-end-line="149" selection-end-column="16" />
-          <folding>
-            <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
-            <element signature="method#doLogout#0;class#MainActivity#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListItemStepperAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1516">
@@ -3129,25 +3118,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail.xml">
-      <provider selected="true" editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="1" column="62" lean-forward="false" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Listing.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="63" column="47" lean-forward="false" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Bid.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="551">
@@ -3161,19 +3131,6 @@
         <state relative-caret-position="630">
           <caret line="31" column="57" lean-forward="false" selection-start-line="31" selection-start-column="57" selection-end-line="31" selection-end-column="57" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListingDetailFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="825">
-          <caret line="106" column="0" lean-forward="false" selection-start-line="106" selection-start-column="0" selection-end-line="135" selection-end-column="26" />
-          <folding>
-            <element signature="e#2386#2574#0" expanded="true" />
-            <element signature="e#2573#2574#0" expanded="true" />
-            <element signature="e#3709#4769#0" expanded="true" />
-            <element signature="e#4768#4769#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -3212,17 +3169,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="53" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail_listview.xml">
       <provider selected="true" editor-type-id="android-designer2">
         <state />
@@ -3240,6 +3186,82 @@
           <caret line="67" column="8" lean-forward="false" selection-start-line="67" selection-start-column="8" selection-end-line="67" selection-end-column="8" />
           <folding>
             <element signature="e#1857#1898#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/nav_header_main.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="462">
+          <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="24" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/Listing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="353">
+          <caret line="63" column="47" lean-forward="false" selection-start-line="63" selection-start-column="47" selection-end-line="63" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_listing_detail.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="33">
+          <caret line="1" column="62" lean-forward="false" selection-start-line="1" selection-start-column="62" selection-end-line="1" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_new_bid.xml">
+      <provider selected="true" editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/ListingDetailFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2881">
+          <caret line="39" column="65" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding>
+            <element signature="e#2409#2601#0" expanded="true" />
+            <element signature="e#2600#2601#0" expanded="true" />
+            <element signature="e#3736#4796#0" expanded="true" />
+            <element signature="e#4795#4796#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/NewBidFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="683">
+          <caret line="88" column="1" lean-forward="false" selection-start-line="88" selection-start-column="1" selection-end-line="88" selection-end-column="1" />
+          <folding>
+            <element signature="e#2337#2338#0" expanded="true" />
+            <element signature="e#2379#2380#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/uk/ac/tees/com2060/oreo/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="386">
+          <caret line="168" column="69" lean-forward="false" selection-start-line="168" selection-start-column="69" selection-end-line="168" selection-end-column="69" />
+          <folding>
+            <element signature="method#onBackPressed#0;class#MainActivity#0" expanded="false" />
+            <element signature="method#doLogout#0;class#MainActivity#0" expanded="false" />
           </folding>
         </state>
       </provider>

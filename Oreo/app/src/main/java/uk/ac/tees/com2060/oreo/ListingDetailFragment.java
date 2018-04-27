@@ -37,7 +37,7 @@ public class ListingDetailFragment extends Fragment
      */
     public interface ListingDetailListener
     {
-        public void listingDetailListener();
+        public void listingDetailListener(Listing selectedListing);
     }
 
     /**
@@ -82,7 +82,7 @@ public class ListingDetailFragment extends Fragment
             @Override
             public void onClick(View view)
             {
-                //TODO: DISPLAY ADD BID FRAGMENT
+                callbackToActivity(selectedListing);
             }
         });
 
@@ -141,8 +141,8 @@ public class ListingDetailFragment extends Fragment
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity()
+    public void callbackToActivity(Listing selectedListing)
     {
-        mCallback.listingDetailListener();
+        mCallback.listingDetailListener(selectedListing);
     }
 }

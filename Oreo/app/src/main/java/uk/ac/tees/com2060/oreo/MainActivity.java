@@ -24,12 +24,14 @@ public class MainActivity extends AppCompatActivity
         implements  NavigationView.OnNavigationItemSelectedListener,
                     DashboardFragment.DashboardListener,
                     ListItemFragment.ListItemListener,
-                    ListingDetailFragment.ListingDetailListener
+                    ListingDetailFragment.ListingDetailListener,
+                    NewBidFragment.NewBidListener
 {
 
-    DashboardFragment dashboardFragment     = new DashboardFragment();
-    ListItemFragment listItemFragment       = new ListItemFragment();
-    ListingDetailFragment listingDetailFragment  = new ListingDetailFragment();
+    DashboardFragment dashboardFragment             = new DashboardFragment();
+    ListItemFragment listItemFragment               = new ListItemFragment();
+    ListingDetailFragment listingDetailFragment     = new ListingDetailFragment();
+    NewBidFragment newBidFragment                   = new NewBidFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -157,7 +159,19 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void listingDetailListener()
+    public void listingDetailListener(Listing selectedListing)
+    {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable("selectedListing", selectedListing);
+        newBidFragment.setArguments(arguments);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, newBidFragment)
+                .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void newBidListener()
     {
 
     }
