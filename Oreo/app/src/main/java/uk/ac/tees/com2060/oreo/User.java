@@ -1,11 +1,19 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.view.View;
+
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 /**
  * User.java
@@ -42,6 +50,21 @@ public class User implements Serializable
         this.postcode = postcode;
         this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
         this.profilePhoto = Utils.getImageFromString(profilePhoto);
+    }
+
+    public void updatePushToken(Context c)
+    {
+        ApiCall api = new ApiCall("user/updatePushToken", c);
+        api.addParam("push_token", FirebaseInstanceId.getInstance().getToken());
+        api.addResponseListener(new ResponseListener()
+        {
+            @Override
+            public void responseReceived(ApiResponse response)
+            {
+                if (response.success()) {}
+            }
+        });
+        api.sendRequest();
     }
 
     /**
