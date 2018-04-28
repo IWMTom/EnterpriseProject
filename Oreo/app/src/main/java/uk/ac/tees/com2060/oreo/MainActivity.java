@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -60,6 +61,8 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         /** END BOILERPLATE */
+
+        if (I)
 
         User.getUser().updatePushToken(this);
 
@@ -201,7 +204,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void newBidListener()
     {
-
+        getSupportFragmentManager().popBackStack();
+        getSupportFragmentManager().beginTransaction().remove(newBidFragment).commitAllowingStateLoss();
     }
 
     @Override

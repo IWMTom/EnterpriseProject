@@ -71,12 +71,13 @@ public class SplashActivity extends AppCompatActivity
 
                             User user = User.getUser();
                             user.init(
-                                (String) body.get("full_name"),
-                                (String) body.get("known_as"),
-                                (String) body.get("email"),
-                                (String) body.get("postcode"),
-                                (String) body.get("dob"),
-                                profilePhoto
+                                    (int) body.get("id"),
+                                    (String) body.get("full_name"),
+                                    (String) body.get("known_as"),
+                                    (String) body.get("email"),
+                                    (String) body.get("postcode"),
+                                    (String) body.get("dob"),
+                                    profilePhoto
                             );
                         } catch (JSONException | ParseException e) { e.printStackTrace(); }
 

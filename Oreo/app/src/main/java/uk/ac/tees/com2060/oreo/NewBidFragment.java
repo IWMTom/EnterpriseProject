@@ -99,6 +99,8 @@ public class NewBidFragment extends Fragment
         bid_amount = view.findViewById(R.id.editText_bid_amount);
         bid_message = view.findViewById(R.id.editText_bid_message);
 
+        bid_amount.setText(null); // Temporary workaround
+
         Button submit = view.findViewById(R.id.button_submit_bid);
         submit.setOnClickListener(new View.OnClickListener()
         {
@@ -133,9 +135,10 @@ public class NewBidFragment extends Fragment
             {
                 if (response.success())
                 {
-                    FragmentManager fm = getActivity()
-                            .getSupportFragmentManager();
-                    fm.popBackStack();
+                    bid_amount.setText(null);
+                    bid_message.setText(null);
+
+                    callbackToActivity();
                 }
                 else
                 {
