@@ -123,7 +123,7 @@ public class NewBidFragment extends Fragment
     public void submitBid(View view)
     {
         ApiCall newBid = new ApiCall("listing/" + selectedListing.id() + "/bids/new", getContext());
-        newBid.addParam("amount", Double.toString(this.bid_amount.getRawValue() / 100));
+        newBid.addParam("amount", Long.toString(this.bid_amount.getRawValue()));
         newBid.addParam("message", this.bid_message.getText().toString());
 
         newBid.addResponseListener(new ResponseListener()
