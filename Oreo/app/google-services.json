@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "299982675961",
+    "firebase_url": "https://shipr-197714.firebaseio.com",
+    "project_id": "shipr-197714",
+    "storage_bucket": "shipr-197714.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:299982675961:android:33fdb337c17d3258",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.com2060.oreo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "299982675961-i1i5ci37g2k7b9eufoj23i7g5kpg3t79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "uk.ac.tees.com2060.oreo",
+            "certificate_hash": "7ed68c41815d2f4bb559ba2204fa54302afa6c88"
+          }
+        },
+        {
+          "client_id": "299982675961-5tra6cql46uoehdr5rkueseqdlorksc4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCETiL4VL3RaAS_T2kzSDkLS9OM-o6IvQY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "299982675961-5tra6cql46uoehdr5rkueseqdlorksc4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

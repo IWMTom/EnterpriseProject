@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         /** END BOILERPLATE */
 
+        if (I)
+
         User.getUser().updatePushToken(this);
 
         ImageView imageView_nav_header_profile_photo =

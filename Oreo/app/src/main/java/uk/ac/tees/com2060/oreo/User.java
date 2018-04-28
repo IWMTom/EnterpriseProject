@@ -24,6 +24,7 @@ public class User implements Serializable
 {
     private static User userInstance = null;
 
+    private int id;
     private String fullName, knownAs, emailAddress, postcode;
     private Date dob;
     private Bitmap profilePhoto;
@@ -42,8 +43,9 @@ public class User implements Serializable
      * @param dob date of birth
      * @param profilePhoto profile photo string
      */
-    public void init(String fullName, String knownAs, String emailAddress, String postcode, String dob, String profilePhoto) throws ParseException
+    public void init(int id, String fullName, String knownAs, String emailAddress, String postcode, String dob, String profilePhoto) throws ParseException
     {
+        this.id = id;
         this.fullName = fullName;
         this.knownAs = knownAs;
         this.emailAddress = emailAddress;
@@ -80,6 +82,8 @@ public class User implements Serializable
 
         return userInstance;
     }
+
+    public int id() { return this.id; }
 
     /**
      * Gets full name
