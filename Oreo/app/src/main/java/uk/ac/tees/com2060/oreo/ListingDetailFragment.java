@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -101,6 +102,7 @@ public class ListingDetailFragment extends Fragment
         TextView listing_important_details = view.findViewById(R.id.textView_listing_important_details);
         listing_important_details.setText(selectedListing.importantDetails());
 
+        final ProgressBar progress = view.findViewById(R.id.progressBar_listing_detail);
         final ListView listView = view.findViewById(R.id.listing_detail_bids);
         final ArrayList<Bid> al = new ArrayList<>();
 
@@ -130,6 +132,8 @@ public class ListingDetailFragment extends Fragment
                     }
 
                     listView.setAdapter(new BidsAdapter(getContext(), al));
+
+                    progress.setVisibility(View.INVISIBLE);
                 }
             }
         });

@@ -65,10 +65,10 @@ public class BidsAdapter extends BaseAdapter
 
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
-        Picasso.get().load(mContext.getString(R.string.API_BASE_URL) + "user/" + bid.user_id() + "/photo").into(bidThumbnail);
+        Picasso.get().load(mContext.getString(R.string.API_BASE_URL) + "user/" + bid.user_id() + "/photo").placeholder(R.drawable.default_profile_photo).into(bidThumbnail);
 
         bidUser.setText(bid.userName());
-        bidMessage.setText(bid.message());
+        bidMessage.setText((bid.message().equals("null") ? "" : bid.message()));
         bidAmount.setText(formatter.format(bid.amount()));
 
         return rowView;
