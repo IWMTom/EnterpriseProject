@@ -21,6 +21,10 @@ import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.List;
 
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
+import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
+
 /**
  * MainActivity.java
  *
@@ -62,9 +66,10 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         /** END BOILERPLATE */
 
-        Log.d("FUCK", getIntent().getStringExtra("test"));
-
         User.getUser().updatePushToken(this);
+
+        if (getIntent().getIntExtra("notification_bid", -1) != -1)
+            showListingDetail(getIntent().getIntExtra("notification_bid", -1));
 
         ImageView imageView_nav_header_profile_photo =
                 (ImageView) navigationView.getHeaderView(0)
@@ -181,6 +186,29 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, listingDetailFragment)
                 .addToBackStack(null).commit();
+    }
+
+    private void showListingDetail(final int id)
+    {
+        ApiCall api = new ApiCall("listing/" + id, this);
+        api.addResponseListener(new ResponseListener()
+        {
+            @Override
+            public void responseReceived(ApiResponse response)
+            {
+                if (response.success())
+                {
+                    Bundle arguments = new Bundle();
+                    arguments.putSerializable("selectedListing", Listing.getListing(response.getBodyArray()));
+                    listingDetailFragment.setArguments(arguments);
+
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.main_fragment_container, listingDetailFragment)
+                            .addToBackStack(null).commit();
+                }
+            }
+        });
+        api.sendRequest();
     }
 
     @Override

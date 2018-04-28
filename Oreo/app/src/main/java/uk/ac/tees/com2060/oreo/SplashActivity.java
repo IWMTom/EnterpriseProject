@@ -30,12 +30,15 @@ public class SplashActivity extends AppCompatActivity
 {
     Activity activity = this;
     Intent intent;
+    int notification_bid = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        handlePushNotifications();
 
         TextView version = findViewById(R.id.textView_version);
         version.setText(BuildConfig.VERSION_NAME);
@@ -81,6 +84,9 @@ public class SplashActivity extends AppCompatActivity
                             );
                         } catch (JSONException | ParseException e) { e.printStackTrace(); }
 
+                        if (notification_bid != -1)
+                            intent.putExtra("notification_bid", notification_bid);
+
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
@@ -101,5 +107,11 @@ public class SplashActivity extends AppCompatActivity
             finish();
         }
 
+    }
+
+    private void handlePushNotifications()
+    {
+        if (getIntent().getStringExtra("notification_bid") != null)
+            notification_bid = Integer.parseInt(getIntent().getStringExtra("notification_bid"));
     }
 }

@@ -1,6 +1,7 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.content.Context;
+import android.view.View;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -34,6 +35,11 @@ public class Listing implements Serializable
         this.max_bid                = max_bid;
         this.min_bid                = min_bid;
         this.average_bid            = average_bid;
+    }
+
+    public static Listing getListing(JSONArray data)
+    {
+        return getListings(data).get(0);
     }
 
     public static ArrayList<Listing> getListings(JSONArray json)
