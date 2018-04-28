@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
         /** END BOILERPLATE */
 
-        if (I)
+        Log.d("FUCK", getIntent().getStringExtra("test"));
 
         User.getUser().updatePushToken(this);
 
