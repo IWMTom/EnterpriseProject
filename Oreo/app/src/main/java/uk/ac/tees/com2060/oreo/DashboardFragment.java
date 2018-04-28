@@ -38,7 +38,7 @@ public class DashboardFragment extends Fragment
      */
     public interface DashboardListener
     {
-        public void dashboardListener(Listing selectedListing);
+        public void dashboardListener();
     }
 
     /**
@@ -76,40 +76,9 @@ public class DashboardFragment extends Fragment
 
         ImageView imageView_test          = view.findViewById(R.id.dashboard_imageView);
         TextView textView_test            = view.findViewById(R.id.dashboard_textView);
-        final ListView listView           = view.findViewById(R.id.dashboard_listView);
-        final ArrayList[] listings        = new ArrayList[1];
-        final ProgressBar progress        = view.findViewById(R.id.progressBar_dashboard);
 
         textView_test.setText(User.getUser().fullName());
         imageView_test.setImageBitmap(User.getUser().profilePhoto());
-
-        ApiCall api = new ApiCall("listing/list", getContext());
-        api.addResponseListener(new ResponseListener()
-        {
-            @Override
-            public void responseReceived(ApiResponse response)
-            {
-                if (response.success())
-                {
-                    listings[0] = Listing.getListings(response.getBodyArray());
-                    listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
-                    progress.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
-        api.sendRequest();
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-            {
-                Listing selectedListing = ((ArrayList<Listing>) listings[0]).get(position);
-
-                callbackToActivity(selectedListing);
-            }
-
-        });
 
         return view;
     }
@@ -117,8 +86,8 @@ public class DashboardFragment extends Fragment
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity(Listing selectedListing)
+    public void callbackToActivity()
     {
-        mCallback.dashboardListener(selectedListing);
+        mCallback.dashboardListener();
     }
 }

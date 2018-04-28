@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity
                     NewBidFragment.NewBidListener,
                     EditProfileFragment.EditProfileListener,
                     ViewProfileFragment.ViewProfileListener,
-                    PastListingsFragment.PastListingsListener
+                    PastListingsFragment.PastListingsListener,
+                    BrowseListingsFragment.BrowseListingsListener
 {
 
     DashboardFragment dashboardFragment             = new DashboardFragment();
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity
     NewBidFragment newBidFragment                   = new NewBidFragment();
     EditProfileFragment editProfileFragment         = new EditProfileFragment();
     PastListingsFragment pastListingsFragment       = new PastListingsFragment();
+    BrowseListingsFragment browseListingsFragment   = new BrowseListingsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -168,7 +170,8 @@ public class MainActivity extends AppCompatActivity
 
     private void showBrowseListings()
     {
-
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, browseListingsFragment).commit();
     }
 
     private void showPastListings()
@@ -193,15 +196,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void dashboardListener(Listing selectedListing)
+    public void dashboardListener()
     {
-        Bundle arguments = new Bundle();
-        arguments.putSerializable("selectedListing", selectedListing);
-        listingDetailFragment.setArguments(arguments);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, listingDetailFragment)
-                .addToBackStack(null).commit();
     }
 
     private void showListingDetail(final int id)
@@ -266,6 +263,18 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void pastListingsListener(Listing selectedListing)
+    {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable("selectedListing", selectedListing);
+        listingDetailFragment.setArguments(arguments);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, listingDetailFragment)
+                .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void browseListingsListener(Listing selectedListing)
     {
         Bundle arguments = new Bundle();
         arguments.putSerializable("selectedListing", selectedListing);
