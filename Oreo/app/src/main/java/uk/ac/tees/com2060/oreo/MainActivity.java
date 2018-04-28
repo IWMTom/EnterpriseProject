@@ -1,6 +1,7 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -9,8 +10,10 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -29,13 +32,16 @@ public class MainActivity extends AppCompatActivity
                     DashboardFragment.DashboardListener,
                     ListItemFragment.ListItemListener,
                     ListingDetailFragment.ListingDetailListener,
-                    NewBidFragment.NewBidListener
+                    NewBidFragment.NewBidListener,
+                    EditProfileFragment.EditProfileListener,
+                    ViewProfileFragment.ViewProfileListener
 {
 
     DashboardFragment dashboardFragment             = new DashboardFragment();
     ListItemFragment listItemFragment               = new ListItemFragment();
     ListingDetailFragment listingDetailFragment     = new ListingDetailFragment();
     NewBidFragment newBidFragment                   = new NewBidFragment();
+    EditProfileFragment editProfileFragment         = new EditProfileFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,6 +69,13 @@ public class MainActivity extends AppCompatActivity
         ImageView imageView_nav_header_profile_photo =
                 (ImageView) navigationView.getHeaderView(0)
                         .findViewById(R.id.imageView_nav_header_profile_photo);
+
+        imageView_nav_header_profile_photo.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                showProfile();
+            }
+        });;
+
         TextView textView_nav_header_name =
                 (TextView) navigationView.getHeaderView(0)
                         .findViewById(R.id.textView_nav_header_name);
@@ -118,6 +131,16 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showProfile()
+    {
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(Gravity.LEFT);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, editProfileFragment).commit();
+
     }
 
     private void showDashboard()
@@ -183,5 +206,17 @@ public class MainActivity extends AppCompatActivity
     {
         getSupportFragmentManager().popBackStack();
         getSupportFragmentManager().beginTransaction().remove(newBidFragment).commitAllowingStateLoss();
+    }
+
+    @Override
+    public void editProfileListener()
+    {
+
+    }
+
+    @Override
+    public void viewProfileListener()
+    {
+
     }
 }

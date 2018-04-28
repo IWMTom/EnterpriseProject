@@ -7,15 +7,15 @@
     android:orientation="vertical">
 
     <android.support.constraint.ConstraintLayout
-        android:background="@color/colorWhite"
-        android:focusableInTouchMode="true"
-        tools:context="uk.ac.tees.com2060.oreo.RegisterStep1Fragment"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="3">
+        android:layout_weight="3"
+        android:background="@color/colorWhite"
+        android:focusableInTouchMode="true"
+        tools:context="uk.ac.tees.com2060.oreo.RegisterStep1Fragment">
 
         <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imageView_profile_photo"
+            android:id="@+id/imageView_profile_view_image"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginEnd="16dp"
@@ -45,7 +45,7 @@
             app:layout_constraintBottom_toTopOf="@+id/editText_known_as"
             app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_profile_photo" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView_profile_view_image" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline_far_left"
