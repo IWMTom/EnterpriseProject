@@ -47,7 +47,7 @@
             app:layout_constraintBottom_toTopOf="@+id/editText_phone_number"
             app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
             app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
-            app:layout_constraintTop_toBottomOf="@+id/textView_hey" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_username" />
 
         <android.support.constraint.Guideline
             android:id="@+id/guideline_far_left"
@@ -131,7 +131,7 @@
             app:layout_constraintTop_toBottomOf="@+id/editText_email_address" />
 
         <TextView
-            android:id="@+id/textView_hey"
+            android:id="@+id/textView_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

@@ -12,7 +12,6 @@ import android.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -28,7 +27,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 
 import static android.app.Activity.RESULT_OK;
@@ -98,7 +96,7 @@ public class RegisterStep1Fragment extends Fragment
         View view = inflater.inflate(R.layout.fragment_register_step1, container, false);
         setHasOptionsMenu(true);
 
-        profilePhoto = (ImageView) view.findViewById(R.id.imageView_profile_photo);
+        profilePhoto = (ImageView) view.findViewById(R.id.imageView_profile_view_image);
         editText_dob = (EditText) view.findViewById(R.id.editText_dob);
         editText_full_name = (EditText) view.findViewById(R.id.editText_full_name);
         editText_known_as = (EditText) view.findViewById(R.id.editText_known_as);

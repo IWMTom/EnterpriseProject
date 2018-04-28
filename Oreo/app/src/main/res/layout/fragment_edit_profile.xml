@@ -1,0 +1,265 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:scrollbarStyle="insideOverlay"
+    tools:context="uk.ac.tees.com2060.oreo.EditProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageView_profile_view_image2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:elevation="2dp"
+            android:src="@drawable/default_profile_photo"
+            app:civ_border_color="@color/colorWhite"
+            app:civ_border_width="3dp"
+            app:layout_constraintBottom_toTopOf="@+id/textView_rep"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_centre_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_centre_left3"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_far_left3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.1" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_centre_left3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.3" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_centre_right3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.7" />
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline_far_right3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.9" />
+
+        <EditText
+            android:id="@+id/editText_profile_known_as"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Alias"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_profile_view_image2" />
+
+        <EditText
+            android:id="@+id/editText_profile_full_name"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Full Name"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_known_as" />
+
+        <EditText
+            android:id="@+id/editText_profile_postcode"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Postcode"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_full_name" />
+
+        <Button
+            android:id="@+id/button_update_details"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Update"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_centre_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_centre_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_postcode" />
+
+        <EditText
+            android:id="@+id/editText_profile_email"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="Email"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/button_update_details" />
+
+        <Button
+            android:id="@+id/button_update_email"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Verify"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_centre_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_centre_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_email" />
+
+        <EditText
+            android:id="@+id/editText_profile_mobile_number"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="Mobile Number"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/button_update_email" />
+
+        <Button
+            android:id="@+id/button_update_mobile_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Verify"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_centre_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_centre_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_mobile_number" />
+
+        <EditText
+            android:id="@+id/editText_profile_password_current"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:hint="Current Password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/button_update_mobile_number" />
+
+        <EditText
+            android:id="@+id/editText_profile_password_new"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="New Password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_password_current" />
+
+        <EditText
+            android:id="@+id/editText_profile_password_check"
+            style="@style/AppTheme.EditText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:hint="Confirm New Password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_password_new" />
+
+        <Button
+            android:id="@+id/button_update_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="Update"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_centre_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_centre_left3"
+            app:layout_constraintTop_toBottomOf="@+id/editText_profile_password_check" />
+
+        <TextView
+            android:id="@+id/textView_profile_credit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="86dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Created by Tom &amp; Lewis"
+            android:textAlignment="center"
+            android:textAppearance="@style/AppTheme.BodyText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/textView_profile_version"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/textView_profile_version"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="64dp"
+            android:text="Version"
+            android:textAlignment="center"
+            android:textAppearance="@style/AppTheme.BodyText"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right3"
+            app:layout_constraintStart_toStartOf="@+id/guideline_far_left3"
+            app:layout_constraintTop_toBottomOf="@+id/button_update_password" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</ScrollView>

@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,6 +36,9 @@ public class SplashActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+        TextView version = findViewById(R.id.textView_version);
+        version.setText(BuildConfig.VERSION_NAME);
 
         if (Utils.getUserAccessToken(activity) != null)
         {

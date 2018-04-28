@@ -79,7 +79,7 @@ public class RegisterStep2Fragment extends Fragment
 
         View view = inflater.inflate(R.layout.fragment_register_step2, container, false);
 
-        textView_hey = (TextView) view.findViewById(R.id.textView_hey);
+        textView_hey = (TextView) view.findViewById(R.id.textView_username);
         textView_hey.setText(getResources().getString(R.string.activity_register_step2_nearly_there,
                 getArguments().getString("known_as")));
 
