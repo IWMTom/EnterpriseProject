@@ -124,4 +124,9 @@ public class Utils
         Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
         return decodedByte;
     }
+
+    public static void clearTemporaryStorage(Activity a)
+    {
+        a.getPreferences(Context.MODE_PRIVATE).edit().clear().apply();
+    }
 }

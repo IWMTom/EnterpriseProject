@@ -129,9 +129,14 @@ public class ListItemStep3Fragment extends Fragment implements BlockingStep
             {
                 if (response.success())
                 {
-                    Utils.displayMessage(getActivity(), "SUCCESS!");
+                    Utils.clearTemporaryStorage(getActivity());
 
-                    getActivity().getPreferences(Context.MODE_PRIVATE).edit().clear().apply();
+                    try
+                    {
+                        getActivity().getPreferences(Context.MODE_PRIVATE).edit()
+                                .putInt("listing_id", response.getBody().getInt("id"))
+                                .apply();
+                    } catch (JSONException e) { e.printStackTrace(); }
 
                     new Handler().postDelayed(new Runnable()
                     {

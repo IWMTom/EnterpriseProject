@@ -38,7 +38,8 @@ public class MainActivity extends AppCompatActivity
                     ListingDetailFragment.ListingDetailListener,
                     NewBidFragment.NewBidListener,
                     EditProfileFragment.EditProfileListener,
-                    ViewProfileFragment.ViewProfileListener
+                    ViewProfileFragment.ViewProfileListener,
+                    PastListingsFragment.PastListingsListener
 {
 
     DashboardFragment dashboardFragment             = new DashboardFragment();
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     ListingDetailFragment listingDetailFragment     = new ListingDetailFragment();
     NewBidFragment newBidFragment                   = new NewBidFragment();
     EditProfileFragment editProfileFragment         = new EditProfileFragment();
+    PastListingsFragment pastListingsFragment       = new PastListingsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -124,7 +126,11 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_list:
                 showListItem();
                 break;
+            case R.id.nav_browse_listings:
+                showBrowseListings();
+                break;
             case R.id.nav_past_listings:
+                showPastListings();
                 break;
             case R.id.nav_settings:
                 break;
@@ -154,11 +160,21 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.main_fragment_container, dashboardFragment).commit();
     }
 
-
     private void showListItem()
     {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, listItemFragment).commit();
+    }
+
+    private void showBrowseListings()
+    {
+
+    }
+
+    private void showPastListings()
+    {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, pastListingsFragment).commit();
     }
     
 
@@ -212,9 +228,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void listItemListener()
+    public void listItemListener(int id)
     {
-
+        showListingDetail(id);
     }
 
     @Override
@@ -246,5 +262,17 @@ public class MainActivity extends AppCompatActivity
     public void viewProfileListener()
     {
 
+    }
+
+    @Override
+    public void pastListingsListener(Listing selectedListing)
+    {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable("selectedListing", selectedListing);
+        listingDetailFragment.setArguments(arguments);
+
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, listingDetailFragment)
+                .addToBackStack(null).commit();
     }
 }

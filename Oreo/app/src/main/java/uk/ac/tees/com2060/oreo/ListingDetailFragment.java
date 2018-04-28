@@ -100,7 +100,7 @@ public class ListingDetailFragment extends Fragment
         listing_size.setText(selectedListing.itemSize().substring(0, 1).toUpperCase() + selectedListing.itemSize().substring(1));
 
         TextView listing_important_details = view.findViewById(R.id.textView_listing_important_details);
-        listing_important_details.setText(selectedListing.importantDetails());
+        listing_important_details.setText((selectedListing.importantDetails().equals("null") ? "" : selectedListing.importantDetails()));
 
         final ProgressBar progress = view.findViewById(R.id.progressBar_listing_detail);
         final ListView listView = view.findViewById(R.id.listing_detail_bids);

@@ -1,22 +1,26 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
+import com.stepstone.stepper.VerificationError;
 
 /**
  * ListItemFragment.java
  *
  * The Fragment class that handles the List Item page
  */
-public class ListItemFragment extends Fragment
+public class ListItemFragment extends Fragment implements StepperLayout.StepperListener
 {
     ListItemListener mCallback;
     private StepperLayout mStepperLayout;
@@ -29,7 +33,7 @@ public class ListItemFragment extends Fragment
      */
     public interface ListItemListener
     {
-        public void listItemListener();
+        public void listItemListener(int id);
     }
 
     /**
@@ -69,6 +73,7 @@ public class ListItemFragment extends Fragment
 
         mStepperLayout = (StepperLayout) view.findViewById(R.id.stepperLayout);
         mStepperLayout.setAdapter(stepperAdapter);
+        mStepperLayout.setListener(this);
 
         return view;
     }
@@ -92,9 +97,27 @@ public class ListItemFragment extends Fragment
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity()
+    public void callbackToActivity(int id)
     {
-        mCallback.listItemListener();
+        mCallback.listItemListener(id);
     }
+
+    @Override
+    public void onCompleted(View completeButton)
+    {
+        callbackToActivity(
+                getActivity().getPreferences(Context.MODE_PRIVATE).getInt("listing_id", -1));
+
+        Utils.clearTemporaryStorage(getActivity());
+    }
+
+    @Override
+    public void onError(VerificationError verificationError) {}
+
+    @Override
+    public void onStepSelected(int newStepPosition) {}
+
+    @Override
+    public void onReturn() {}
 
 }
