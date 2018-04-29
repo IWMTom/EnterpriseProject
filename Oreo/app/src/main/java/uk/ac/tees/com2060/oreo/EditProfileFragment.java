@@ -5,8 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,6 +20,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
@@ -71,6 +75,29 @@ public class EditProfileFragment extends Fragment
         final View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         setHasOptionsMenu(true);
 
+        getActivity().setTitle("Edit Your Profile");
+
+        CircleImageView image = view.findViewById(R.id.imageView_profile_view_image2);
+        image.setImageBitmap(User.getUser().profilePhoto());
+
+        EditText alias = view.findViewById(R.id.editText_profile_known_as);
+        alias.setText(User.getUser().knownAs());
+
+        EditText name = view.findViewById(R.id.editText_profile_full_name);
+        name.setText(User.getUser().fullName());
+
+        EditText postcode = view.findViewById(R.id.editText_profile_postcode);
+        postcode.setText(User.getUser().postcode());
+
+        EditText email = view.findViewById(R.id.editText_profile_email);
+        email.setText(User.getUser().emailAddress());
+
+        EditText mobile = view.findViewById(R.id.editText_profile_mobile_number);
+        //mobile.setText(); TODO:implement in user class
+
+        TextView version = view.findViewById(R.id.textView_profile_version);
+        version.setText(BuildConfig.VERSION_NAME);
+
         return view;
     }
 
@@ -81,4 +108,5 @@ public class EditProfileFragment extends Fragment
     {
         mCallback.editProfileListener();
     }
+
 }

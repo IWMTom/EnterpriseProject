@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     ListItemFragment listItemFragment               = new ListItemFragment();
     ListingDetailFragment listingDetailFragment     = new ListingDetailFragment();
     NewBidFragment newBidFragment                   = new NewBidFragment();
+    ViewProfileFragment viewProfileFragment         = new ViewProfileFragment();
     EditProfileFragment editProfileFragment         = new EditProfileFragment();
     PastListingsFragment pastListingsFragment       = new PastListingsFragment();
     BrowseListingsFragment browseListingsFragment   = new BrowseListingsFragment();
@@ -135,6 +136,7 @@ public class MainActivity extends AppCompatActivity
                 showPastListings();
                 break;
             case R.id.nav_settings:
+                showEditProfile();
                 break;
             case R.id.nav_logout:
                 doLogout();
@@ -152,7 +154,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(Gravity.LEFT);
 
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, editProfileFragment).commit();
+                .replace(R.id.main_fragment_container, viewProfileFragment).commit();
 
     }
 
@@ -178,6 +180,11 @@ public class MainActivity extends AppCompatActivity
     {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, pastListingsFragment).commit();
+    }
+
+    private void showEditProfile(){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, editProfileFragment).commit();
     }
     
 
@@ -258,8 +265,9 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void viewProfileListener()
     {
-
-    }
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, editProfileFragment)
+        .addToBackStack(null).commit(); }
 
     @Override
     public void pastListingsListener(Listing selectedListing)
