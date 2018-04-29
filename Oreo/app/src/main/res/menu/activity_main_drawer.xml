@@ -9,31 +9,41 @@
             android:icon="@drawable/ic_dashboard"
             android:title="@string/menu_dashboard"
             android:checked="true" />
-        <item
-            android:id="@+id/nav_list"
-            android:icon="@drawable/ic_add"
-            android:title="@string/menu_list" />
-        <item
-            android:id="@+id/nav_browse_listings"
-            android:icon="@drawable/ic_browse"
-            android:title="Browse Listings" />
-        <item
-            android:id="@+id/nav_past_listings"
-            android:icon="@drawable/ic_history"
-            android:title="@string/menu_past_listings" />
-    </group>
 
-    <item android:title="Account">
-        <menu>
-            <item
-                android:id="@+id/nav_settings"
-                android:icon="@drawable/ic_settings"
-                android:title="@string/menu_settings" />
-            <item
-                android:id="@+id/nav_logout"
-                android:icon="@drawable/ic_power"
-                android:title="@string/menu_log_out" />
-        </menu>
-    </item>
+        <item android:title="Shipping">
+            <menu>
+                <item
+                    android:id="@+id/nav_list"
+                    android:icon="@drawable/ic_add"
+                    android:title="@string/menu_list" />
+                <item
+                    android:id="@+id/nav_past_listings"
+                    android:icon="@drawable/ic_history"
+                    android:title="@string/menu_past_listings" />
+            </menu>
+        </item>
+
+        <item android:title="Carrying">
+            <menu>
+                <item
+                    android:id="@+id/nav_browse_listings"
+                    android:icon="@drawable/ic_browse"
+                    android:title="Browse Listings" />
+            </menu>
+        </item>
+
+        <item android:title="Account">
+            <menu>
+                <item
+                    android:id="@+id/nav_settings"
+                    android:icon="@drawable/ic_settings"
+                    android:title="@string/menu_settings" />
+                <item
+                    android:id="@+id/nav_logout"
+                    android:icon="@drawable/ic_power"
+                    android:title="@string/menu_log_out" />
+            </menu>
+        </item>
+    </group>
 
 </menu>
