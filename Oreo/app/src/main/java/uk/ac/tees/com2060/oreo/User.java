@@ -17,34 +17,37 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 /**
  * User.java
- *
+ * <p>
  * A singleton-based model class to store authenticated user data
  */
-public class User implements Serializable
-{
+public class User implements Serializable {
     private static User userInstance = null;
 
-    private int id;
-    private String fullName, knownAs, emailAddress, postcode;
+    private int id, rep;
+    private String fullName, knownAs, emailAddress, postcode, mobileNumber;
     private Date dob;
     private Bitmap profilePhoto;
 
     /**
      * Empty constructor
      */
-    private User() {}
+    private User() {
+    }
 
     /**
      * Initialises an empty User
-     * @param fullName full name
-     * @param knownAs known as name
+     *
+     * @param fullName     full name
+     * @param knownAs      known as name
      * @param emailAddress email address
-     * @param postcode postcode
-     * @param dob date of birth
+     * @param postcode     postcode
+     * @param dob          date of birth
      * @param profilePhoto profile photo string
+     * @param rep          reputation integer
+     * @param mobileNumber mobile number
      */
-    public void init(int id, String fullName, String knownAs, String emailAddress, String postcode, String dob, String profilePhoto) throws ParseException
-    {
+    public void init(int id, String fullName, String knownAs, String emailAddress, String postcode,
+                     String dob, String profilePhoto, int rep, String mobileNumber) throws ParseException {
         this.id = id;
         this.fullName = fullName;
         this.knownAs = knownAs;
@@ -52,18 +55,18 @@ public class User implements Serializable
         this.postcode = postcode;
         this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
         this.profilePhoto = Utils.getImageFromString(profilePhoto);
+        this.rep = rep;
+        this.mobileNumber = mobileNumber;
     }
 
-    public void updatePushToken(Context c)
-    {
+    public void updatePushToken(Context c) {
         ApiCall api = new ApiCall("user/updatePushToken", c);
         api.addParam("push_token", FirebaseInstanceId.getInstance().getToken());
-        api.addResponseListener(new ResponseListener()
-        {
+        api.addResponseListener(new ResponseListener() {
             @Override
-            public void responseReceived(ApiResponse response)
-            {
-                if (response.success()) {}
+            public void responseReceived(ApiResponse response) {
+                if (response.success()) {
+                }
             }
         });
         api.sendRequest();
@@ -71,71 +74,114 @@ public class User implements Serializable
 
     /**
      * Gets instance of user (singleton)
+     *
      * @return
      */
-    public static User getUser()
-    {
-        if (userInstance == null)
-        {
+    public static User getUser() {
+        if (userInstance == null) {
             userInstance = new User();
         }
 
         return userInstance;
     }
 
-    public int id() { return this.id; }
+    public int id() {
+        return this.id;
+    }
 
     /**
      * Gets full name
+     *
      * @return full name
      */
-    public String fullName()
-    {
+    public String fullName() {
         return this.fullName;
     }
 
     /**
      * Gets known as name
+     *
      * @return known as name
      */
-    public String knownAs()
-    {
+    public String knownAs() {
         return this.knownAs;
     }
 
     /**
      * Gets email address
+     *
      * @return email address
      */
-    public String emailAddress()
-    {
+    public String emailAddress() {
         return this.emailAddress;
     }
 
     /**
      * Gets postcode
+     *
      * @return postcode
      */
-    public String postcode()
-    {
+    public String postcode() {
         return this.postcode;
     }
 
     /**
      * Gets date of birth
+     *
      * @return date of birth
      */
-    public Date dob()
-    {
+    public Date dob() {
         return this.dob;
     }
 
     /**
      * Gets profile photo
+     *
      * @return profile photo
      */
-    public Bitmap profilePhoto()
-    {
+    public Bitmap profilePhoto() {
         return this.profilePhoto;
+    }
+
+    /**
+     * Gets mobile number
+     *
+     * @return mobile number
+     */
+    public String mobileNumber() {
+        return this.mobileNumber;
+    }
+
+    /**
+     * Gets rep
+     *
+     * @return rep
+     */
+    public int rep() {
+        return this.rep;
+    }
+
+    public void setMobileNumber(String mobile) {
+        this.mobileNumber = mobile;
+    }
+
+    public void setProfilePhoto(Bitmap bmp){
+        profilePhoto = bmp;
+    }
+
+    public void setAlias(String s){
+        knownAs = s;
+    }
+
+    public void setFullName(String s){
+        fullName = s;
+    }
+
+    public void setPostcode(String s){
+        postcode = s;
+    }
+
+    public void setEmailAddress(String s){
+        emailAddress = s;
     }
 }

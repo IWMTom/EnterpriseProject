@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,102 +6,51 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="3"
-        android:background="@color/colorWhite"
-        android:focusableInTouchMode="true"
-        tools:context="uk.ac.tees.com2060.oreo.ProfileFragment">
+    <TextView
+        android:id="@+id/textView_profile_location"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="location"
+        android:textAlignment="center"
+        android:textAppearance="@style/AppTheme.Header3"
+        android:textColor="@color/colorDarkGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_rep" />
 
-        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/imageView_profile_view_image"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:elevation="2dp"
-            android:src="@drawable/default_profile_photo"
-            app:civ_border_color="@color/colorWhite"
-            app:civ_border_width="3dp"
-            app:layout_constraintBottom_toTopOf="@+id/textView_rep"
-            app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
-            app:layout_constraintTop_toBottomOf="@+id/textView_location" />
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageView_profile_view_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="86dp"
+        android:layout_marginStart="86dp"
+        android:layout_marginTop="8dp"
+        android:elevation="2dp"
+        android:src="@drawable/default_profile_photo"
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="3dp"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline_far_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="41dp" />
+    <TextView
+        android:id="@+id/textView_rep"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:text="rep"
+        android:textAlignment="center"
+        android:textAppearance="@style/AppTheme.Header3"
+        android:textColor="@color/colorDarkGrey"
+        android:textSize="36sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_profile_view_image" />
 
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline_centre_left"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="113dp" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline_centre_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="280dp" />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline_far_right"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="370dp" />
-
-        <TextView
-            android:id="@+id/textView_username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="28dp"
-            android:text="username"
-            android:textAlignment="center"
-            android:textAppearance="@style/AppTheme.Title"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView_location"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
-            android:text="location"
-            android:textAlignment="center"
-            android:textAppearance="@style/AppTheme.Header3"
-            android:textColor="@color/colorDarkGrey"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
-            app:layout_constraintTop_toBottomOf="@+id/textView_username" />
-
-        <TextView
-            android:id="@+id/textView_rep"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:text="rep"
-            android:textAlignment="center"
-            android:textAppearance="@style/AppTheme.Header3"
-            android:textColor="@color/colorDarkGrey"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_far_right"
-            app:layout_constraintStart_toStartOf="@+id/guideline_far_left"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_profile_view_image" />
-
-    </android.support.constraint.ConstraintLayout>
-</LinearLayout>
+</android.support.constraint.ConstraintLayout>
