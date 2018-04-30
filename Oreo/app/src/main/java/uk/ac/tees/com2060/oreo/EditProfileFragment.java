@@ -172,7 +172,7 @@ public class EditProfileFragment extends Fragment {
         });
 
         TextView version = view.findViewById(R.id.textView_profile_version);
-        version.setText(BuildConfig.VERSION_NAME);
+        version.setText(BuildConfig.VERSION_NAME + "-" + BuildConfig.VERSION_CODE);
         version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
