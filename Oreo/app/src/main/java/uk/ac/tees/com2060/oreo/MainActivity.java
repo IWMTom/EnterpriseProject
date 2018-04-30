@@ -158,27 +158,35 @@ public class MainActivity extends AppCompatActivity
 
     private void showDashboard() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, dashboardFragment).commit();
+                .replace(R.id.main_fragment_container, dashboardFragment)                .addToBackStack(null)
+                .commit();
     }
 
     private void showListItem() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, listItemFragment).commit();
+                .replace(R.id.main_fragment_container, listItemFragment)                .addToBackStack(null)
+                .commit();
+
     }
 
     private void showBrowseListings() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, browseListingsFragment).commit();
+                .replace(R.id.main_fragment_container, browseListingsFragment)                .addToBackStack(null)
+                .commit();
     }
 
     private void showPastListings() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, pastListingsFragment).commit();
+                .replace(R.id.main_fragment_container, pastListingsFragment)                .addToBackStack(null)
+                .commit();
     }
 
     private void showEditProfile() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, editProfileFragment).commit();
+                .replace(R.id.main_fragment_container, editProfileFragment)
+                .addToBackStack(null)
+                .commit();
+
     }
 
 
@@ -210,8 +218,7 @@ public class MainActivity extends AppCompatActivity
                     listingDetailFragment.setArguments(arguments);
 
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_fragment_container, listingDetailFragment)
-                            .addToBackStack(null).commit();
+                            .replace(R.id.main_fragment_container, listingDetailFragment);
                 }
             }
         });
