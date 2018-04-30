@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -103,7 +101,7 @@ public class ListingDetailFragment extends Fragment
         listing_important_details.setText((selectedListing.importantDetails().equals("null") ? "" : selectedListing.importantDetails()));
 
         final ProgressBar progress = view.findViewById(R.id.progressBar_listing_detail);
-        final ListView listView = view.findViewById(R.id.listing_detail_bids);
+        final ListView listView = view.findViewById(R.id.listing_ratings);
         final ArrayList<Bid> al = new ArrayList<>();
 
         ApiCall api = new ApiCall("listing/" + selectedListing.id() + "/bids", getContext());
