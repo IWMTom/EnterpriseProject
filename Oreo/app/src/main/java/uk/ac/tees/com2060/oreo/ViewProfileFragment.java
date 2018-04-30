@@ -19,6 +19,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -86,6 +87,7 @@ public class ViewProfileFragment extends Fragment {
         final TextView rep = view.findViewById(R.id.textView_rep);
         final TextView location = view.findViewById(R.id.textView_profile_location);
         final ProgressBar spinner = view.findViewById(R.id.progressBar_view_profile);
+        final ProgressBar spinner_profile = view.findViewById(R.id.progressBar_view_profile_picture);
         Bundle args = this.getArguments();
         if (args != null) {
 
@@ -133,7 +135,7 @@ public class ViewProfileFragment extends Fragment {
             setHasOptionsMenu(true);
 
         } else {
-
+            spinner_profile.setVisibility(View.VISIBLE);
             ApiCall getUserData = new ApiCall("user/" + profileID, this.getContext());
             getUserData.addResponseListener(new ResponseListener() {
 
@@ -160,7 +162,17 @@ public class ViewProfileFragment extends Fragment {
 
             getUserData.sendRequest();
 
-            Picasso.get().load("https://getshipr.com/api/user/" + profileID + "/photo").placeholder(R.drawable.default_profile_photo).into(image);
+            Picasso.get().load("https://getshipr.com/api/user/" + profileID + "/photo").placeholder(R.drawable.default_profile_photo).into(image, new Callback() {
+                @Override
+                public void onSuccess() {
+                    spinner_profile.setVisibility(View.INVISIBLE);
+                }
+
+                @Override
+                public void onError(Exception e) {
+                    spinner_profile.setVisibility(View.INVISIBLE);
+                }
+            });
 
             setHasOptionsMenu(false);
         }
