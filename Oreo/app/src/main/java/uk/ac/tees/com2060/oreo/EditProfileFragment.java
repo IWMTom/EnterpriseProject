@@ -1,6 +1,7 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,6 +39,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 import static android.app.Activity.RESULT_OK;
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 /**
  * EditProfileFragment.java
@@ -93,10 +96,9 @@ public class EditProfileFragment extends Fragment {
      * Sets the title in the title bar and displays the fragment layout file.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
         setHasOptionsMenu(true);
-
         getActivity().setTitle("Edit Your Profile");
 
         image = view.findViewById(R.id.imageView_profile_view_image2);
@@ -104,6 +106,7 @@ public class EditProfileFragment extends Fragment {
         image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard();
                 doUpdatePhoto();
             }
         });
@@ -121,6 +124,7 @@ public class EditProfileFragment extends Fragment {
         button_user_details.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard();
                 doUpdateDetails();
             }
         });
@@ -132,6 +136,7 @@ public class EditProfileFragment extends Fragment {
         button_user_email.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard();
                 doUpdateEmail();
             }
         });
@@ -143,14 +148,20 @@ public class EditProfileFragment extends Fragment {
         button_user_number.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard();
                 doUpdateMobileNumber();
             }
         });
+
+        current_password = view.findViewById(R.id.editText_profile_password_current);
+        new_password = view.findViewById(R.id.editText_profile_password_new);
+        validate_password = view.findViewById(R.id.editText_profile_password_check);
 
         button_user_password = view.findViewById(R.id.button_update_password);
         button_user_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                closeKeyboard();
                 doUpdatePassword();
             }
         });
@@ -183,6 +194,8 @@ public class EditProfileFragment extends Fragment {
                     @Override
                     public void responseReceived(ApiResponse response) {
                         User.getUser().setProfilePhoto(bmp);
+                        Toast toast = Toast.makeText(getContext(), "Profile picture updated!", Toast.LENGTH_SHORT);
+                        toast.show();
                     }
                 });
 
@@ -196,12 +209,32 @@ public class EditProfileFragment extends Fragment {
 
     private void doUpdatePassword() {
         if (validatePasswords()) {
-            //todo:api update password call
+            ApiCall doUpdatePassword = new ApiCall("user/updatePassword", this.getContext());
+
+            doUpdatePassword.addParam("current_password", current_password.getText().toString());
+            doUpdatePassword.addParam("new_password", new_password.getText().toString());
+
+            doUpdatePassword.addResponseListener(new ResponseListener() {
+                @Override
+                public void responseReceived(ApiResponse response) {
+                    if (response.success()) {
+                        Toast toast = Toast.makeText(getActivity().getBaseContext(), "Password Updated!", Toast.LENGTH_LONG);
+                        toast.show();
+                    } else {
+                        Utils.displayMessage(getActivity(), "Your password wasn't changed");
+                    }
+                }
+            });
+
+            doUpdatePassword.sendRequest();
+
+            current_password.setText("");
+            new_password.setText("");
+            validate_password.setText("");
         }
     }
 
     private boolean validatePasswords() {
-        //todo: do api check with current password too
         if (!(new_password.getText().toString().equals(validate_password.getText().toString()))) {
             Utils.displayMessage(getActivity(), R.string.validation_invalid_password, R.string.okay);
             return false;
@@ -217,9 +250,15 @@ public class EditProfileFragment extends Fragment {
             doUpdateNumber.addResponseListener(new ResponseListener() {
                 @Override
                 public void responseReceived(ApiResponse response) {
-                    User.getUser().setMobileNumber(mobile.getText().toString());
+                    if (response.success()) {
+                        User.getUser().setMobileNumber(mobile.getText().toString());
+                        Toast toast = Toast.makeText(getContext(), "Updated!", Toast.LENGTH_SHORT);
+                        toast.show();
+                    }
                 }
             });
+
+            doUpdateNumber.sendRequest();
         }
     }
 
@@ -235,17 +274,43 @@ public class EditProfileFragment extends Fragment {
 
     private void doUpdateEmail() {
         if (validateEmail()) {
-            //todo:api update call
+            ApiCall doUpdate = new ApiCall("user/updateEmailAddress", this.getContext());
+            doUpdate.addParam("email_address", email.getText().toString());
+            doUpdate.sendRequest();
         }
     }
 
     private boolean validateEmail() {
-        return true;
+        if (email.length() < 5) {
+            Utils.displayMessage(getActivity(), R.string.validation_complete_all_fields, R.string.okay);
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private void doUpdateDetails() {
         if (validateDetails()) {
-            //todo:api update call
+            ApiCall doUpdate = new ApiCall("user/updateUserInfo", this.getContext());
+            doUpdate.addParam("known_as", alias.getText().toString());
+            doUpdate.addParam("full_name", name.getText().toString());
+            doUpdate.addParam("postcode", postcode.getText().toString());
+            doUpdate.addResponseListener(new ResponseListener() {
+                @Override
+                public void responseReceived(ApiResponse response) {
+                    if (response.success()) {
+                        User.getUser().setAlias(alias.getText().toString());
+                        User.getUser().setFullName(name.getText().toString());
+                        User.getUser().setPostcode(postcode.getText().toString());
+                        Toast toast = Toast.makeText(getContext(), "Updated!", Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        //todo:fail message
+                    }
+                }
+            });
+
+            doUpdate.sendRequest();
         }
     }
 
@@ -269,6 +334,15 @@ public class EditProfileFragment extends Fragment {
      */
     public void callbackToActivity() {
         mCallback.editProfileListener();
+    }
+
+    private void closeKeyboard(){
+        try {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        } catch (Exception e) {
+
+        }
     }
 
 }

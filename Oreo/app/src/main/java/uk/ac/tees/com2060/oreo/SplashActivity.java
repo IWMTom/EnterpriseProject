@@ -81,8 +81,9 @@ public class SplashActivity extends AppCompatActivity
                                     (String) body.get("postcode"),
                                     (String) body.get("dob"),
                                     profilePhoto,
-                                    (int) body.get("reputation"),
-                                    (String) body.get("phone_number")
+                                    (String) body.get("phone_number"),
+                                    getBaseContext()
+
                             );
                         } catch (JSONException | ParseException e) { e.printStackTrace(); }
 

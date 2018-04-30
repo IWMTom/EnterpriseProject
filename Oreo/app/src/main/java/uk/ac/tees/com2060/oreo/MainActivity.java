@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity
                         .findViewById(R.id.textView_nav_header_name);
 
         imageView_nav_header_profile_photo.setImageBitmap(User.getUser().profilePhoto());
-        textView_nav_header_rep.setText(String.valueOf(User.getUser().rep()));
+
+        textView_nav_header_rep.setText(String.valueOf(User.getUser().getRep(this)));
         textView_nav_header_name.setText(User.getUser().fullName());
 
         // Displays dashboard fragment by default

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.ContentLoadingProgressBar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -83,7 +85,7 @@ public class ViewProfileFragment extends Fragment {
         final CircleImageView image = view.findViewById(R.id.imageView_profile_view_image);
         final TextView rep = view.findViewById(R.id.textView_rep);
         final TextView location = view.findViewById(R.id.textView_profile_location);
-
+        final ProgressBar spinner = view.findViewById(R.id.progressBar_view_profile);
         Bundle args = this.getArguments();
         if (args != null) {
 
@@ -103,13 +105,36 @@ public class ViewProfileFragment extends Fragment {
         if (ownprofile) {
             getActivity().setTitle("Your Profile");
             image.setImageBitmap(User.getUser().profilePhoto());
-            rep.setText(String.valueOf(User.getUser().rep()));
+
+            ApiCall getUserData = new ApiCall("user/" + profileID, this.getContext());
+            getUserData.addResponseListener(new ResponseListener() {
+
+                @Override
+                public void responseReceived(ApiResponse response) {
+                    if (response.success()) {
+                        try {
+                            location.setText(response.getBody().getString("city"));
+                            rep.setText(String.valueOf(response.getBody().getInt("reputation")));
+                            rep.setVisibility(View.VISIBLE);
+                            location.setVisibility(View.VISIBLE);
+                            spinner.setVisibility(View.GONE);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        Toast toast = Toast.makeText(view.getContext(), "This should not happen", Toast.LENGTH_LONG);
+                        toast.show();
+                    }
+                }
+            });
+
+            getUserData.sendRequest();
 
             setHasOptionsMenu(true);
 
         } else {
 
-            ApiCall getUserData = new ApiCall("user/"+ profileID, this.getContext());
+            ApiCall getUserData = new ApiCall("user/" + profileID, this.getContext());
             getUserData.addResponseListener(new ResponseListener() {
 
                 @Override
@@ -119,13 +144,16 @@ public class ViewProfileFragment extends Fragment {
                             getActivity().setTitle(response.getBody().getString("known_as"));
                             rep.setText(String.valueOf(response.getBody().getInt("reputation")));
                             location.setText(response.getBody().getString("city"));
-
+                            rep.setVisibility(View.VISIBLE);
+                            location.setVisibility(View.VISIBLE);
+                            spinner.setVisibility(View.GONE);
                         } catch (JSONException e) {
 
                             e.printStackTrace();
                         }
                     } else {
-                        //TODO: kill self
+                        Toast toast = Toast.makeText(view.getContext(), "This should not happen", Toast.LENGTH_LONG);
+                        toast.show();
                     }
                 }
             });
@@ -136,7 +164,6 @@ public class ViewProfileFragment extends Fragment {
 
             setHasOptionsMenu(false);
         }
-
         return view;
     }
 

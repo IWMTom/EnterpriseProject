@@ -3,8 +3,11 @@ package uk.ac.tees.com2060.oreo;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
+
+import org.json.JSONException;
 
 import java.io.Serializable;
 import java.text.ParseException;
@@ -43,11 +46,11 @@ public class User implements Serializable {
      * @param postcode     postcode
      * @param dob          date of birth
      * @param profilePhoto profile photo string
-     * @param rep          reputation integer
      * @param mobileNumber mobile number
+     * @param context      context for rep api call
      */
     public void init(int id, String fullName, String knownAs, String emailAddress, String postcode,
-                     String dob, String profilePhoto, int rep, String mobileNumber) throws ParseException {
+                     String dob, String profilePhoto, String mobileNumber, Context context) throws ParseException {
         this.id = id;
         this.fullName = fullName;
         this.knownAs = knownAs;
@@ -55,8 +58,8 @@ public class User implements Serializable {
         this.postcode = postcode;
         this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
         this.profilePhoto = Utils.getImageFromString(profilePhoto);
-        this.rep = rep;
         this.mobileNumber = mobileNumber;
+        rep = getRep(context);
     }
 
     public void updatePushToken(Context c) {
@@ -152,36 +155,47 @@ public class User implements Serializable {
         return this.mobileNumber;
     }
 
-    /**
-     * Gets rep
-     *
-     * @return rep
-     */
-    public int rep() {
-        return this.rep;
+    public int getRep(Context context) {
+        ApiCall getUserData = new ApiCall("user/" + id, context);
+        getUserData.addResponseListener(new ResponseListener() {
+
+            @Override
+            public void responseReceived(ApiResponse response) {
+                if (response.success()) {
+                    try {
+                        rep = response.getBody().getInt("reputation");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+
+                }
+            }
+        });
+        return rep;
     }
 
     public void setMobileNumber(String mobile) {
         this.mobileNumber = mobile;
     }
 
-    public void setProfilePhoto(Bitmap bmp){
+    public void setProfilePhoto(Bitmap bmp) {
         profilePhoto = bmp;
     }
 
-    public void setAlias(String s){
+    public void setAlias(String s) {
         knownAs = s;
     }
 
-    public void setFullName(String s){
+    public void setFullName(String s) {
         fullName = s;
     }
 
-    public void setPostcode(String s){
+    public void setPostcode(String s) {
         postcode = s;
     }
 
-    public void setEmailAddress(String s){
+    public void setEmailAddress(String s) {
         emailAddress = s;
     }
 }
