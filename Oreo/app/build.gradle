@@ -6,8 +6,8 @@ android {
         applicationId "uk.ac.tees.com2060.oreo"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 67
-        versionName "0.7.32"
+        versionCode 76
+        versionName "0.7.33"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -17,7 +17,7 @@ android {
         }
     }
     dataBinding {
-        enabled = true;
+        enabled = true
     }
 }
 
