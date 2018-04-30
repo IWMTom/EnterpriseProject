@@ -40,12 +40,14 @@ public class BrowseListingsFragment extends Fragment {
 
     CollapsingToolbarLayout toolbar;
     ListView listView;
-    ArrayList[] listings;
+    ArrayList<Listing> listings;
+    ArrayList[] filteredListings;
     ProgressBar progress;
     TextView radiusText;
     SeekBar seeker;
 
     int range = 10;
+    int size = 2;
 
     public BrowseListingsFragment() {
     }
@@ -89,7 +91,6 @@ public class BrowseListingsFragment extends Fragment {
         toolbar.setVisibility(View.GONE);
 
         listView = view.findViewById(R.id.listView_browse_listings);
-        listings = new ArrayList[1];
 
         progress = view.findViewById(R.id.progressBar_browse_listings);
         radiusText = view.findViewById(R.id.radius_text);
@@ -120,7 +121,7 @@ public class BrowseListingsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Listing selectedListing = ((ArrayList<Listing>) listings[0]).get(position);
+                Listing selectedListing = ((ArrayList<Listing>) listings).get(position);
 
                 callbackToActivity(selectedListing);
             }
@@ -163,19 +164,23 @@ public class BrowseListingsFragment extends Fragment {
             @Override
             public void responseReceived(ApiResponse response) {
                 if (response.success()) {
-                    listings[0] = Listing.getListings(response.getBodyArray());
-                    listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
+                    listings = Listing.getListings(response.getBodyArray());
+                    filteredListings = Utils.FilterList(listings,size);
+                    listView.setAdapter(new ListingAdapter(getContext(), filteredListings));
                     listView.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.INVISIBLE);
+
                 }
             }
         });
         api.sendRequest();
 
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Listing selectedListing = ((ArrayList<Listing>) listings[0]).get(position);
+                Listing selectedListing = ((ArrayList<Listing>) listings).get(position);
 
                 callbackToActivity(selectedListing);
             }

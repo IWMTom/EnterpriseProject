@@ -26,50 +26,81 @@
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 app:layout_collapseMode="pin">
 
                 <android.support.v7.widget.Toolbar
                     android:id="@+id/listing_toolbar"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="0dp"
                     android:background="@color/colorLightGrey"
                     android:theme="@style/Base.Widget.AppCompat.Toolbar.Button.Navigation"
                     app:layout_collapseMode="pin"
-                    app:layout_constraintStart_toStartOf="@+id/radius_text"></android.support.v7.widget.Toolbar>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/radius_text"
+                    app:layout_constraintTop_toTopOf="parent"></android.support.v7.widget.Toolbar>
 
                 <SeekBar
                     android:id="@+id/range_seeker"
                     style="@android:style/Widget.DeviceDefault.Light.SeekBar"
                     android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginBottom="8dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="8dp"
                     android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:max="28"
+                    android:max="98"
                     android:progress="8"
                     android:theme="@style/Base.Widget.AppCompat.SeekBar.Discrete"
                     android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/radius_text"
                     app:layout_constraintEnd_toStartOf="@+id/radius_text"
-                    app:layout_constraintStart_toStartOf="@+id/listing_toolbar"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/radius_text" />
+
+                <SeekBar
+                    android:id="@+id/size_seeker"
+                    style="@android:style/Widget.DeviceDefault.Light.SeekBar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="8dp"
+                    android:max="4"
+                    android:progress="1"
+                    android:theme="@style/Base.Widget.AppCompat.SeekBar.Discrete"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/size_text"
+                    app:layout_constraintEnd_toStartOf="@+id/size_text"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/size_text" />
 
                 <TextView
                     android:id="@+id/radius_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="16dp"
                     android:text="10 Miles"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/AppTheme.BodyText"
+                    android:textSize="18sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/size_text"
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Massive"
                     android:textAlignment="center"
                     android:textAppearance="@style/AppTheme.BodyText"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/radius_text"
+                    app:layout_constraintTop_toBottomOf="@+id/radius_text" />
             </android.support.constraint.ConstraintLayout>
 
         </android.support.design.widget.CollapsingToolbarLayout>
