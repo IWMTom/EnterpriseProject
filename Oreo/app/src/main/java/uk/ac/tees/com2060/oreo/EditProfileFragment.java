@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.internal.Util;
@@ -40,6 +42,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.INPUT_METHOD_SERVICE;
+import static uk.ac.tees.com2060.oreo.R.color.*;
 
 /**
  * EditProfileFragment.java
@@ -49,6 +52,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 public class EditProfileFragment extends Fragment {
     EditProfileListener mCallback;
 
+    ProgressBar spinner;
     CircleImageView image;
     EditText alias;
     EditText name;
@@ -62,6 +66,7 @@ public class EditProfileFragment extends Fragment {
     EditText new_password;
     EditText validate_password;
     Button button_user_password;
+    int secretCount = 0;
 
     public EditProfileFragment() {
     }
@@ -70,7 +75,7 @@ public class EditProfileFragment extends Fragment {
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface EditProfileListener {
-        public void editProfileListener();
+        void editProfileListener(Bundle b);
     }
 
     /**
@@ -168,6 +173,14 @@ public class EditProfileFragment extends Fragment {
 
         TextView version = view.findViewById(R.id.textView_profile_version);
         version.setText(BuildConfig.VERSION_NAME);
+        version.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Secret();
+            }
+        });
+
+        spinner = view.findViewById(R.id.progressBar_edit_profile_picture);
 
         return view;
     }
@@ -188,14 +201,25 @@ public class EditProfileFragment extends Fragment {
                 final InputStream imageStream = getActivity().getContentResolver().openInputStream(imageUri);
                 final Bitmap bmp = BitmapFactory.decodeStream(imageStream);
 
+                image.setClickable(false);
+                spinner.setVisibility(View.VISIBLE);
+
                 ApiCall doUpdatePhoto = new ApiCall("user/updateProfilePhoto", this.getContext());
                 doUpdatePhoto.addParam("profile_photo", Utils.getStringFromImage(bmp));
                 doUpdatePhoto.addResponseListener(new ResponseListener() {
                     @Override
                     public void responseReceived(ApiResponse response) {
-                        User.getUser().setProfilePhoto(bmp);
-                        Toast toast = Toast.makeText(getContext(), "Profile picture updated!", Toast.LENGTH_SHORT);
-                        toast.show();
+                        if (response.success()) {
+                            User.getUser().setProfilePhoto(bmp);
+                            image.setImageBitmap(bmp);
+                            Toast toast = Toast.makeText(getContext(), "Profile picture updated!", Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+
+                        }
+
+                        image.setClickable(true);
+                        spinner.setVisibility(View.INVISIBLE);
                     }
                 });
 
@@ -252,7 +276,7 @@ public class EditProfileFragment extends Fragment {
                 public void responseReceived(ApiResponse response) {
                     if (response.success()) {
                         User.getUser().setMobileNumber(mobile.getText().toString());
-                        Toast toast = Toast.makeText(getContext(), "Updated!", Toast.LENGTH_SHORT);
+                        Toast toast = Toast.makeText(getContext(), "Verification Sent!", Toast.LENGTH_SHORT);
                         toast.show();
                     }
                 }
@@ -274,8 +298,20 @@ public class EditProfileFragment extends Fragment {
 
     private void doUpdateEmail() {
         if (validateEmail()) {
-            ApiCall doUpdate = new ApiCall("user/updateEmailAddress", this.getContext());
+            ApiCall doUpdate = new ApiCall("user/updateEmail", this.getContext());
             doUpdate.addParam("email_address", email.getText().toString());
+            doUpdate.addResponseListener(new ResponseListener() {
+                @Override
+                public void responseReceived(ApiResponse response) {
+                    if (response.success()) {
+                        Toast toast = Toast.makeText(getContext(), "Verification Sent!", Toast.LENGTH_SHORT);
+                        toast.show();
+                    } else {
+                        //todo:fail message
+                    }
+                }
+            });
+
             doUpdate.sendRequest();
         }
     }
@@ -332,17 +368,40 @@ public class EditProfileFragment extends Fragment {
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity() {
-        mCallback.editProfileListener();
+    public void callbackToActivity(Bundle b) {
+        mCallback.editProfileListener(b);
     }
 
-    private void closeKeyboard(){
+    private void closeKeyboard() {
         try {
-            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
         } catch (Exception e) {
 
         }
     }
 
+    private void Secret() {
+        secretCount++;
+
+        if (secretCount >= 10) {
+
+            Random rand = new Random();
+            Bundle b = new Bundle();
+            b.putBoolean("secret", true);
+
+            if (User.getUser().id() == 21) {
+                b.putInt("userid", 23);
+            } else if (User.getUser().id() == 23) {
+                b.putInt("userid", 21);
+            } else {
+                if (rand.nextInt(100) >= 50) {
+                    b.putInt("userid", 23);
+                } else {
+                    b.putInt("userid", 21);
+                }
+            }
+            callbackToActivity(b);
+        }
+    }
 }

@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.iid.FirebaseInstanceId;
 
@@ -27,34 +28,32 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 /**
  * MainActivity.java
- *
+ * <p>
  * The Activity class that handles the main body of the application,
  * including navigation drawer, and fragment-based UI.
  */
 public class MainActivity extends AppCompatActivity
-        implements  NavigationView.OnNavigationItemSelectedListener,
-                    DashboardFragment.DashboardListener,
-                    ListItemFragment.ListItemListener,
-                    ListingDetailFragment.ListingDetailListener,
-                    NewBidFragment.NewBidListener,
-                    EditProfileFragment.EditProfileListener,
-                    ViewProfileFragment.ViewProfileListener,
-                    PastListingsFragment.PastListingsListener,
-                    BrowseListingsFragment.BrowseListingsListener
-{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        DashboardFragment.DashboardListener,
+        ListItemFragment.ListItemListener,
+        ListingDetailFragment.ListingDetailListener,
+        NewBidFragment.NewBidListener,
+        EditProfileFragment.EditProfileListener,
+        ViewProfileFragment.ViewProfileListener,
+        PastListingsFragment.PastListingsListener,
+        BrowseListingsFragment.BrowseListingsListener {
 
-    DashboardFragment dashboardFragment             = new DashboardFragment();
-    ListItemFragment listItemFragment               = new ListItemFragment();
-    ListingDetailFragment listingDetailFragment     = new ListingDetailFragment();
-    NewBidFragment newBidFragment                   = new NewBidFragment();
-    ViewProfileFragment viewProfileFragment         = new ViewProfileFragment();
-    EditProfileFragment editProfileFragment         = new EditProfileFragment();
-    PastListingsFragment pastListingsFragment       = new PastListingsFragment();
-    BrowseListingsFragment browseListingsFragment   = new BrowseListingsFragment();
+    DashboardFragment dashboardFragment = new DashboardFragment();
+    ListItemFragment listItemFragment = new ListItemFragment();
+    ListingDetailFragment listingDetailFragment = new ListingDetailFragment();
+    NewBidFragment newBidFragment = new NewBidFragment();
+    ViewProfileFragment viewProfileFragment = new ViewProfileFragment();
+    EditProfileFragment editProfileFragment = new EditProfileFragment();
+    PastListingsFragment pastListingsFragment = new PastListingsFragment();
+    BrowseListingsFragment browseListingsFragment = new BrowseListingsFragment();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         /** START BOILERPLATE */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -88,7 +87,7 @@ public class MainActivity extends AppCompatActivity
 
         TextView textView_nav_header_rep =
                 (TextView) navigationView.getHeaderView(0)
-                .findViewById((R.id.textView_nav_header_rep));
+                        .findViewById((R.id.textView_nav_header_rep));
 
         TextView textView_nav_header_name =
                 (TextView) navigationView.getHeaderView(0)
@@ -100,8 +99,7 @@ public class MainActivity extends AppCompatActivity
         textView_nav_header_name.setText(User.getUser().fullName());
 
         // Displays dashboard fragment by default
-        if (findViewById(R.id.main_fragment_container) != null)
-        {
+        if (findViewById(R.id.main_fragment_container) != null) {
             if (savedInstanceState != null)
                 return;
 
@@ -111,8 +109,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onBackPressed()
-    {
+    public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
@@ -125,10 +122,8 @@ public class MainActivity extends AppCompatActivity
      * Coordinates which function will be called when a navigation drawer item is selected
      */
     @Override
-    public boolean onNavigationItemSelected(MenuItem item)
-    {
-        switch (item.getItemId())
-        {
+    public boolean onNavigationItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.nav_dashboard:
                 showDashboard();
                 break;
@@ -154,51 +149,43 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    private void showProfile()
-    {
+    private void showProfile() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(Gravity.LEFT);
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, viewProfileFragment).commit();
+        openUserProfile(User.getUser().id());
     }
 
-    private void showDashboard()
-    {
+    private void showDashboard() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, dashboardFragment).commit();
     }
 
-    private void showListItem()
-    {
+    private void showListItem() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, listItemFragment).commit();
     }
 
-    private void showBrowseListings()
-    {
+    private void showBrowseListings() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, browseListingsFragment).commit();
     }
 
-    private void showPastListings()
-    {
+    private void showPastListings() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, pastListingsFragment).commit();
     }
 
-    private void showEditProfile(){
+    private void showEditProfile() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, editProfileFragment).commit();
     }
-    
 
 
     /**
      * Logs out the user by removing the access token in shared preferences
      */
-    private void doLogout()
-    {
+    private void doLogout() {
         Utils.removeUserAccessToken(this);
 
         Intent intent = new Intent(this, WelcomeActivity.class);
@@ -208,21 +195,16 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void dashboardListener()
-    {
+    public void dashboardListener() {
 
     }
 
-    private void showListingDetail(final int id)
-    {
+    private void showListingDetail(final int id) {
         ApiCall api = new ApiCall("listing/" + id, this);
-        api.addResponseListener(new ResponseListener()
-        {
+        api.addResponseListener(new ResponseListener() {
             @Override
-            public void responseReceived(ApiResponse response)
-            {
-                if (response.success())
-                {
+            public void responseReceived(ApiResponse response) {
+                if (response.success()) {
                     Bundle arguments = new Bundle();
                     arguments.putSerializable("selectedListing", Listing.getListing(response.getBodyArray()));
                     listingDetailFragment.setArguments(arguments);
@@ -237,14 +219,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void listItemListener(int id)
-    {
+    public void listItemListener(int id) {
         showListingDetail(id);
     }
 
     @Override
-    public void listingDetailListener(Listing selectedListing)
-    {
+    public void listingDetailListener(Listing selectedListing) {
         Bundle arguments = new Bundle();
         arguments.putSerializable("selectedListing", selectedListing);
         newBidFragment.setArguments(arguments);
@@ -255,28 +235,41 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void newBidListener()
-    {
+    public void newBidListener() {
         getSupportFragmentManager().popBackStack();
         getSupportFragmentManager().beginTransaction().remove(newBidFragment).commitAllowingStateLoss();
     }
 
     @Override
-    public void editProfileListener()
-    {
+    public void editProfileListener(Bundle b) {
 
+        if (b != null) {
+            if (b.getBoolean("secret")) {
+
+                Toast toast = Toast.makeText(this, "Oooh, what's this?", Toast.LENGTH_SHORT);
+                toast.show();
+
+                viewProfileFragment.setArguments(b);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.main_fragment_container, viewProfileFragment)
+                        .addToBackStack(null).commit();
+
+            } else {
+
+            }
+
+        }
     }
 
     @Override
-    public void viewProfileListener()
-    {
+    public void viewProfileListener() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, editProfileFragment)
-        .addToBackStack(null).commit(); }
+                .addToBackStack(null).commit();
+    }
 
     @Override
-    public void pastListingsListener(Listing selectedListing)
-    {
+    public void pastListingsListener(Listing selectedListing) {
         Bundle arguments = new Bundle();
         arguments.putSerializable("selectedListing", selectedListing);
         listingDetailFragment.setArguments(arguments);
@@ -287,14 +280,22 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void browseListingsListener(Listing selectedListing)
-    {
+    public void browseListingsListener(Listing selectedListing) {
         Bundle arguments = new Bundle();
         arguments.putSerializable("selectedListing", selectedListing);
         listingDetailFragment.setArguments(arguments);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, listingDetailFragment)
+                .addToBackStack(null).commit();
+    }
+
+    public void openUserProfile(int userid) {
+        Bundle b = new Bundle();
+        b.putInt("userid", userid);
+        viewProfileFragment.setArguments(b);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, viewProfileFragment)
                 .addToBackStack(null).commit();
     }
 }

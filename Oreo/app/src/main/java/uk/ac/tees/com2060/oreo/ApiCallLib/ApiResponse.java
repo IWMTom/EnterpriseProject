@@ -43,8 +43,13 @@ public class ApiResponse
                 {
                     this.bodyArray = (JSONArray) response.get("success");
                 }
-                else
+                else if (response.get("success") instanceof String)
                 {
+                    //todo: remove DIRTY hack to fix tom's endpoint fuck up so i can keep testing
+                    JSONObject JsonObj = new JSONObject();
+                    JsonObj.put("success","success");
+
+                }else{
                     // Gets response message after the first key
                     this.body = (JSONObject) response.get("success");
                 }
