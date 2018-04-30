@@ -6,8 +6,8 @@
     <color name="colorAccentDark">#000000</color>
     <color name="colorLightBackground">#F9F9FB</color>
     <color name="colorLightBorder">#D4DCE1</color>
-    <color name="colorLightGrey">#E6EBED</color>
-    <color name="colorDarkGrey">#A2A8B1</color>
+    <color name="colorLightGrey">#e6ebed</color>
+    <color name="colorDarkGrey">#a2a8b1</color>
 
     <color name="colorWhiteTransparent">#CCFFFFFF</color>
     <color name="colorWhiteMoreTransparent">#80FFFFFF</color>
