@@ -99,7 +99,7 @@ public class BrowseListingsFragment extends Fragment {
         seeker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                range = progress;
+                range = progress + 2;
                 radiusText.setText(range + " Miles");
             }
 
@@ -141,6 +141,7 @@ public class BrowseListingsFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
         menu.clear();
         inflater.inflate(R.menu.menu_listing, menu);
 
@@ -149,12 +150,14 @@ public class BrowseListingsFragment extends Fragment {
 
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        item.setVisible(false);
         toolbar.setVisibility(View.VISIBLE);
         return super.onOptionsItemSelected(item);
     }
 
     private void doFetchListings(int radius) {
         progress.setVisibility(View.VISIBLE);
+        listView.setVisibility(View.INVISIBLE);
         ApiCall api = new ApiCall("listing/list/radius/" + radius, getContext());
         api.addResponseListener(new ResponseListener() {
             @Override
@@ -162,6 +165,7 @@ public class BrowseListingsFragment extends Fragment {
                 if (response.success()) {
                     listings[0] = Listing.getListings(response.getBodyArray());
                     listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
+                    listView.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.INVISIBLE);
                 }
             }
