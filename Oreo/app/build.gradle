@@ -6,8 +6,8 @@ android {
         applicationId "uk.ac.tees.com2060.oreo"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 78
-        versionName "0.7.35"
+        versionCode 80
+        versionName "0.7.36"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
