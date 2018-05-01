@@ -162,6 +162,7 @@ public class BrowseListingsFragment extends Fragment {
      * Callback to the Activity
      */
     public void callbackToActivity(Listing selectedListing) {
+        mCallback = (BrowseListingsListener)getActivity();
         mCallback.browseListingsListener(selectedListing);
     }
 

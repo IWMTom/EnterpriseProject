@@ -83,6 +83,7 @@ public class PastListingsFragment extends Fragment {
      * Callback to the Activity
      */
     public void callbackToActivity(Listing selectedListing) {
+        mCallback = (PastListingsListener) getActivity();
         mCallback.pastListingsListener(selectedListing);
     }
 }
