@@ -24,6 +24,8 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 public class PastListingsFragment extends Fragment {
     PastListingsListener mCallback;
 
+    ProgressBar progressBar;
+
     public PastListingsFragment() {
     }
 
@@ -49,6 +51,7 @@ public class PastListingsFragment extends Fragment {
         final ListView listView = view.findViewById(R.id.listView_past_listings);
         final ArrayList[] listings = new ArrayList[1];
 
+
         ApiCall api = new ApiCall("listing/list/user", getContext());
         api.addResponseListener(new ResponseListener() {
             @Override
@@ -56,6 +59,7 @@ public class PastListingsFragment extends Fragment {
                 if (response.success()) {
                     listings[0] = Listing.getListings(response.getBodyArray());
                     listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
+                    listView.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.INVISIBLE);
                 }
             }

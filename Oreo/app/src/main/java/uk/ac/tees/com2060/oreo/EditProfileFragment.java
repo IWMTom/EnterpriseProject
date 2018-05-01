@@ -1,6 +1,5 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
