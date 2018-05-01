@@ -16,12 +16,8 @@
         <ProgressBar
             android:id="@+id/progressBar_edit_profile_picture"
             style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:elevation="3dp"
             android:indeterminate="true"
             android:indeterminateTint="@color/colorPrimary"
@@ -123,6 +119,7 @@
 
         <Button
             android:id="@+id/button_update_details"
+            style="@style/AppTheme.ButtonPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -151,6 +148,7 @@
 
         <Button
             android:id="@+id/button_update_email"
+            style="@style/AppTheme.ButtonPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -180,6 +178,7 @@
 
         <Button
             android:id="@+id/button_update_mobile_number"
+            style="@style/AppTheme.ButtonPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
@@ -240,6 +239,7 @@
 
         <Button
             android:id="@+id/button_update_password"
+            style="@style/AppTheme.ButtonPrimary"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"

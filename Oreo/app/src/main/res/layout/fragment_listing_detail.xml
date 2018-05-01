@@ -68,7 +68,7 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_listing_distance_title"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_delivery" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_delivery" />
 
             <TextView
                 android:id="@+id/textView_listing_distance"
@@ -96,17 +96,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_listing_collection" />
 
             <TextView
-                android:id="@+id/textView_listing_important_details"
+                android:id="@+id/textView_confirm_important_details"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_important_details_title" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_important_details_title" />
 
             <TextView
-                android:id="@+id/textView_listing_important_details_title"
+                android:id="@+id/textView_confirm_important_details_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -120,17 +120,17 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView_listing_size" />
 
             <TextView
-                android:id="@+id/textView_listing_delivery"
+                android:id="@+id/textView_confirm_delivery"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView_listing_collection"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_delivery_title" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_delivery_title" />
 
             <TextView
-                android:id="@+id/textView_listing_delivery_title"
+                android:id="@+id/textView_confirm_delivery_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -141,11 +141,11 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView_listing_collection_title"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintStart_toEndOf="@+id/textView_confirm_collection_title"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_confirm_bid_image" />
 
             <TextView
-                android:id="@+id/textView_listing_collection_title"
+                android:id="@+id/textView_confirm_collection_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -154,12 +154,12 @@
                 android:text="Collection from"
                 android:textAppearance="@style/AppTheme.Title"
                 android:textSize="18sp"
-                app:layout_constraintEnd_toStartOf="@+id/textView_listing_delivery_title"
+                app:layout_constraintEnd_toStartOf="@+id/textView_confirm_delivery_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_confirm_bid_image" />
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageView_confirm_bid_image"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
@@ -174,17 +174,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
-                app:layout_constraintEnd_toStartOf="@+id/textView_listing_delivery"
+                app:layout_constraintEnd_toStartOf="@+id/textView_confirm_delivery"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_collection_title" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_collection_title" />
 
             <View
-                android:id="@+id/divider"
+                android:id="@+id/divider_confirm_bid"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorLightGrey"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_important_details" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_important_details" />
 
             <TextView
                 android:id="@+id/textView15"
@@ -198,7 +198,7 @@
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider" />
+                app:layout_constraintTop_toBottomOf="@+id/divider_confirm_bid" />
 
             <ListView
                 android:id="@+id/listing_ratings"
