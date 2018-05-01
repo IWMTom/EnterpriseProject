@@ -1,12 +1,9 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -14,14 +11,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -41,13 +34,16 @@ public class BrowseListingsFragment extends Fragment {
     CollapsingToolbarLayout toolbar;
     ListView listView;
     ArrayList<Listing> listings;
-    ArrayList[] filteredListings;
+    ArrayList<Listing> filteredListings;
     ProgressBar progress;
     TextView radiusText;
-    SeekBar seeker;
+    TextView sizeText;
+    SeekBar seeker_Radius;
+    SeekBar seeker_Size;
 
     int range = 10;
-    int size = 2;
+    int size = 3;
+
 
     public BrowseListingsFragment() {
     }
@@ -92,12 +88,17 @@ public class BrowseListingsFragment extends Fragment {
 
         listView = view.findViewById(R.id.listView_browse_listings);
 
-        progress = view.findViewById(R.id.progressBar_browse_listings);
-        radiusText = view.findViewById(R.id.radius_text);
+        listings = new ArrayList();
+        filteredListings = new ArrayList();
 
-        seeker = view.findViewById(R.id.range_seeker);
-        seeker.setProgress(range);
-        seeker.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        progress = view.findViewById(R.id.progressBar_browse_listings);
+
+        radiusText = view.findViewById(R.id.radius_text);
+        sizeText = view.findViewById(R.id.size_text);
+
+        seeker_Radius = view.findViewById(R.id.range_seeker);
+        seeker_Radius.setProgress(range);
+        seeker_Radius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 range = progress + 2;
@@ -112,6 +113,44 @@ public class BrowseListingsFragment extends Fragment {
             public void onStopTrackingTouch(SeekBar seekBar) {
                 doFetchListings(range);
                 radiusText.setText(range + " Miles");
+            }
+        });
+
+        seeker_Size = view.findViewById(R.id.size_seeker);
+        seeker_Size.setProgress(size);
+        seeker_Size.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                size = progress;
+                switch (progress) {
+                    case 0:
+                        sizeText.setText("Small");
+                        break;
+                    case 1:
+                        sizeText.setText("Medium");
+                        break;
+                    case 2:
+                        sizeText.setText("Large");
+                        break;
+                    case 3:
+                        sizeText.setText("XL");
+                        break;
+                    case 4:
+                        sizeText.setText("Huge");
+                        break;
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+                filteredListings = Utils.FilterList(listings, size);
+
+                listView.setAdapter(new ListingAdapter(getContext(), filteredListings));
             }
         });
 
@@ -164,9 +203,13 @@ public class BrowseListingsFragment extends Fragment {
             @Override
             public void responseReceived(ApiResponse response) {
                 if (response.success()) {
+
                     listings = Listing.getListings(response.getBodyArray());
-                    filteredListings = Utils.FilterList(listings,size);
+
+                    filteredListings = Utils.FilterList(listings, size);
+
                     listView.setAdapter(new ListingAdapter(getContext(), filteredListings));
+
                     listView.setVisibility(View.VISIBLE);
                     progress.setVisibility(View.INVISIBLE);
 
@@ -174,7 +217,6 @@ public class BrowseListingsFragment extends Fragment {
             }
         });
         api.sendRequest();
-
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

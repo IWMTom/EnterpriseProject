@@ -2,12 +2,10 @@ package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.databinding.BindingAdapter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.net.sip.SipSession;
 import android.support.annotation.FontRes;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AlertDialog;
@@ -129,36 +127,48 @@ public class Utils {
         a.getPreferences(Context.MODE_PRIVATE).edit().clear().apply();
     }
 
-    public static int sizeStringtoInt(String s) {
-        if (s == "SMALL") {
+    public static int sizeStringToInt(String s) {
+        if (s.equals("small")) {
             return 0;
-        } else if (s == "MEDIUM") {
+        } else if (s.equals("medium")) {
             return 1;
-        } else if (s == "LARGE") {
+        } else if (s.equals("large")) {
             return 2;
-        } else if (s == "XLARGE") {
+        } else if (s.equals("xlarge")) {
             return 3;
-        } else if (s == "HUGE") {
+        } else if (s.equals("huge")) {
             return 4;
         } else {
             return -1;
         }
     }
 
-    public static ArrayList[] FilterList(ArrayList<Listing> list, int size) {
+    public static ArrayList<Listing> FilterList(ArrayList<Listing> list, int size) {
+
         if (list == null) {
             return null;
         }
 
-        ArrayList[] returnList = new ArrayList[0];
+        ArrayList<Listing> returnList = new ArrayList();
 
-        for (int i = 0; i < list.length; i++ ) {
-
-            if(size <= Utils.sizeStringtoInt(((Listing)list[0].get(i)).itemSize())){
-                returnList[0].add((Listing)list[0].get(i));
+        for (int i = 0; i < list.size(); i++) {
+            if ((Utils.sizeStringToInt(((Listing) list.get(i)).itemSize())) <= size) {
+                Listing listing = new Listing(
+                        list.get(i).id(),
+                        list.get(i).user_id(),
+                        list.get(i).itemDescription(),
+                        list.get(i).itemSize(),
+                        list.get(i).importantDetails(),
+                        list.get(i).collectionCity(),
+                        list.get(i).deliveryCity(),
+                        list.get(i).distance(),
+                        list.get(i).maxBid(),
+                        list.get(i).minBid(),
+                        list.get(i).averageBid());
+                returnList.add(listing);
             }
         }
-
         return returnList;
     }
+
 }
