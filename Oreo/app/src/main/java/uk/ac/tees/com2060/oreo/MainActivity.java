@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
@@ -34,8 +36,7 @@ public class MainActivity extends AppCompatActivity
         EditProfileFragment.EditProfileListener,
         ViewProfileFragment.ViewProfileListener,
         PastListingsFragment.PastListingsListener,
-        BrowseListingsFragment.BrowseListingsListener,
-        BidConfirmFragment.BidConfirmListener{
+        BrowseListingsFragment.BrowseListingsListener{
 
     DashboardFragment dashboardFragment = new DashboardFragment();
     ListItemFragment listItemFragment = new ListItemFragment();
@@ -71,7 +72,7 @@ public class MainActivity extends AppCompatActivity
             showListingDetail(getIntent().getIntExtra("notification_bid", -1));
 
         ImageView imageView_nav_header_profile_photo =
-                 navigationView.getHeaderView(0)
+                navigationView.getHeaderView(0)
                         .findViewById(R.id.imageView_nav_header_profile_photo);
 
         imageView_nav_header_profile_photo.setOnClickListener(new View.OnClickListener() {
@@ -81,11 +82,11 @@ public class MainActivity extends AppCompatActivity
         });
 
         TextView textView_nav_header_rep =
-                 navigationView.getHeaderView(0)
+                navigationView.getHeaderView(0)
                         .findViewById((R.id.textView_nav_header_rep));
 
         TextView textView_nav_header_name =
-                 navigationView.getHeaderView(0)
+                navigationView.getHeaderView(0)
                         .findViewById(R.id.textView_nav_header_name);
 
         imageView_nav_header_profile_photo.setImageBitmap(User.getUser().profilePhoto());
@@ -172,7 +173,7 @@ public class MainActivity extends AppCompatActivity
 
     private void showPastListings() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, bidConfirmFragment).addToBackStack(null)
+                .replace(R.id.main_fragment_container, pastListingsFragment).addToBackStack(null)
                 .commit();
     }
 
@@ -181,9 +182,7 @@ public class MainActivity extends AppCompatActivity
                 .replace(R.id.main_fragment_container, editProfileFragment)
                 .addToBackStack(null)
                 .commit();
-
     }
-
 
     /**
      * Logs out the user by removing the access token in shared preferences
@@ -300,10 +299,5 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, viewProfileFragment)
                 .addToBackStack(null).commit();
-    }
-
-    @Override
-    public void bidConfirmListener() {
-
     }
 }

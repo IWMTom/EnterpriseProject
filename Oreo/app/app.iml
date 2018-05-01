@@ -174,5 +174,6 @@
     <orderEntry type="library" name="com.android.support:animated-vector-drawable-26.1.0" level="project" />
     <orderEntry type="library" name="com.google.android.gms:play-services-ads-identifier-15.0.0" level="project" />
     <orderEntry type="library" name="com.google.firebase:firebase-common-15.0.0" level="project" />
+    <orderEntry type="library" name="com.google.code.gson:gson:2.8.4@jar" level="project" />
   </component>
 </module>

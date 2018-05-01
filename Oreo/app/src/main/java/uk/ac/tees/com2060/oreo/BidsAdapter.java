@@ -18,10 +18,12 @@ public class BidsAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<Bid> mDataSource;
+    private Listing listing;
 
-    public BidsAdapter(Context context, ArrayList<Bid> items) {
+    public BidsAdapter(Context context, ArrayList<Bid> items, Listing listing) {
         mContext = context;
         mDataSource = items;
+        this.listing = listing;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
@@ -44,12 +46,15 @@ public class BidsAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         @SuppressLint("ViewHolder") View rowView = mInflater.inflate(R.layout.fragment_listing_detail_listview, viewGroup, false);
 
-        final ImageView bidThumbnail = rowView.findViewById(R.id.ImageView_rating_profile);
-        TextView bidUser = rowView.findViewById(R.id.bid_list_user);
-        TextView bidMessage = rowView.findViewById(R.id.bid_list_message);
-        TextView bidAmount = rowView.findViewById(R.id.bid_list_amount);
+        final Bid bid = (Bid) getItem(i);
 
-        Bid bid = (Bid) getItem(i);
+        final ImageView bidThumbnail = rowView.findViewById(R.id.ImageView_rating_profile);
+
+        TextView bidUser = rowView.findViewById(R.id.bid_list_user);
+
+        TextView bidMessage = rowView.findViewById(R.id.bid_list_message);
+
+        TextView bidAmount = rowView.findViewById(R.id.bid_list_amount);
 
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
 
