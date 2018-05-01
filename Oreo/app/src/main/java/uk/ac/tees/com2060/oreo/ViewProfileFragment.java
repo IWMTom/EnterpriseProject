@@ -34,7 +34,8 @@ public class ViewProfileFragment extends Fragment {
     int profileID;
     boolean ownProfile;
 
-    public ViewProfileFragment() {}
+    public ViewProfileFragment() {
+    }
 
     /**
      * Interface for the Activity to implement - enables activity/fragment communication

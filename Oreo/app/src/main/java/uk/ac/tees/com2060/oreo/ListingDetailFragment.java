@@ -25,7 +25,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
  * <p>
  * The Fragment class that handles the Dashboard page
  */
-public class ListingDetailFragment extends Fragment {
+public class ListingDetailFragment extends Fragment{
     ListingDetailListener mCallback;
 
     public ListingDetailFragment() {
@@ -35,7 +35,7 @@ public class ListingDetailFragment extends Fragment {
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface ListingDetailListener {
-        public void listingDetailListener(Listing selectedListing);
+        void listingDetailListener(Listing selectedListing);
     }
 
     /**
@@ -53,12 +53,17 @@ public class ListingDetailFragment extends Fragment {
             getActivity().setTitle(selectedListing.itemDescription());
 
             FloatingActionButton fab = view.findViewById(R.id.fab_listing_detail);
-            fab.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    callbackToActivity(selectedListing);
-                }
-            });
+
+            if (selectedListing.user_id() != User.getUser().id()) {
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        callbackToActivity(selectedListing);
+                    }
+                });
+            } else {
+                fab.setVisibility(View.GONE);
+            }
 
             TextView listing_collection = view.findViewById(R.id.textView_listing_collection);
             listing_collection.setText(selectedListing.collectionCity());
@@ -101,7 +106,7 @@ public class ListingDetailFragment extends Fragment {
                             }
                         }
 
-                        listView.setAdapter(new BidsAdapter(getContext(), al));
+                        listView.setAdapter(new BidsAdapter(getContext(), al, selectedListing));
 
                         progress.setVisibility(View.INVISIBLE);
                     }
@@ -116,11 +121,9 @@ public class ListingDetailFragment extends Fragment {
         return view;
     }
 
-    /**
-     * Callback to the Activity
-     */
 
-    public void callbackToActivity(Listing selectedListing) {
-        mCallback.listingDetailListener(selectedListing);
+    public void callbackToActivity(Listing listing) {
+        mCallback = (ListingDetailListener) getActivity();
+        mCallback.listingDetailListener(listing);
     }
 }

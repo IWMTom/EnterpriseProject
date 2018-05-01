@@ -1,6 +1,5 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -24,7 +23,6 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 public class PastListingsFragment extends Fragment {
     PastListingsListener mCallback;
 
-    ProgressBar progressBar;
 
     public PastListingsFragment() {
     }
@@ -42,12 +40,12 @@ public class PastListingsFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        getActivity().setTitle("Past Listings");
+        getActivity().setTitle("My Listings");
 
         final View view = inflater.inflate(R.layout.fragment_past_listings, container, false);
         setHasOptionsMenu(true);
 
-        final ProgressBar progress = view.findViewById(R.id.progressBar_past_listings);
+        final ProgressBar progressBar = view.findViewById(R.id.progressBar_past_listings);
         final ListView listView = view.findViewById(R.id.listView_past_listings);
         final ArrayList[] listings = new ArrayList[1];
 
@@ -60,7 +58,7 @@ public class PastListingsFragment extends Fragment {
                     listings[0] = Listing.getListings(response.getBodyArray());
                     listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
                     listView.setVisibility(View.VISIBLE);
-                    progress.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.INVISIBLE);
                 }
             }
         });

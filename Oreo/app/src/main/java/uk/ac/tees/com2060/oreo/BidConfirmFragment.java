@@ -4,9 +4,6 @@ import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -15,10 +12,11 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -43,6 +41,9 @@ public class BidConfirmFragment extends Fragment {
     TextView titleText;
     TextView locationText;
 
+    Bid bid;
+    Listing listing;
+
     public BidConfirmFragment() {
     }
 
@@ -50,7 +51,7 @@ public class BidConfirmFragment extends Fragment {
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface BidConfirmListener {
-        void bidConfirmListener();
+        void bidConfirmListener(Bundle b);
     }
 
     /**
@@ -61,11 +62,33 @@ public class BidConfirmFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_bid_confirm, container, false);
 
+
+        getActivity().setTitle("Bid on your Listing");
+
         hiddenControls = view.findViewById(R.id.confirm_constraint_hidden);
+
+
+        Bundle args = this.getArguments();
+        if (args != null) {
+            String bidJson = args.getString("bid");
+            String listingJson = args.getString("listing");
+
+            bid = new Gson().fromJson(bidJson,Bid.class);
+            listing = new Gson().fromJson(listingJson,Listing.class);
+        } else {
+
+        }
+
 
         mCallback = (BidConfirmListener) getActivity();
 
         profilePhoto = view.findViewById(R.id.imageView_confirm_profile_picture);
+        profilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doGoToProfile(bid.user_id());
+            }
+        });
 
         reputationText = view.findViewById(R.id.textView_confirm_rep);
 
@@ -77,6 +100,8 @@ public class BidConfirmFragment extends Fragment {
 
         profileProgressBar = view.findViewById(R.id.progressBar_confirm);
         profileProgressBar.setVisibility(View.VISIBLE);
+
+        titleText.setText(getFlavourText());
 
         Picasso.get().load("https://getshipr.com/api/user/" + User.getUser().id() + "/photo").placeholder(R.drawable.default_profile_photo).into(profilePhoto, new Callback() {
             @Override
@@ -100,12 +125,10 @@ public class BidConfirmFragment extends Fragment {
                         reputationText.setVisibility(View.VISIBLE);
                         usernameText.setVisibility(View.VISIBLE);
                         locationText.setVisibility(View.VISIBLE);
-                        titleText.setVisibility(View.VISIBLE);
 
                         reputationText.setText(String.valueOf(response.getBody().get("reputation")));
                         usernameText.setText((String)response.getBody().get("known_as"));
                         locationText.setText((String)response.getBody().get("city"));
-                        titleText.setText(getFlavourText());
 
                         Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
                         hiddenControls.startAnimation(slideUp);
@@ -128,11 +151,17 @@ public class BidConfirmFragment extends Fragment {
         return view;
     }
 
+    private void doGoToProfile(int i) {
+        Bundle b = new Bundle();
+        b.putInt("userid",i);
+        callbackToActivity(b);
+    }
+
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity() {
-        mCallback.bidConfirmListener();
+    public void callbackToActivity(Bundle b) {
+        mCallback.bidConfirmListener(b);
     }
 
     String getFlavourText(){
