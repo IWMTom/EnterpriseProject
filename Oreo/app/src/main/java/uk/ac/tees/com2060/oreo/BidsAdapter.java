@@ -2,6 +2,7 @@ package uk.ac.tees.com2060.oreo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,14 @@ import java.util.ArrayList;
 
 public class BidsAdapter extends BaseAdapter {
     private Context mContext;
+
+
+    BidsAdapterListener mCallback;
+
+    interface BidsAdapterListener {
+        void bidsAdapterListener(Bundle b);
+    }
+
     private LayoutInflater mInflater;
     private ArrayList<Bid> mDataSource;
     private Listing listing;
@@ -49,6 +58,17 @@ public class BidsAdapter extends BaseAdapter {
         final Bid bid = (Bid) getItem(i);
 
         final ImageView bidThumbnail = rowView.findViewById(R.id.ImageView_rating_profile);
+        bidThumbnail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putInt("userid",bid.user_id());
+                if(listing.user_id()==User.getUser().id()){
+                    b.putInt("bid", bid.id());
+                }
+                callbackToActivity(b);
+            }
+        });
 
         TextView bidUser = rowView.findViewById(R.id.bid_list_user);
 
@@ -65,5 +85,10 @@ public class BidsAdapter extends BaseAdapter {
         bidAmount.setText(formatter.format(bid.amount()));
 
         return rowView;
+    }
+
+    public void callbackToActivity(Bundle b) {
+        mCallback = (BidsAdapterListener) mContext;
+        mCallback.bidsAdapterListener(b);
     }
 }

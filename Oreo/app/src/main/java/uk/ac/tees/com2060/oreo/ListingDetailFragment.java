@@ -3,9 +3,11 @@ package uk.ac.tees.com2060.oreo;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -108,6 +110,12 @@ public class ListingDetailFragment extends Fragment{
 
                         listView.setAdapter(new BidsAdapter(getContext(), al, selectedListing));
 
+                        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                                Log.d("123", listView.getItemAtPosition(i).toString());
+                            }
+                        });
                         progress.setVisibility(View.INVISIBLE);
                     }
                 }
