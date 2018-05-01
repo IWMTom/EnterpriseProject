@@ -339,6 +339,7 @@ public class EditProfileFragment extends Fragment {
      * Callback to the Activity
      */
     public void callbackToActivity(Bundle b) {
+        mCallback = (EditProfileListener) getActivity();
         mCallback.editProfileListener(b);
     }
 
