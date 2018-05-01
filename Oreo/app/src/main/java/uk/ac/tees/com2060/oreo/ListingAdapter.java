@@ -15,7 +15,7 @@ public class ListingAdapter extends BaseAdapter
     private LayoutInflater mInflater;
     private ArrayList<Listing> mDataSource;
 
-    public ListingAdapter(Context context, ArrayList<Listing> items)
+    public ListingAdapter(Context context, ArrayList items)
     {
         mContext = context;
         mDataSource = items;
