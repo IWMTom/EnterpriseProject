@@ -57,7 +57,7 @@ public class RegisterStep1Fragment extends Fragment
      */
     public interface RegisterStep1Listener
     {
-        public void step1Listener(Bitmap profile_photo, String full_name,
+        void step1Listener(Bitmap profile_photo, String full_name,
                                   String known_as, String dob);
     }
 

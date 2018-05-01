@@ -50,16 +50,16 @@ public class MainActivity extends AppCompatActivity
         /** START BOILERPLATE */
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.listing_toolbar);
+        Toolbar toolbar = findViewById(R.id.listing_toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         /** END BOILERPLATE */
 
@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity
             showListingDetail(getIntent().getIntExtra("notification_bid", -1));
 
         ImageView imageView_nav_header_profile_photo =
-                (ImageView) navigationView.getHeaderView(0)
+                 navigationView.getHeaderView(0)
                         .findViewById(R.id.imageView_nav_header_profile_photo);
 
         imageView_nav_header_profile_photo.setOnClickListener(new View.OnClickListener() {
@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity
         });
 
         TextView textView_nav_header_rep =
-                (TextView) navigationView.getHeaderView(0)
+                 navigationView.getHeaderView(0)
                         .findViewById((R.id.textView_nav_header_rep));
 
         TextView textView_nav_header_name =
-                (TextView) navigationView.getHeaderView(0)
+                 navigationView.getHeaderView(0)
                         .findViewById(R.id.textView_nav_header_name);
 
         imageView_nav_header_profile_photo.setImageBitmap(User.getUser().profilePhoto());
@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -144,33 +144,33 @@ public class MainActivity extends AppCompatActivity
 
     private void showProfile() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(Gravity.LEFT);
+        drawer.closeDrawer(Gravity.START);
 
         openUserProfile(User.getUser().id());
     }
 
     private void showDashboard() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, dashboardFragment)                .addToBackStack(null)
+                .replace(R.id.main_fragment_container, dashboardFragment).addToBackStack(null)
                 .commit();
     }
 
     private void showListItem() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, listItemFragment)                .addToBackStack(null)
+                .replace(R.id.main_fragment_container, listItemFragment).addToBackStack(null)
                 .commit();
 
     }
 
     private void showBrowseListings() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, browseListingsFragment)                .addToBackStack(null)
+                .replace(R.id.main_fragment_container, browseListingsFragment).addToBackStack(null)
                 .commit();
     }
 
     private void showPastListings() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, pastListingsFragment)                .addToBackStack(null)
+                .replace(R.id.main_fragment_container, pastListingsFragment).addToBackStack(null)
                 .commit();
     }
 
@@ -211,7 +211,8 @@ public class MainActivity extends AppCompatActivity
                     listingDetailFragment.setArguments(arguments);
 
                     getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.main_fragment_container, listingDetailFragment);
+                            .replace(R.id.main_fragment_container, listingDetailFragment)
+                            .commit();
                 }
             }
         });

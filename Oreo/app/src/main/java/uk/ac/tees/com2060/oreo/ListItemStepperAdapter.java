@@ -1,26 +1,21 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.adapter.AbstractFragmentStepAdapter;
 import com.stepstone.stepper.viewmodel.StepViewModel;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-public class ListItemStepperAdapter extends AbstractFragmentStepAdapter
-{
+public class ListItemStepperAdapter extends AbstractFragmentStepAdapter {
 
     private ArrayList<Step> fragments = new ArrayList<>();
 
-    public ListItemStepperAdapter(FragmentManager fm, Context context)
-    {
+    ListItemStepperAdapter(FragmentManager fm, Context context) {
         super(fm, context);
 
         Step step1 = new ListItemStep1Fragment();
@@ -32,17 +27,14 @@ public class ListItemStepperAdapter extends AbstractFragmentStepAdapter
         fragments.add(step3);
     }
 
-    public ArrayList<Step> getFragments()
-    {
+    ArrayList<Step> getFragments() {
         return fragments;
     }
 
 
     @Override
-    public Step createStep(int position)
-    {
-        switch (position)
-        {
+    public Step createStep(int position) {
+        switch (position) {
             case 0:
                 return fragments.get(0);
             case 1:
@@ -61,12 +53,10 @@ public class ListItemStepperAdapter extends AbstractFragmentStepAdapter
 
     @NonNull
     @Override
-    public StepViewModel getViewModel(@IntRange(from = 0) int position)
-    {
+    public StepViewModel getViewModel(@IntRange(from = 0) int position) {
         StepViewModel.Builder builder = new StepViewModel.Builder(context);
 
-        switch (position)
-        {
+        switch (position) {
             case 0:
                 builder
                         .setTitle("Select Location");

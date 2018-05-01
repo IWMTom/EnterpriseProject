@@ -1,7 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -11,13 +10,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.stepstone.stepper.BlockingStep;
-import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
@@ -27,8 +23,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
-public class ListItemStep3Fragment extends Fragment implements BlockingStep
-{
+public class ListItemStep3Fragment extends Fragment implements BlockingStep {
 
     TextView collectionLocation, deliveryLocation, itemDescription, itemSize, importantDetails;
 
@@ -46,14 +41,12 @@ public class ListItemStep3Fragment extends Fragment implements BlockingStep
     }
 
     @Override
-    public VerificationError verifyStep()
-    {
+    public VerificationError verifyStep() {
         return null;
     }
 
     @Override
-    public void onSelected()
-    {
+    public void onSelected() {
 
         SharedPreferences sharedPref = getActivity().getPreferences(Context.MODE_PRIVATE);
 
@@ -67,53 +60,38 @@ public class ListItemStep3Fragment extends Fragment implements BlockingStep
 
 
     @Override
-    public void onError(@NonNull VerificationError error)
-    {
+    public void onError(@NonNull VerificationError error) {
         Utils.displayMessage(getActivity(), error.getErrorMessage());
     }
 
     @Override
     @UiThread
-    public void onNextClicked(final StepperLayout.OnNextClickedCallback callback)
-    {
-        new Handler().postDelayed(new Runnable()
-        {
+    public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
+        new Handler().postDelayed(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 callback.goToNextStep();
             }
         }, 2000L);
     }
 
-    private String getShortSize(String longSize)
-    {
-        if (longSize.startsWith("Small"))
-        {
+    private String getShortSize(String longSize) {
+        if (longSize.startsWith("Small")) {
             return "small";
-        }
-        else if (longSize.startsWith("Medium"))
-        {
+        } else if (longSize.startsWith("Medium")) {
             return "medium";
-        }
-        else if (longSize.startsWith("Large"))
-        {
+        } else if (longSize.startsWith("Large")) {
             return "large";
-        }
-        else if (longSize.startsWith("Extra Large"))
-        {
+        } else if (longSize.startsWith("Extra Large")) {
             return "xlarge";
-        }
-        else
-        {
+        } else {
             return "huge";
         }
     }
 
     @Override
     @UiThread
-    public void onCompleteClicked(final StepperLayout.OnCompleteClickedCallback callback)
-    {
+    public void onCompleteClicked(final StepperLayout.OnCompleteClickedCallback callback) {
 
         ApiCall api = new ApiCall("listing/new", getContext());
         api.addParam("item_description", itemDescription.getText().toString());
@@ -122,33 +100,27 @@ public class ListItemStep3Fragment extends Fragment implements BlockingStep
         api.addParam("collection_location", collectionLocation.getText().toString());
         api.addParam("delivery_location", deliveryLocation.getText().toString());
 
-        api.addResponseListener(new ResponseListener()
-        {
+        api.addResponseListener(new ResponseListener() {
             @Override
-            public void responseReceived(ApiResponse response)
-            {
-                if (response.success())
-                {
+            public void responseReceived(ApiResponse response) {
+                if (response.success()) {
                     Utils.clearTemporaryStorage(getActivity());
 
-                    try
-                    {
+                    try {
                         getActivity().getPreferences(Context.MODE_PRIVATE).edit()
                                 .putInt("listing_id", response.getBody().getInt("id"))
                                 .apply();
-                    } catch (JSONException e) { e.printStackTrace(); }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
-                    new Handler().postDelayed(new Runnable()
-                    {
+                    new Handler().postDelayed(new Runnable() {
                         @Override
-                        public void run()
-                        {
+                        public void run() {
                             callback.complete();
                         }
                     }, 0);
-                }
-                else
-                {
+                } else {
                     Utils.displayMessage(getActivity(), response.getErrors().get(0));
                 }
             }
@@ -160,8 +132,7 @@ public class ListItemStep3Fragment extends Fragment implements BlockingStep
 
     @Override
     @UiThread
-    public void onBackClicked(StepperLayout.OnBackClickedCallback callback)
-    {
+    public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
         callback.goToPrevStep();
     }
 }

@@ -2,12 +2,10 @@ package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -21,20 +19,18 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 /**
  * SplashActivity.java
- *
+ * <p>
  * The Activity class for handling the splash screen.
  * The splash screen will be displayed while user data is being cached for this session.
  * An API call is made to get user details, and this is cached using the User singleton.
  */
-public class SplashActivity extends AppCompatActivity
-{
+public class SplashActivity extends AppCompatActivity {
     Activity activity = this;
     Intent intent;
     int notification_bid = -1;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
@@ -43,32 +39,24 @@ public class SplashActivity extends AppCompatActivity
         TextView version = findViewById(R.id.textView_version);
         version.setText(BuildConfig.VERSION_NAME);
 
-        if (Utils.getUserAccessToken(activity) != null)
-        {
+        if (Utils.getUserAccessToken(activity) != null) {
             intent = new Intent(activity, MainActivity.class);
 
             ApiCall getInfo = new ApiCall("user/details", this);
-            getInfo.addResponseListener(new ResponseListener()
-            {
+            getInfo.addResponseListener(new ResponseListener() {
                 @Override
-                public void responseReceived(ApiResponse response)
-                {
-                    if (response.success())
-                    {
-                        try
-                        {
+                public void responseReceived(ApiResponse response) {
+                    if (response.success()) {
+                        try {
                             JSONObject body = response.getBody();
 
                             String profilePhoto;
 
-                            if (body.get("profile_photo").toString().equals("null"))
-                            {
+                            if (body.get("profile_photo").toString().equals("null")) {
                                 profilePhoto = Utils.getStringFromImage(
                                         BitmapFactory.decodeResource(activity.getResources(),
                                                 R.drawable.default_profile_photo));
-                            }
-                            else
-                            {
+                            } else {
                                 profilePhoto = (String) body.get("profile_photo");
                             }
 
@@ -85,7 +73,9 @@ public class SplashActivity extends AppCompatActivity
                                     getBaseContext()
 
                             );
-                        } catch (JSONException | ParseException e) { e.printStackTrace(); }
+                        } catch (JSONException | ParseException e) {
+                            e.printStackTrace();
+                        }
 
                         if (notification_bid != -1)
                             intent.putExtra("notification_bid", notification_bid);
@@ -93,17 +83,13 @@ public class SplashActivity extends AppCompatActivity
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(intent);
                         finish();
-                    }
-                    else
-                    {
+                    } else {
                         Log.d("ERROR", response.getBody().toString());
                     }
                 }
             });
             getInfo.sendRequest();
-        }
-        else
-        {
+        } else {
             intent = new Intent(activity, WelcomeActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
@@ -112,8 +98,7 @@ public class SplashActivity extends AppCompatActivity
 
     }
 
-    private void handlePushNotifications()
-    {
+    private void handlePushNotifications() {
         if (getIntent().getStringExtra("notification_bid") != null)
             notification_bid = Integer.parseInt(getIntent().getStringExtra("notification_bid"));
     }
