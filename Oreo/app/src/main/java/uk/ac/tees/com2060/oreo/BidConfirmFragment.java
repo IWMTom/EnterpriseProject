@@ -92,7 +92,7 @@ public class BidConfirmFragment extends Fragment {
 
         titleText.setText(getFlavourText());
 
-        Picasso.get().load("https://getshipr.com/api/user/" + User.getUser().id() + "/photo").placeholder(R.drawable.default_profile_photo).into(profilePhoto, new Callback() {
+        Picasso.get().load("https://getshipr.com/api/user/" + args.getInt("userid") + "/photo").placeholder(R.drawable.default_profile_photo).into(profilePhoto, new Callback() {
             @Override
             public void onSuccess() {
                 profileProgressBar.setVisibility(View.INVISIBLE);
@@ -104,7 +104,7 @@ public class BidConfirmFragment extends Fragment {
             }
         });
 
-        ApiCall getUserData = new ApiCall("user/" + User.getUser().id(), this.getContext());
+        ApiCall getUserData = new ApiCall("user/" + args.getInt("userid"), this.getContext());
         getUserData.addResponseListener(new ResponseListener() {
             @Override
             public void responseReceived(ApiResponse response) {
