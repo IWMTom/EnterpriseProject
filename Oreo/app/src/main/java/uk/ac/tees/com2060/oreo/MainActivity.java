@@ -8,6 +8,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,7 +37,9 @@ public class MainActivity extends AppCompatActivity
         EditProfileFragment.EditProfileListener,
         ViewProfileFragment.ViewProfileListener,
         PastListingsFragment.PastListingsListener,
-        BrowseListingsFragment.BrowseListingsListener{
+        BrowseListingsFragment.BrowseListingsListener,
+        BidsAdapter.BidsAdapterListener
+{
 
     DashboardFragment dashboardFragment = new DashboardFragment();
     ListItemFragment listItemFragment = new ListItemFragment();
@@ -47,6 +50,10 @@ public class MainActivity extends AppCompatActivity
     PastListingsFragment pastListingsFragment = new PastListingsFragment();
     BrowseListingsFragment browseListingsFragment = new BrowseListingsFragment();
     BidConfirmFragment bidConfirmFragment = new BidConfirmFragment();
+
+    public MainActivity() {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,6 +191,14 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
+    private void showConfirmBid(Bundle b) {
+        bidConfirmFragment.setArguments(b);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, bidConfirmFragment)
+                .addToBackStack(null)
+                .commit();
+    }
+
     /**
      * Logs out the user by removing the access token in shared preferences
      */
@@ -299,5 +314,15 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, viewProfileFragment)
                 .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void bidsAdapterListener(Bundle b) {
+
+        if(b.get("bid")!=null){
+            showConfirmBid(b);
+        }else if(b.get("userid")!=null){
+            openUserProfile(b.getInt("userid"));
+        }
     }
 }

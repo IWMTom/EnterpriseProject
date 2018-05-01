@@ -62,25 +62,14 @@ public class BidConfirmFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_bid_confirm, container, false);
 
-
         getActivity().setTitle("Bid on your Listing");
 
         hiddenControls = view.findViewById(R.id.confirm_constraint_hidden);
 
-
         Bundle args = this.getArguments();
-        if (args != null) {
-            String bidJson = args.getString("bid");
-            String listingJson = args.getString("listing");
-
-            bid = new Gson().fromJson(bidJson,Bid.class);
-            listing = new Gson().fromJson(listingJson,Listing.class);
-        } else {
-
+        if(args.get("bid")!=null){
+            args.getInt("bid");
         }
-
-
-        mCallback = (BidConfirmListener) getActivity();
 
         profilePhoto = view.findViewById(R.id.imageView_confirm_profile_picture);
         profilePhoto.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +106,6 @@ public class BidConfirmFragment extends Fragment {
 
         ApiCall getUserData = new ApiCall("user/" + User.getUser().id(), this.getContext());
         getUserData.addResponseListener(new ResponseListener() {
-
             @Override
             public void responseReceived(ApiResponse response) {
                 if (response.success()) {
