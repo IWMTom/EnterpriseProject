@@ -229,4 +229,11 @@
     </string>
     <string name="fragement_profile_title">Your Profile</string>
     <string name="fragment_profile_known_as">username</string>
+    <string name="package_size_0">Small</string>
+    <string name="package_size_1">Medium</string>
+    <string name="package_size_2">Large</string>
+    <string name="package_size_3">XLarge</string>
+    <string name="package_size_4">Huge</string>
+    <string name="regex_mobile_number">^(\\s?7\\d{3}|\\(?07\\d{3}\\)?)\\s?\\d{3}\\s?\\d{3}$</string>
+    <string name="regex_postcode">^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\\s*[0-9][a-zA-Z]{2}$</string>
 </resources>

@@ -1,6 +1,5 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.Activity;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
@@ -28,21 +28,20 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
  * The Fragment class that handles the Browse Listings page
  */
 public class BrowseListingsFragment extends Fragment {
-
     BrowseListingsListener mCallback;
 
     CollapsingToolbarLayout toolbar;
     ListView listView;
     ArrayList<Listing> listings;
     ArrayList<Listing> filteredListings;
-    ProgressBar progress;
+    ProgressBar progressBar;
     TextView radiusText;
     TextView sizeText;
-    SeekBar seeker_Radius;
-    SeekBar seeker_Size;
+    SeekBar seekerRadius;
+    SeekBar seekerSize;
 
-    int range = 10;
-    int size = 3;
+    int range = 20;
+    int size = 2;
 
 
     public BrowseListingsFragment() {
@@ -52,25 +51,7 @@ public class BrowseListingsFragment extends Fragment {
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface BrowseListingsListener {
-        public void browseListingsListener(Listing selectedListing);
-    }
-
-    /**
-     * Handles the attachment of the Fragment to the Activity.
-     * Throws an exception if the Activity doesn't implement the listener interface.
-     *
-     * @param activity calling activity
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mCallback = (BrowseListingsListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement BrowseListingsListener");
-        }
+        void browseListingsListener(Listing selectedListing);
     }
 
     /**
@@ -88,21 +69,21 @@ public class BrowseListingsFragment extends Fragment {
 
         listView = view.findViewById(R.id.listView_browse_listings);
 
-        listings = new ArrayList();
-        filteredListings = new ArrayList();
+        listings = new ArrayList<>();
+        filteredListings = new ArrayList<>();
 
-        progress = view.findViewById(R.id.progressBar_browse_listings);
+        progressBar = view.findViewById(R.id.progressBar_browse_listings);
 
         radiusText = view.findViewById(R.id.radius_text);
         sizeText = view.findViewById(R.id.size_text);
 
-        seeker_Radius = view.findViewById(R.id.range_seeker);
-        seeker_Radius.setProgress(range);
-        seeker_Radius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekerRadius = view.findViewById(R.id.range_seeker);
+        seekerRadius.setProgress(range);
+        seekerRadius.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 range = progress + 2;
-                radiusText.setText(range + " Miles");
+                radiusText.setText(String.format(Locale.ENGLISH, "%d Miles", range));
             }
 
             @Override
@@ -112,31 +93,33 @@ public class BrowseListingsFragment extends Fragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 doFetchListings(range);
-                radiusText.setText(range + " Miles");
+                radiusText.setText(String.format(Locale.ENGLISH, "%d Miles", range));
             }
         });
 
-        seeker_Size = view.findViewById(R.id.size_seeker);
-        seeker_Size.setProgress(size);
-        seeker_Size.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        seekerSize = view.findViewById(R.id.size_seeker);
+        seekerSize.setProgress(size);
+        seekerSize.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                progressBar.setVisibility(View.VISIBLE);
+                listView.setVisibility(View.INVISIBLE);
                 size = progress;
                 switch (progress) {
                     case 0:
-                        sizeText.setText("Small");
+                        sizeText.setText(R.string.package_size_0);
                         break;
                     case 1:
-                        sizeText.setText("Medium");
+                        sizeText.setText(R.string.package_size_1);
                         break;
                     case 2:
-                        sizeText.setText("Large");
+                        sizeText.setText(R.string.package_size_2);
                         break;
                     case 3:
-                        sizeText.setText("XL");
+                        sizeText.setText(R.string.package_size_3);
                         break;
                     case 4:
-                        sizeText.setText("Huge");
+                        sizeText.setText(R.string.package_size_4);
                         break;
                 }
             }
@@ -151,6 +134,9 @@ public class BrowseListingsFragment extends Fragment {
                 filteredListings = Utils.FilterList(listings, size);
 
                 listView.setAdapter(new ListingAdapter(getContext(), filteredListings));
+
+                listView.setVisibility(View.VISIBLE);
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
 
@@ -160,7 +146,7 @@ public class BrowseListingsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Listing selectedListing = ((ArrayList<Listing>) listings).get(position);
+                Listing selectedListing = (listings).get(position);
 
                 callbackToActivity(selectedListing);
             }
@@ -196,7 +182,7 @@ public class BrowseListingsFragment extends Fragment {
     }
 
     private void doFetchListings(int radius) {
-        progress.setVisibility(View.VISIBLE);
+        progressBar.setVisibility(View.VISIBLE);
         listView.setVisibility(View.INVISIBLE);
         ApiCall api = new ApiCall("listing/list/radius/" + radius, getContext());
         api.addResponseListener(new ResponseListener() {
@@ -211,7 +197,7 @@ public class BrowseListingsFragment extends Fragment {
                     listView.setAdapter(new ListingAdapter(getContext(), filteredListings));
 
                     listView.setVisibility(View.VISIBLE);
-                    progress.setVisibility(View.INVISIBLE);
+                    progressBar.setVisibility(View.INVISIBLE);
 
                 }
             }
@@ -222,7 +208,7 @@ public class BrowseListingsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Listing selectedListing = ((ArrayList<Listing>) listings).get(position);
+                Listing selectedListing = (listings).get(position);
 
                 callbackToActivity(selectedListing);
             }

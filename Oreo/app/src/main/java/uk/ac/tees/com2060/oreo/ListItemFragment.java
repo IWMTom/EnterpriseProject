@@ -1,16 +1,12 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
@@ -22,7 +18,6 @@ import com.stepstone.stepper.VerificationError;
  */
 public class ListItemFragment extends Fragment implements StepperLayout.StepperListener {
     ListItemListener mCallback;
-    private StepperLayout mStepperLayout;
     private ListItemStepperAdapter stepperAdapter;
     private boolean cantDestroy;
 
@@ -33,25 +28,7 @@ public class ListItemFragment extends Fragment implements StepperLayout.StepperL
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface ListItemListener {
-        public void listItemListener(int id);
-    }
-
-    /**
-     * Handles the attachment of the Fragment to the Activity.
-     * Throws an exception if the Activity doesn't implement the listener interface.
-     *
-     * @param activity calling activity
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mCallback = (ListItemListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement ListItemListener");
-        }
+         void listItemListener(int id);
     }
 
     /**
@@ -67,7 +44,7 @@ public class ListItemFragment extends Fragment implements StepperLayout.StepperL
 
         stepperAdapter = new ListItemStepperAdapter(getFragmentManager(), getContext());
 
-        mStepperLayout = view.findViewById(R.id.stepperLayout);
+        StepperLayout mStepperLayout = view.findViewById(R.id.stepperLayout);
         mStepperLayout.setAdapter(stepperAdapter);
         mStepperLayout.setListener(this);
 

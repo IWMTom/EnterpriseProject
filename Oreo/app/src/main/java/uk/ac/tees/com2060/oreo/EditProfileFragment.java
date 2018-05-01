@@ -1,48 +1,32 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.common.api.Api;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.ArrayList;
+import java.util.Locale;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
-import okhttp3.internal.Util;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 
 import static android.app.Activity.RESULT_OK;
 import static android.content.Context.INPUT_METHOD_SERVICE;
-import static uk.ac.tees.com2060.oreo.R.color.*;
 
 /**
  * EditProfileFragment.java
@@ -68,8 +52,7 @@ public class EditProfileFragment extends Fragment {
     Button button_user_password;
     int secretCount = 0;
 
-    public EditProfileFragment() {
-    }
+    public EditProfileFragment() {}
 
     /**
      * Interface for the Activity to implement - enables activity/fragment communication
@@ -79,34 +62,18 @@ public class EditProfileFragment extends Fragment {
     }
 
     /**
-     * Handles the attachment of the Fragment to the Activity.
-     * Throws an exception if the Activity doesn't implement the listener interface.
-     *
-     * @param activity calling activity
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mCallback = (EditProfileListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement EditProfileListener");
-        }
-    }
-
-    /**
      * Overridden default onCreateView() method
      * Sets the title in the title bar and displays the fragment layout file.
      */
     @Override
     public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
-        setHasOptionsMenu(true);
+
+        mCallback = (EditProfileListener) getActivity();
+
         getActivity().setTitle("Edit Your Profile");
 
-        image = view.findViewById(R.id.imageView_profile_view_image2);
+        image = view.findViewById(R.id.imageView_profile_view_profile_photo);
         image.setImageBitmap(User.getUser().profilePhoto());
         image.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,7 +139,7 @@ public class EditProfileFragment extends Fragment {
         });
 
         TextView version = view.findViewById(R.id.textView_profile_version);
-        version.setText(BuildConfig.VERSION_NAME + "-" + BuildConfig.VERSION_CODE);
+        version.setText(String.format(Locale.ENGLISH, "%s-%d", BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE));
         version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -181,6 +148,8 @@ public class EditProfileFragment extends Fragment {
         });
 
         spinner = view.findViewById(R.id.progressBar_edit_profile_picture);
+
+        setHasOptionsMenu(true);
 
         return view;
     }
@@ -215,7 +184,7 @@ public class EditProfileFragment extends Fragment {
                             Toast toast = Toast.makeText(getContext(), "Profile picture updated!", Toast.LENGTH_SHORT);
                             toast.show();
                         } else {
-
+                            //TODO:Fail message
                         }
 
                         image.setClickable(true);
@@ -288,7 +257,7 @@ public class EditProfileFragment extends Fragment {
 
     private boolean validateMobileNumber() {
         if (!mobile.getText().toString().matches(
-                "^(\\s?7\\d{3}|\\(?07\\d{3}\\)?)\\s?\\d{3}\\s?\\d{3}$")) {
+                getString(R.string.regex_mobile_number))) {
             Utils.displayMessage(getActivity(), R.string.validation_invalid_phone_number, R.string.okay);
             return false;
         } else {
@@ -356,7 +325,7 @@ public class EditProfileFragment extends Fragment {
             return false;
 
         } else if (!postcode.getText().toString().matches(
-                "^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\\s*[0-9][a-zA-Z]{2}$")) {
+                getString(R.string.regex_postcode))) {
             Utils.displayMessage(getActivity(), R.string.validation_invalid_postcode, R.string.okay);
             return false;
 
@@ -369,13 +338,16 @@ public class EditProfileFragment extends Fragment {
      * Callback to the Activity
      */
     public void callbackToActivity(Bundle b) {
+        mCallback = (EditProfileListener) getActivity();
         mCallback.editProfileListener(b);
     }
 
     private void closeKeyboard() {
         try {
             InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+            }
         } catch (Exception e) {
 
         }

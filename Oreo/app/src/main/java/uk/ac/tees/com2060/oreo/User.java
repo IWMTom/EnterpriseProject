@@ -49,8 +49,8 @@ public class User implements Serializable {
      * @param mobileNumber mobile number
      * @param context      context for rep api call
      */
-    public void init(int id, String fullName, String knownAs, String emailAddress, String postcode,
-                     String dob, String profilePhoto, String mobileNumber, Context context) throws ParseException {
+    void init(int id, String fullName, String knownAs, String emailAddress, String postcode,
+              String dob, String profilePhoto, String mobileNumber, Context context) throws ParseException {
         this.id = id;
         this.fullName = fullName;
         this.knownAs = knownAs;
@@ -62,7 +62,7 @@ public class User implements Serializable {
         rep = getRep(context);
     }
 
-    public void updatePushToken(Context c) {
+    void updatePushToken(Context c) {
         ApiCall api = new ApiCall("user/updatePushToken", c);
         api.addParam("push_token", FirebaseInstanceId.getInstance().getToken());
         api.addResponseListener(new ResponseListener() {
@@ -78,7 +78,7 @@ public class User implements Serializable {
     /**
      * Gets instance of user (singleton)
      *
-     * @return
+     * @return returns User singleton
      */
     public static User getUser() {
         if (userInstance == null) {
@@ -97,7 +97,7 @@ public class User implements Serializable {
      *
      * @return full name
      */
-    public String fullName() {
+    String fullName() {
         return this.fullName;
     }
 
@@ -106,7 +106,7 @@ public class User implements Serializable {
      *
      * @return known as name
      */
-    public String knownAs() {
+    String knownAs() {
         return this.knownAs;
     }
 
@@ -115,7 +115,7 @@ public class User implements Serializable {
      *
      * @return email address
      */
-    public String emailAddress() {
+    String emailAddress() {
         return this.emailAddress;
     }
 
@@ -124,7 +124,7 @@ public class User implements Serializable {
      *
      * @return postcode
      */
-    public String postcode() {
+    String postcode() {
         return this.postcode;
     }
 
@@ -133,7 +133,7 @@ public class User implements Serializable {
      *
      * @return date of birth
      */
-    public Date dob() {
+    Date dob() {
         return this.dob;
     }
 
@@ -142,7 +142,7 @@ public class User implements Serializable {
      *
      * @return profile photo
      */
-    public Bitmap profilePhoto() {
+    Bitmap profilePhoto() {
         return this.profilePhoto;
     }
 
@@ -151,11 +151,11 @@ public class User implements Serializable {
      *
      * @return mobile number
      */
-    public String mobileNumber() {
+    String mobileNumber() {
         return this.mobileNumber;
     }
 
-    public int getRep(Context context) {
+    int getRep(Context context) {
         ApiCall getUserData = new ApiCall("user/" + id, context);
         getUserData.addResponseListener(new ResponseListener() {
 
@@ -175,27 +175,23 @@ public class User implements Serializable {
         return rep;
     }
 
-    public void setMobileNumber(String mobile) {
+    void setMobileNumber(String mobile) {
         this.mobileNumber = mobile;
     }
 
-    public void setProfilePhoto(Bitmap bmp) {
+    void setProfilePhoto(Bitmap bmp) {
         profilePhoto = bmp;
     }
 
-    public void setAlias(String s) {
+    void setAlias(String s) {
         knownAs = s;
     }
 
-    public void setFullName(String s) {
+    void setFullName(String s) {
         fullName = s;
     }
 
-    public void setPostcode(String s) {
+    void setPostcode(String s) {
         postcode = s;
-    }
-
-    public void setEmailAddress(String s) {
-        emailAddress = s;
     }
 }

@@ -123,13 +123,13 @@ public class RegisterStep2Fragment extends Fragment
     public boolean validateFields()
     {
         if (!editText_postcode.getText().toString().matches(
-                "^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\\s*[0-9][a-zA-Z]{2}$"))
+                getString(R.string.regex_postcode)))
         {
             Utils.displayMessage(getActivity(), R.string.validation_invalid_postcode, R.string.okay);
             return false;
         }
         else if(!editText_phone_number.getText().toString().matches(
-                "^(\\s?7\\d{3}|\\(?07\\d{3}\\)?)\\s?\\d{3}\\s?\\d{3}$"))
+                getString(R.string.regex_mobile_number)))
         {
             Utils.displayMessage(getActivity(), R.string.validation_invalid_phone_number, R.string.okay);
             return false;

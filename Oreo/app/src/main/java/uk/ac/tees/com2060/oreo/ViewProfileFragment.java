@@ -1,20 +1,14 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,16 +17,11 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * ViewProfileFragment.java
@@ -43,36 +32,15 @@ public class ViewProfileFragment extends Fragment {
     ViewProfileListener mCallback;
 
     int profileID;
-    boolean ownprofile;
+    boolean ownProfile;
 
-    public ViewProfileFragment() {
-
-    }
-
+    public ViewProfileFragment() {}
 
     /**
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface ViewProfileListener {
-        public void viewProfileListener();
-    }
-
-    /**
-     * Handles the attachment of the Fragment to the Activity.
-     * Throws an exception if the Activity doesn't implement the listener interface.
-     *
-     * @param activity calling activity
-     */
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mCallback = (ViewProfileListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement ViewProfileListener");
-        }
+        void viewProfileListener();
     }
 
     /**
@@ -83,28 +51,27 @@ public class ViewProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_view_profile, container, false);
 
+        mCallback = (ViewProfileListener) getActivity();
+
         final CircleImageView image = view.findViewById(R.id.imageView_profile_view_image);
         final TextView rep = view.findViewById(R.id.textView_rep);
         final TextView location = view.findViewById(R.id.textView_profile_location);
         final ProgressBar spinner = view.findViewById(R.id.progressBar_view_profile);
         final ProgressBar spinner_profile = view.findViewById(R.id.progressBar_view_profile_picture);
+
         Bundle args = this.getArguments();
         if (args != null) {
 
             profileID = args.getInt("userid");
 
-            if (profileID == User.getUser().id()) {
-                ownprofile = true;
-            } else {
-                ownprofile = false;
-            }
+            ownProfile = profileID == User.getUser().id();
 
         } else {
             profileID = User.getUser().id();
-            ownprofile = true;
+            ownProfile = true;
         }
 
-        if (ownprofile) {
+        if (ownProfile) {
             getActivity().setTitle("Your Profile");
             image.setImageBitmap(User.getUser().profilePhoto());
 
@@ -176,12 +143,14 @@ public class ViewProfileFragment extends Fragment {
 
             setHasOptionsMenu(false);
         }
+
         return view;
     }
 
     /**
      * Callback to the Activity
      */
+
     public void callbackToActivity() {
         mCallback.viewProfileListener();
     }
@@ -195,6 +164,7 @@ public class ViewProfileFragment extends Fragment {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
         callbackToActivity();
         return super.onOptionsItemSelected(item);
     }

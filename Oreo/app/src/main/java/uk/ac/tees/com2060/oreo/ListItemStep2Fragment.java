@@ -15,12 +15,10 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.stepstone.stepper.BlockingStep;
-import com.stepstone.stepper.Step;
 import com.stepstone.stepper.StepperLayout;
 import com.stepstone.stepper.VerificationError;
 
-public class ListItemStep2Fragment extends Fragment implements BlockingStep
-{
+public class ListItemStep2Fragment extends Fragment implements BlockingStep {
 
     private EditText itemDescription;
     private RadioGroup itemSize;
@@ -39,36 +37,29 @@ public class ListItemStep2Fragment extends Fragment implements BlockingStep
     }
 
     @Override
-    public VerificationError verifyStep()
-    {
-        if (itemDescription.getText().toString().isEmpty())
-        {
+    public VerificationError verifyStep() {
+        if (itemDescription.getText().toString().isEmpty()) {
             return new VerificationError("You must tell us what your item is!");
-        }
-        else if (itemSize.getCheckedRadioButtonId() == -1)
-        {
+        } else if (itemSize.getCheckedRadioButtonId() == -1) {
             return new VerificationError("You must tell us what size your item is!");
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
     @Override
-    public void onSelected() {}
+    public void onSelected() {
+    }
 
 
     @Override
-    public void onError(@NonNull VerificationError error)
-    {
+    public void onError(@NonNull VerificationError error) {
         Utils.displayMessage(getActivity(), error.getErrorMessage());
     }
 
     @Override
     @UiThread
-    public void onNextClicked(final StepperLayout.OnNextClickedCallback callback)
-    {
+    public void onNextClicked(final StepperLayout.OnNextClickedCallback callback) {
         RadioButton rb = v.findViewById(itemSize.getCheckedRadioButtonId());
 
         SharedPreferences.Editor editor = getActivity().getPreferences(Context.MODE_PRIVATE).edit();
@@ -87,8 +78,7 @@ public class ListItemStep2Fragment extends Fragment implements BlockingStep
 
     @Override
     @UiThread
-    public void onCompleteClicked(final StepperLayout.OnCompleteClickedCallback callback)
-    {
+    public void onCompleteClicked(final StepperLayout.OnCompleteClickedCallback callback) {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -99,8 +89,7 @@ public class ListItemStep2Fragment extends Fragment implements BlockingStep
 
     @Override
     @UiThread
-    public void onBackClicked(StepperLayout.OnBackClickedCallback callback)
-    {
+    public void onBackClicked(StepperLayout.OnBackClickedCallback callback) {
         callback.goToPrevStep();
     }
 }

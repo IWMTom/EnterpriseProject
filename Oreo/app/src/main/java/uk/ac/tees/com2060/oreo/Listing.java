@@ -1,8 +1,5 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.content.Context;
-import android.view.View;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -10,18 +7,14 @@ import org.json.JSONObject;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
-import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
-import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
-
 public class Listing implements Serializable {
     private int id, user_id;
     private String item_description, item_size, important_details, collection_city, delivery_city;
     private float distance, max_bid, min_bid, average_bid;
 
-    public Listing(int id, int user_id, String item_description, String item_size, String important_details,
-                   String collection_city, String delivery_city, float distance, float max_bid, float min_bid,
-                   float average_bid) {
+    Listing(int id, int user_id, String item_description, String item_size, String important_details,
+            String collection_city, String delivery_city, float distance, float max_bid, float min_bid,
+            float average_bid) {
         this.id = id;
         this.user_id = user_id;
         this.item_description = item_description;
@@ -35,11 +28,11 @@ public class Listing implements Serializable {
         this.average_bid = average_bid;
     }
 
-    public static Listing getListing(JSONArray data) {
+    static Listing getListing(JSONArray data) {
         return getListings(data).get(0);
     }
 
-    public static ArrayList<Listing> getListings(JSONArray json) {
+    static ArrayList<Listing> getListings(JSONArray json) {
         final ArrayList<Listing> al = new ArrayList<>();
 
         for (int i = 0; i < json.length(); i++) {
@@ -72,43 +65,43 @@ public class Listing implements Serializable {
         return this.id;
     }
 
-    public int user_id() {
+    int user_id() {
         return this.user_id;
     }
 
-    public String itemDescription() {
+    String itemDescription() {
         return this.item_description;
     }
 
-    public String itemSize() {
+    String itemSize() {
         return this.item_size;
     }
 
-    public String importantDetails() {
+    String importantDetails() {
         return this.important_details;
     }
 
-    public String collectionCity() {
+    String collectionCity() {
         return this.collection_city;
     }
 
-    public String deliveryCity() {
+    String deliveryCity() {
         return this.delivery_city;
     }
 
-    public float distance() {
+    float distance() {
         return this.distance;
     }
 
-    public float maxBid() {
+    float maxBid() {
         return this.max_bid;
     }
 
-    public float minBid() {
+    float minBid() {
         return this.min_bid;
     }
 
-    public float averageBid() {
+    float averageBid() {
         return this.average_bid;
     }
 

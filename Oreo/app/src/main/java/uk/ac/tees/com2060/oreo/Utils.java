@@ -36,7 +36,7 @@ public class Utils {
      * @param activity current activity
      * @param message  message (string)
      */
-    public static void displayMessage(Activity activity, String message) {
+    static void displayMessage(Activity activity, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(message)
                 .setPositiveButton(R.string.okay, null);
@@ -51,7 +51,7 @@ public class Utils {
      * @param message_resource string resource for message
      * @param button_resource  string resource for button
      */
-    public static void displayMessage(Activity activity, int message_resource, int button_resource) {
+    static void displayMessage(Activity activity, int message_resource, int button_resource) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         builder.setMessage(message_resource)
                 .setPositiveButton(button_resource, null);
@@ -65,7 +65,7 @@ public class Utils {
      * @param context current context
      * @param key     user access token
      */
-    public static void setUserAccessToken(Context context, String key) {
+    static void setUserAccessToken(Context context, String key) {
         SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_data), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.putString(context.getString(R.string.shared_preferences_user_data_api_key), key);
@@ -89,7 +89,7 @@ public class Utils {
      *
      * @param context current context
      */
-    public static void removeUserAccessToken(Context context) {
+    static void removeUserAccessToken(Context context) {
         SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.shared_preferences_user_data), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPrefs.edit();
         editor.remove(context.getString(R.string.shared_preferences_user_data_api_key));
@@ -102,13 +102,12 @@ public class Utils {
      * @param img bitmap image
      * @return Base64 encoded string
      */
-    public static String getStringFromImage(Bitmap img) {
+    static String getStringFromImage(Bitmap img) {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         img.compress(Bitmap.CompressFormat.JPEG, 100, baos);
         byte[] imageBytes = baos.toByteArray();
-        String encodedImage = Base64.encodeToString(imageBytes, Base64.NO_WRAP);
 
-        return encodedImage;
+        return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
     }
 
     /**
@@ -117,42 +116,42 @@ public class Utils {
      * @param str Base64 encoded string
      * @return Bitmap image
      */
-    public static Bitmap getImageFromString(String str) {
+    static Bitmap getImageFromString(String str) {
         byte[] decodedString = Base64.decode(str, Base64.NO_WRAP);
-        Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-        return decodedByte;
+        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-    public static void clearTemporaryStorage(Activity a) {
+    static void clearTemporaryStorage(Activity a) {
         a.getPreferences(Context.MODE_PRIVATE).edit().clear().apply();
     }
 
-    public static int sizeStringToInt(String s) {
-        if (s.equals("small")) {
-            return 0;
-        } else if (s.equals("medium")) {
-            return 1;
-        } else if (s.equals("large")) {
-            return 2;
-        } else if (s.equals("xlarge")) {
-            return 3;
-        } else if (s.equals("huge")) {
-            return 4;
-        } else {
-            return -1;
+    static int sizeStringToInt(String s) {
+        switch (s) {
+            case "small":
+                return 0;
+            case "medium":
+                return 1;
+            case "large":
+                return 2;
+            case "xlarge":
+                return 3;
+            case "huge":
+                return 4;
+            default:
+                return -1;
         }
     }
 
-    public static ArrayList<Listing> FilterList(ArrayList<Listing> list, int size) {
+    static ArrayList<Listing> FilterList(ArrayList<Listing> list, int size) {
 
         if (list == null) {
             return null;
         }
 
-        ArrayList<Listing> returnList = new ArrayList();
+        ArrayList<Listing> returnList = new ArrayList<>();
 
         for (int i = 0; i < list.size(); i++) {
-            if ((Utils.sizeStringToInt(((Listing) list.get(i)).itemSize())) <= size) {
+            if ((Utils.sizeStringToInt(list.get(i).itemSize())) <= size) {
                 Listing listing = new Listing(
                         list.get(i).id(),
                         list.get(i).user_id(),

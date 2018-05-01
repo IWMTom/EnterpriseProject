@@ -1,5 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,41 +14,35 @@ import com.squareup.picasso.Picasso;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 
-public class BidsAdapter extends BaseAdapter
-{
+public class BidsAdapter extends BaseAdapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<Bid> mDataSource;
 
-    public BidsAdapter(Context context, ArrayList<Bid> items)
-    {
+    public BidsAdapter(Context context, ArrayList<Bid> items) {
         mContext = context;
         mDataSource = items;
         mInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
 
     @Override
-    public int getCount()
-    {
+    public int getCount() {
         return mDataSource.size();
     }
 
     @Override
-    public Object getItem(int i)
-    {
-        return  mDataSource.get(i);
+    public Object getItem(int i) {
+        return mDataSource.get(i);
     }
 
     @Override
-    public long getItemId(int i)
-    {
+    public long getItemId(int i) {
         return i;
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup)
-    {
-        View rowView = mInflater.inflate(R.layout.fragment_listing_detail_listview, viewGroup, false);
+    public View getView(int i, View view, ViewGroup viewGroup) {
+        @SuppressLint("ViewHolder") View rowView = mInflater.inflate(R.layout.fragment_listing_detail_listview, viewGroup, false);
 
         final ImageView bidThumbnail = rowView.findViewById(R.id.ImageView_rating_profile);
         TextView bidUser = rowView.findViewById(R.id.bid_list_user);
