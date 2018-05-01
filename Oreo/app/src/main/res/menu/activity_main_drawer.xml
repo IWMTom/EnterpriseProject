@@ -17,7 +17,7 @@
                     android:icon="@drawable/ic_add"
                     android:title="@string/menu_list" />
                 <item
-                    android:id="@+id/nav_past_listings"
+                    android:id="@+id/nav_my_listings"
                     android:icon="@drawable/ic_history"
                     android:title="@string/menu_past_listings" />
             </menu>

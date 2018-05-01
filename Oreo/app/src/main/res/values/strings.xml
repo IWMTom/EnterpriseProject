@@ -129,12 +129,11 @@
     <string name="action_settings">Settings</string>
     <string name="menu_log_out">Log Out</string>
     <string name="menu_settings">Settings</string>
-    <string name="menu_past_listings">Past Listings</string>
+    <string name="menu_past_listings">My Listings</string>
     <string name="menu_list">List an Item</string>
     <string name="menu_dashboard">Dashboard</string>
     <string name="fragment_dashboard_title">Dashboard</string>
     <string name="API_BASE_URL">https://getshipr.com/api/</string>
-
 
     <string name="fragment_list_item_title">List an Item</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
@@ -236,4 +235,16 @@
     <string name="package_size_4">Huge</string>
     <string name="regex_mobile_number">^(\\s?7\\d{3}|\\(?07\\d{3}\\)?)\\s?\\d{3}\\s?\\d{3}$</string>
     <string name="regex_postcode">^[a-zA-Z]{1,2}([0-9]{1,2}|[0-9][a-zA-Z])\\s*[0-9][a-zA-Z]{2}$</string>
+
+    <string name="bid_confirm_1">A ship on the horizon!</string>
+    <string name="bid_confirm_2">A ship in the distance!</string>
+    <string name="bid_confirm_3">A boat on the horizon!</string>
+    <string name="bid_confirm_4">A boat in the distance!</string>
+    <string name="bid_confirm_5">A handsome sailor appears!</string>
+    <string name="bid_confirm_6">Someone for your package!</string>
+    <string name="bid_confirm_7">Did someone call a Courier?</string>
+    <string name="bid_confirm_8">Can you sign for this?</string>
+    <string name="bid_confirm_9">Courier on deck Cap\'n!</string>
+    <string name="bid_confirm_10">All hands on deck!</string>
+
 </resources>

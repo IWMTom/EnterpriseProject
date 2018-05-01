@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity
         EditProfileFragment.EditProfileListener,
         ViewProfileFragment.ViewProfileListener,
         PastListingsFragment.PastListingsListener,
-        BrowseListingsFragment.BrowseListingsListener {
+        BrowseListingsFragment.BrowseListingsListener,
+        BidConfirmFragment.BidConfirmListener{
 
     DashboardFragment dashboardFragment = new DashboardFragment();
     ListItemFragment listItemFragment = new ListItemFragment();
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity
     EditProfileFragment editProfileFragment = new EditProfileFragment();
     PastListingsFragment pastListingsFragment = new PastListingsFragment();
     BrowseListingsFragment browseListingsFragment = new BrowseListingsFragment();
+    BidConfirmFragment bidConfirmFragment = new BidConfirmFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_browse_listings:
                 showBrowseListings();
                 break;
-            case R.id.nav_past_listings:
+            case R.id.nav_my_listings:
                 showPastListings();
                 break;
             case R.id.nav_settings:
@@ -170,7 +172,7 @@ public class MainActivity extends AppCompatActivity
 
     private void showPastListings() {
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, pastListingsFragment).addToBackStack(null)
+                .replace(R.id.main_fragment_container, bidConfirmFragment).addToBackStack(null)
                 .commit();
     }
 
@@ -298,5 +300,10 @@ public class MainActivity extends AppCompatActivity
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, viewProfileFragment)
                 .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void bidConfirmListener() {
+
     }
 }

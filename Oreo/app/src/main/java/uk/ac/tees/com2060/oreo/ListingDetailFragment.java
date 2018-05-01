@@ -1,6 +1,5 @@
 package uk.ac.tees.com2060.oreo;
 
-import android.app.Activity;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -64,7 +63,7 @@ public class ListingDetailFragment extends Fragment {
             TextView listing_collection = view.findViewById(R.id.textView_listing_collection);
             listing_collection.setText(selectedListing.collectionCity());
 
-            TextView listing_delivery = view.findViewById(R.id.textView_listing_delivery);
+            TextView listing_delivery = view.findViewById(R.id.textView_confirm_delivery);
             listing_delivery.setText(selectedListing.deliveryCity());
 
             TextView listing_distance = view.findViewById(R.id.textView_listing_distance);
@@ -73,7 +72,7 @@ public class ListingDetailFragment extends Fragment {
             TextView listing_size = view.findViewById(R.id.textView_listing_size);
             listing_size.setText(String.format(Locale.ENGLISH, "%s%s", selectedListing.itemSize().substring(0, 1).toUpperCase(), selectedListing.itemSize().substring(1)));
 
-            TextView listing_important_details = view.findViewById(R.id.textView_listing_important_details);
+            TextView listing_important_details = view.findViewById(R.id.textView_confirm_important_details);
             listing_important_details.setText((selectedListing.importantDetails().equals("null") ? "" : selectedListing.importantDetails()));
 
             final ProgressBar progress = view.findViewById(R.id.progressBar_listing_detail);
