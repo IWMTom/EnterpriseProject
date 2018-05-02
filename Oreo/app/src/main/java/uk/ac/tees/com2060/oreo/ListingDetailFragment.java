@@ -11,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.api.Api;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,6 +32,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
  */
 public class ListingDetailFragment extends Fragment{
     ListingDetailListener mCallback;
+    DeleteListingListener deleteCallback;
 
     public ListingDetailFragment() {
     }
@@ -38,6 +42,10 @@ public class ListingDetailFragment extends Fragment{
      */
     public interface ListingDetailListener {
         void listingDetailListener(Listing selectedListing);
+    }
+
+    public interface DeleteListingListener {
+        void deleteListingListener();
     }
 
     /**
@@ -71,7 +79,26 @@ public class ListingDetailFragment extends Fragment{
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        //TODO: delete listing
+                        ApiCall apiCall= new ApiCall("listing/"+ String.valueOf(selectedListing.id() + "/delete"), getContext());
+                        apiCall.addResponseListener(new ResponseListener() {
+                            @Override
+                            public void responseReceived(ApiResponse response) {
+                                    if(response.success()){
+                                        Toast toast = Toast.makeText(getContext(), "Listing has been deleted!", Toast.LENGTH_SHORT);
+                                        toast.show();
+
+                                        deleteCallback = (DeleteListingListener) getActivity();
+                                        deleteCallback.deleteListingListener();
+                                    }else{
+                                        Toast toast = Toast.makeText(getContext(), "Server Error!", Toast.LENGTH_SHORT);
+                                        toast.show();
+                                    }
+                            }
+                        });
+
+                        apiCall.sendRequest();
+
+
                     }
                 });
             }

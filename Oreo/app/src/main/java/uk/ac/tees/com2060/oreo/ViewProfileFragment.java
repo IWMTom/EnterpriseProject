@@ -10,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -19,6 +21,8 @@ import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
@@ -44,9 +48,11 @@ public class ViewProfileFragment extends Fragment {
     TextView alias;
     ListView ratingsList;
 
+    ArrayList<Rating> ratings;
+
     TextView noRatings;
 
-    ConstraintLayout ratings;
+    ConstraintLayout ratingsLayout;
 
     ProgressBar progress;
 
@@ -79,7 +85,7 @@ public class ViewProfileFragment extends Fragment {
         location = view.findViewById(R.id.textView_profile_location);
         progress = view.findViewById(R.id.progressBar_profile);
         noRatings = view.findViewById(R.id.textView_no_rating);
-        ratings = view.findViewById(R.id.confirm_constraint_hidden);
+        ratingsLayout = view.findViewById(R.id.confirm_constraint_hidden);
 
         Bundle args = this.getArguments();
         if (args != null) {
@@ -103,11 +109,24 @@ public class ViewProfileFragment extends Fragment {
                         alias.setText(response.getBody().getString("known_as"));
                         getActivity().setTitle(response.getBody().getString("known_as"));
                         location.setText(response.getBody().getString("city"));
+
                         rep.setText(String.format("%s ★", String.valueOf(response.getBody().getInt("reputation"))));
                         if(ownProfile){User.getUser().setRep(response.getBody().getInt("reputation"));}
+
                         reputation = response.getBody().getInt("reputation");
 
-                        //TODO: load ratings and display or display no rating
+                        Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
+
+                        if(response.getBodyArray() != null){
+                            ratings = Rating.getRatings(response.getBodyArray());
+                            ratingsList.setAdapter(new RatingsAdapter(getContext(), ratings));
+
+                            ratingsLayout.startAnimation(slideUp);
+                            ratingsLayout.setVisibility(View.VISIBLE);
+                        }else{
+                            noRatings.startAnimation(slideUp);
+                            noRatings.setVisibility(View.VISIBLE);
+                        }
 
                         alias.setVisibility(View.VISIBLE);
                         title.setVisibility(View.VISIBLE);

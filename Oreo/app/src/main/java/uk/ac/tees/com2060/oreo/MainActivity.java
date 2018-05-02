@@ -33,12 +33,16 @@ public class MainActivity extends AppCompatActivity
         DashboardFragment.DashboardListener,
         ListItemFragment.ListItemListener,
         ListingDetailFragment.ListingDetailListener,
+        ListingDetailFragment.DeleteListingListener,
         NewBidFragment.NewBidListener,
         EditProfileFragment.EditProfileListener,
         ViewProfileFragment.ViewProfileListener,
         PastListingsFragment.PastListingsListener,
         BrowseListingsFragment.BrowseListingsListener,
-        BidsAdapter.BidsAdapterListener
+        BidsAdapter.BidsAdapterListener,
+        BidConfirmFragment.BidConfirmListener,
+        BidConfirmFragment.DeleteBidListener
+
 {
 
     DashboardFragment dashboardFragment = new DashboardFragment();
@@ -329,5 +333,20 @@ public class MainActivity extends AppCompatActivity
         }else if(b.get("userid")!=null){
             openUserProfile(b.getInt("userid"));
         }
+    }
+
+    @Override
+    public void bidConfirmListener(Bundle b) {
+
+    }
+
+    @Override
+    public void deleteListingListener() {
+        getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void deleteBidListener() {
+        getSupportFragmentManager().popBackStack();
     }
 }
