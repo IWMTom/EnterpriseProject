@@ -1,5 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -98,6 +99,23 @@ public class ListItemFragment extends Fragment implements StepperLayout.StepperL
     public void onSaveInstanceState(Bundle savedInstanceState) {
         cantDestroy = true;
         super.onSaveInstanceState(savedInstanceState);
+    }
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     *
+     * @param activity calling activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mCallback = (ListItemListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement listener");
+        }
     }
 
 }

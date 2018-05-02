@@ -93,20 +93,20 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView_listing_size_title"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_listing_collection" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_collection" />
 
             <TextView
-                android:id="@+id/textView_confirm_important_details"
+                android:id="@+id/textView_confirm_bidder_comment"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_important_details_title" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_bidder_comment_title" />
 
             <TextView
-                android:id="@+id/textView_confirm_important_details_title"
+                android:id="@+id/textView_confirm_bidder_comment_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -126,7 +126,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView_listing_collection"
+                app:layout_constraintStart_toEndOf="@+id/textView_confirm_collection"
                 app:layout_constraintTop_toBottomOf="@+id/textView_confirm_delivery_title" />
 
             <TextView
@@ -141,11 +141,11 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toEndOf="@+id/textView_confirm_collection_title"
-                app:layout_constraintTop_toBottomOf="@+id/imageView_confirm_bid_image" />
+                app:layout_constraintStart_toEndOf="@+id/textView_confirm_rating_title"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_confirm_background" />
 
             <TextView
-                android:id="@+id/textView_confirm_collection_title"
+                android:id="@+id/textView_confirm_rating_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -156,10 +156,10 @@
                 android:textSize="18sp"
                 app:layout_constraintEnd_toStartOf="@+id/textView_confirm_delivery_title"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView_confirm_bid_image" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_confirm_background" />
 
             <ImageView
-                android:id="@+id/imageView_confirm_bid_image"
+                android:id="@+id/imageView_confirm_background"
                 android:layout_width="0dp"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
@@ -169,14 +169,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView_listing_collection"
+                android:id="@+id/textView_confirm_collection"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintEnd_toStartOf="@+id/textView_confirm_delivery"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_collection_title" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_rating_title" />
 
             <View
                 android:id="@+id/divider_confirm_bid"
@@ -184,7 +184,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorLightGrey"
-                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_important_details" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_confirm_bidder_comment" />
 
             <TextView
                 android:id="@+id/textView15"

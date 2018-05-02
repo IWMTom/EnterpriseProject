@@ -1,5 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +24,24 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 public class PastListingsFragment extends Fragment {
     PastListingsListener mCallback;
 
+
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     *
+     * @param activity calling activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mCallback = (PastListingsListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement listener");
+        }
+    }
 
     public PastListingsFragment() {
     }

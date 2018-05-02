@@ -64,17 +64,12 @@ public class DashboardFragment extends Fragment {
      */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        final View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         getActivity().setTitle(R.string.fragment_dashboard_title);
 
-        final View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+
         setHasOptionsMenu(true);
-
-        ImageView imageView_test = view.findViewById(R.id.dashboard_imageView);
-        TextView textView_test = view.findViewById(R.id.dashboard_textView);
-
-        textView_test.setText(User.getUser().fullName());
-        imageView_test.setImageBitmap(User.getUser().profilePhoto());
-
         return view;
     }
 

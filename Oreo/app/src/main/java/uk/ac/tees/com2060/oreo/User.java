@@ -40,8 +40,8 @@ public class User implements Serializable {
     /**
      * Initialises an empty User
      *
-     * @param fullName     full name
-     * @param knownAs      known as name
+     * @param fullName     full title
+     * @param knownAs      known as title
      * @param emailAddress email address
      * @param postcode     postcode
      * @param dob          date of birth
@@ -50,7 +50,7 @@ public class User implements Serializable {
      * @param context      context for rep api call
      */
     void init(int id, String fullName, String knownAs, String emailAddress, String postcode,
-              String dob, String profilePhoto, String mobileNumber, Context context) throws ParseException {
+              String dob, String profilePhoto, String mobileNumber, int reputation, Context context) throws ParseException {
         this.id = id;
         this.fullName = fullName;
         this.knownAs = knownAs;
@@ -59,7 +59,7 @@ public class User implements Serializable {
         this.dob = new SimpleDateFormat("yyyy-MM-dd").parse(dob);
         this.profilePhoto = Utils.getImageFromString(profilePhoto);
         this.mobileNumber = mobileNumber;
-        rep = getRep(context);
+        this.rep = reputation;
     }
 
     void updatePushToken(Context c) {
@@ -93,18 +93,18 @@ public class User implements Serializable {
     }
 
     /**
-     * Gets full name
+     * Gets full title
      *
-     * @return full name
+     * @return full title
      */
     String fullName() {
         return this.fullName;
     }
 
     /**
-     * Gets known as name
+     * Gets known as title
      *
-     * @return known as name
+     * @return known as title
      */
     String knownAs() {
         return this.knownAs;
@@ -155,10 +155,10 @@ public class User implements Serializable {
         return this.mobileNumber;
     }
 
-    int getRep(Context context) {
+    void fetchRep(Context context) {
         ApiCall getUserData = new ApiCall("user/" + id, context);
-        getUserData.addResponseListener(new ResponseListener() {
 
+        getUserData.addResponseListener(new ResponseListener() {
             @Override
             public void responseReceived(ApiResponse response) {
                 if (response.success()) {
@@ -167,13 +167,15 @@ public class User implements Serializable {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                } else {
-
                 }
             }
         });
-        return rep;
+        getUserData.sendRequest();
     }
+
+    int getRep() {return rep;}
+
+    void setRep(int i) {rep = i;}
 
     void setMobileNumber(String mobile) {
         this.mobileNumber = mobile;

@@ -1,6 +1,7 @@
 package uk.ac.tees.com2060.oreo;
 
 import android.app.Activity;
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -32,7 +34,22 @@ public class ViewProfileFragment extends Fragment {
     ViewProfileListener mCallback;
 
     int profileID;
+    int reputation = 0;
     boolean ownProfile;
+
+    CircleImageView image;
+    TextView rep;
+    TextView title;
+    TextView location;
+    TextView alias;
+    ListView ratingsList;
+
+    TextView noRatings;
+
+    ConstraintLayout ratings;
+
+    ProgressBar progress;
+
 
     public ViewProfileFragment() {
     }
@@ -54,11 +71,15 @@ public class ViewProfileFragment extends Fragment {
 
         mCallback = (ViewProfileListener) getActivity();
 
-        final CircleImageView image = view.findViewById(R.id.imageView_profile_view_image);
-        final TextView rep = view.findViewById(R.id.textView_rep);
-        final TextView location = view.findViewById(R.id.textView_profile_location);
-        final ProgressBar spinner = view.findViewById(R.id.progressBar_view_profile);
-        final ProgressBar spinner_profile = view.findViewById(R.id.progressBar_view_profile_picture);
+
+        alias = view.findViewById(R.id.textView_profile_alias);
+        title = view.findViewById(R.id.textView_profile_title);
+        image = view.findViewById(R.id.imageView_profile_profile_picture);
+        rep = view.findViewById(R.id.textView_profile_rep);
+        location = view.findViewById(R.id.textView_profile_location);
+        progress = view.findViewById(R.id.progressBar_profile);
+        noRatings = view.findViewById(R.id.textView_no_rating);
+        ratings = view.findViewById(R.id.confirm_constraint_hidden);
 
         Bundle args = this.getArguments();
         if (args != null) {
@@ -72,79 +93,79 @@ public class ViewProfileFragment extends Fragment {
             ownProfile = true;
         }
 
+        ApiCall getUserData = new ApiCall("user/" + profileID, this.getContext());
+        getUserData.addResponseListener(new ResponseListener() {
+
+            @Override
+            public void responseReceived(ApiResponse response) {
+                if (response.success()) {
+                    try {
+                        alias.setText(response.getBody().getString("known_as"));
+                        getActivity().setTitle(response.getBody().getString("known_as"));
+                        location.setText(response.getBody().getString("city"));
+                        rep.setText(String.format("%s ★", String.valueOf(response.getBody().getInt("reputation"))));
+                        if(ownProfile){User.getUser().setRep(response.getBody().getInt("reputation"));}
+                        reputation = response.getBody().getInt("reputation");
+
+                        //TODO: load ratings and display or display no rating
+
+                        alias.setVisibility(View.VISIBLE);
+                        title.setVisibility(View.VISIBLE);
+                        rep.setVisibility(View.VISIBLE);
+                        location.setVisibility(View.VISIBLE);
+                        progress.setVisibility(View.GONE);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast toast = Toast.makeText(view.getContext(), "Server Error", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+            }
+        });
+
+        getUserData.sendRequest();
+
         if (ownProfile) {
-            getActivity().setTitle("Your Profile");
+            getActivity().setTitle("Your Profile!");
             image.setImageBitmap(User.getUser().profilePhoto());
 
-            ApiCall getUserData = new ApiCall("user/" + profileID, this.getContext());
-            getUserData.addResponseListener(new ResponseListener() {
-
-                @Override
-                public void responseReceived(ApiResponse response) {
-                    if (response.success()) {
-                        try {
-                            location.setText(response.getBody().getString("city"));
-                            rep.setText(String.valueOf(response.getBody().getInt("reputation")));
-                            rep.setVisibility(View.VISIBLE);
-                            location.setVisibility(View.VISIBLE);
-                            spinner.setVisibility(View.GONE);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(view.getContext(), "This should not happen", Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                }
-            });
-
-            getUserData.sendRequest();
+            title.setText("Welcome back!");
 
             setHasOptionsMenu(true);
-
         } else {
-            spinner_profile.setVisibility(View.VISIBLE);
-            ApiCall getUserData = new ApiCall("user/" + profileID, this.getContext());
-            getUserData.addResponseListener(new ResponseListener() {
-
-                @Override
-                public void responseReceived(ApiResponse response) {
-                    if (response.success()) {
-                        try {
-                            getActivity().setTitle(response.getBody().getString("known_as"));
-                            rep.setText(String.valueOf(response.getBody().getInt("reputation")));
-                            location.setText(response.getBody().getString("city"));
-                            rep.setVisibility(View.VISIBLE);
-                            location.setVisibility(View.VISIBLE);
-                            spinner.setVisibility(View.GONE);
-                        } catch (JSONException e) {
-
-                            e.printStackTrace();
-                        }
-                    } else {
-                        Toast toast = Toast.makeText(view.getContext(), "This should not happen", Toast.LENGTH_LONG);
-                        toast.show();
-                    }
-                }
-            });
-
-            getUserData.sendRequest();
-
             Picasso.get().load("https://getshipr.com/api/user/" + profileID + "/photo").placeholder(R.drawable.default_profile_photo).into(image, new Callback() {
                 @Override
                 public void onSuccess() {
-                    spinner_profile.setVisibility(View.INVISIBLE);
+                    progress.setVisibility(View.INVISIBLE);
                 }
 
                 @Override
                 public void onError(Exception e) {
-                    spinner_profile.setVisibility(View.INVISIBLE);
+                    progress.setVisibility(View.INVISIBLE);
                 }
             });
 
-            setHasOptionsMenu(false);
-        }
 
+            if (profileID == 21 || profileID == 23) {
+                title.setText("Shipr Developer");
+            } else if (reputation < 0) {
+                title.setText("BANNED");
+            } else if (reputation < 100) {
+                title.setText("Fresh Shipr");
+            } else if (reputation < 250) {
+                title.setText("Novice Shipr");
+            } else if (reputation < 500) {
+                title.setText("Adept Shipr");
+            } else if (reputation < 1000) {
+                title.setText("Experienced Shipr");
+            } else if (reputation < 2000) {
+                title.setText("Trusted Shipr");
+            } else if (reputation < 10000) {
+                title.setText("Trusted Shipr");
+                setHasOptionsMenu(false);
+            }
+        }
         return view;
     }
 
@@ -154,6 +175,24 @@ public class ViewProfileFragment extends Fragment {
 
     public void callbackToActivity() {
         mCallback.viewProfileListener();
+    }
+
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     *
+     * @param activity calling activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mCallback = (ViewProfileListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement listener");
+        }
     }
 
     @Override
