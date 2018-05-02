@@ -33,13 +33,15 @@ public class MainActivity extends AppCompatActivity
         DashboardFragment.DashboardListener,
         ListItemFragment.ListItemListener,
         ListingDetailFragment.ListingDetailListener,
+        ListingDetailFragment.DeleteListingListener,
         NewBidFragment.NewBidListener,
         EditProfileFragment.EditProfileListener,
         ViewProfileFragment.ViewProfileListener,
         PastListingsFragment.PastListingsListener,
         BrowseListingsFragment.BrowseListingsListener,
         BidsAdapter.BidsAdapterListener,
-        BidConfirmFragment.BidConfirmListener
+        BidConfirmFragment.BidConfirmListener,
+        BidConfirmFragment.DeleteBidListener
 
 {
 
@@ -336,5 +338,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void bidConfirmListener(Bundle b) {
 
+    }
+
+    @Override
+    public void deleteListingListener() {
+        getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void deleteBidListener() {
+        getSupportFragmentManager().popBackStack();
     }
 }

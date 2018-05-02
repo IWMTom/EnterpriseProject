@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,6 +31,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
  */
 public class BidConfirmFragment extends Fragment {
     BidConfirmListener mCallback;
+    DeleteBidListener deleteCallback;
 
     CircleImageView profilePhoto;
     TextView reputationText;
@@ -38,6 +40,9 @@ public class BidConfirmFragment extends Fragment {
     ConstraintLayout hiddenControls;
     TextView titleText;
     TextView locationText;
+
+    Button confirmButton;
+    Button declineButton;
 
     Bid bid;
     Listing listing;
@@ -50,6 +55,10 @@ public class BidConfirmFragment extends Fragment {
      */
     public interface BidConfirmListener {
         void bidConfirmListener(Bundle b);
+    }
+
+    public interface DeleteBidListener {
+        void deleteBidListener();
     }
 
     /**
@@ -66,7 +75,7 @@ public class BidConfirmFragment extends Fragment {
 
         Bundle args = this.getArguments();
 
-        if(args.get("bid")!=null){
+        if (args.get("bid") != null) {
             args.getInt("bid");
         }
 
@@ -113,9 +122,9 @@ public class BidConfirmFragment extends Fragment {
                         usernameText.setVisibility(View.VISIBLE);
                         locationText.setVisibility(View.VISIBLE);
 
-                        reputationText.setText(String.valueOf(response.getBody().get("reputation"))+ " ★");
-                        usernameText.setText((String)response.getBody().get("known_as"));
-                        locationText.setText((String)response.getBody().get("city"));
+                        reputationText.setText(String.valueOf(response.getBody().get("reputation")) + " ★");
+                        usernameText.setText((String) response.getBody().get("known_as"));
+                        locationText.setText((String) response.getBody().get("city"));
 
                         Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
                         hiddenControls.startAnimation(slideUp);
@@ -134,13 +143,55 @@ public class BidConfirmFragment extends Fragment {
         });
 
         getUserData.sendRequest();
+
+        declineButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiCall apiCall = new ApiCall("bid/" + String.valueOf(bid.id() + "/delete"), getContext());
+                apiCall.addResponseListener(new ResponseListener() {
+                    @Override
+                    public void responseReceived(ApiResponse response) {
+                        if (response.success()) {
+                            Toast toast = Toast.makeText(getContext(), "Bid has been declined!", Toast.LENGTH_SHORT);
+                            toast.show();
+
+                            deleteCallback = (DeleteBidListener) getActivity();
+                            deleteCallback.deleteBidListener();
+                        } else {
+                            Toast toast = Toast.makeText(getContext(), "Server Error!", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                });
+                apiCall.sendRequest();
+            }
+        });
+
+        confirmButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ApiCall apiCall = new ApiCall("bid/" + String.valueOf(bid.id() + "/accept"), getContext());
+                apiCall.addResponseListener(new ResponseListener() {
+                    @Override
+                    public void responseReceived(ApiResponse response) {
+                        if (response.success()) {
+                            //todo bid accept screen
+                        } else {
+                            Toast toast = Toast.makeText(getContext(), "Server Error!", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+                });
+                apiCall.sendRequest();
+            }
+        });
         setHasOptionsMenu(false);
         return view;
     }
 
     private void doGoToProfile(int i) {
         Bundle b = new Bundle();
-        b.putInt("userid",i);
+        b.putInt("userid", i);
         callbackToActivity(b);
     }
 
@@ -170,9 +221,9 @@ public class BidConfirmFragment extends Fragment {
         }
     }
 
-    String getFlavourText(){
+    String getFlavourText() {
         Random rand = new Random();
-        switch (rand.nextInt(10)){
+        switch (rand.nextInt(10)) {
             case 0:
             case 1:
                 return getString(R.string.bid_confirm_1);
@@ -194,7 +245,7 @@ public class BidConfirmFragment extends Fragment {
                 return getString(R.string.bid_confirm_9);
             case 10:
                 return getString(R.string.bid_confirm_10);
-                default:
+            default:
                 return getString(R.string.bid_confirm_1);
         }
     }
