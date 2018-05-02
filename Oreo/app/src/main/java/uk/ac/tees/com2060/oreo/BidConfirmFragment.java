@@ -1,5 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
@@ -12,11 +13,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
-
-import org.json.JSONObject;
 
 import java.util.Random;
 
@@ -82,7 +80,7 @@ public class BidConfirmFragment extends Fragment {
 
         reputationText = view.findViewById(R.id.textView_confirm_rep);
 
-        usernameText = view.findViewById(R.id.textView_confirm_username);
+        usernameText = view.findViewById(R.id.textView_confirm_name);
 
         titleText = view.findViewById(R.id.textView_confirm_title);
 
@@ -115,7 +113,7 @@ public class BidConfirmFragment extends Fragment {
                         usernameText.setVisibility(View.VISIBLE);
                         locationText.setVisibility(View.VISIBLE);
 
-                        reputationText.setText(String.valueOf(response.getBody().get("reputation")));
+                        reputationText.setText(String.valueOf(response.getBody().get("reputation"))+ " ★");
                         usernameText.setText((String)response.getBody().get("known_as"));
                         locationText.setText((String)response.getBody().get("city"));
 
@@ -152,6 +150,24 @@ public class BidConfirmFragment extends Fragment {
     public void callbackToActivity(Bundle b) {
         mCallback = (BidConfirmListener) getContext();
         mCallback.bidConfirmListener(b);
+    }
+
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     *
+     * @param activity calling activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mCallback = (BidConfirmListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement BidConfirmListener");
+        }
     }
 
     String getFlavourText(){

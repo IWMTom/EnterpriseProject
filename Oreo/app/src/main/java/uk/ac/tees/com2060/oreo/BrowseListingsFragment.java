@@ -1,5 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.app.Activity;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -167,6 +168,24 @@ public class BrowseListingsFragment extends Fragment {
     public void callbackToActivity(Listing selectedListing) {
         mCallback = (BrowseListingsListener)getActivity();
         mCallback.browseListingsListener(selectedListing);
+    }
+
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     *
+     * @param activity calling activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mCallback = (BrowseListingsListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement BrowseListingsListener");
+        }
     }
 
     @Override

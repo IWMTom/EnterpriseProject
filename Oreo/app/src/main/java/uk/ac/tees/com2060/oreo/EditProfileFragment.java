@@ -1,5 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -340,6 +341,24 @@ public class EditProfileFragment extends Fragment {
     public void callbackToActivity(Bundle b) {
         mCallback = (EditProfileListener) getActivity();
         mCallback.editProfileListener(b);
+    }
+
+    /**
+     * Handles the attachment of the Fragment to the Activity.
+     * Throws an exception if the Activity doesn't implement the listener interface.
+     *
+     * @param activity calling activity
+     */
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        try {
+            mCallback = (EditProfileListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement listener");
+        }
     }
 
     private void closeKeyboard() {

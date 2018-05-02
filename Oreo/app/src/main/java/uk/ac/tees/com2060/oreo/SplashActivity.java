@@ -77,6 +77,7 @@ public class SplashActivity extends AppCompatActivity {
                                     (String) body.get("dob"),
                                     profilePhoto,
                                     (String) body.get("phone_number"),
+                                    (int) body.get("reputation"),
                                     getBaseContext()
 
                             );

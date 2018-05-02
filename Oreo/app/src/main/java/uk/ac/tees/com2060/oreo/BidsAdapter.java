@@ -62,6 +62,43 @@ public class BidsAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Bundle b = new Bundle();
+                b.putInt("userid", bid.user_id());
+                callbackToActivity(b);
+            }
+        });
+
+        TextView bidUser = rowView.findViewById(R.id.bid_list_user);
+        bidUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putInt("userid", bid.user_id());
+                if (listing.user_id() == User.getUser().id()) {
+                    b.putInt("bid", bid.id());
+                }
+                callbackToActivity(b);
+            }
+        });
+
+
+        TextView bidMessage = rowView.findViewById(R.id.bid_list_message);
+        bidMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
+                b.putInt("userid", bid.user_id());
+                if (listing.user_id() == User.getUser().id()) {
+                    b.putInt("bid", bid.id());
+                }
+                callbackToActivity(b);
+            }
+        });
+
+        TextView bidAmount = rowView.findViewById(R.id.bid_list_amount);
+        bidAmount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle b = new Bundle();
                 b.putInt("userid",bid.user_id());
                 if(listing.user_id()==User.getUser().id()){
                     b.putInt("bid", bid.id());
@@ -69,12 +106,6 @@ public class BidsAdapter extends BaseAdapter {
                 callbackToActivity(b);
             }
         });
-
-        TextView bidUser = rowView.findViewById(R.id.bid_list_user);
-
-        TextView bidMessage = rowView.findViewById(R.id.bid_list_message);
-
-        TextView bidAmount = rowView.findViewById(R.id.bid_list_amount);
 
         NumberFormat formatter = NumberFormat.getCurrencyInstance();
 

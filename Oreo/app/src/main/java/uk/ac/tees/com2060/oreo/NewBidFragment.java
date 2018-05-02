@@ -149,4 +149,5 @@ public class NewBidFragment extends Fragment
         newBid.sendRequest();
         Toast.makeText(getContext(), R.string.submitting, Toast.LENGTH_SHORT).show();
     }
+
 }

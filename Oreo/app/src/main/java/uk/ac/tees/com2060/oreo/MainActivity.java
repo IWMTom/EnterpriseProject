@@ -91,15 +91,13 @@ public class MainActivity extends AppCompatActivity
         TextView textView_nav_header_rep =
                 navigationView.getHeaderView(0)
                         .findViewById((R.id.textView_nav_header_rep));
+        textView_nav_header_rep.setText(String.valueOf(User.getUser().getRep())+" ★");
 
-        TextView textView_nav_header_name =
-                navigationView.getHeaderView(0)
-                        .findViewById(R.id.textView_nav_header_name);
+        TextView textView_nav_header_name = navigationView.getHeaderView(0)
+                .findViewById(R.id.textView_nav_header_name);
+        textView_nav_header_name.setText(User.getUser().fullName());
 
         imageView_nav_header_profile_photo.setImageBitmap(User.getUser().profilePhoto());
-
-        textView_nav_header_rep.setText(String.valueOf(User.getUser().getRep(this)));
-        textView_nav_header_name.setText(User.getUser().fullName());
 
         // Displays dashboard fragment by default
         if (findViewById(R.id.main_fragment_container) != null) {
@@ -126,6 +124,13 @@ public class MainActivity extends AppCompatActivity
      */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        TextView textView_nav_header_rep =
+                navigationView.getHeaderView(0)
+                        .findViewById((R.id.textView_nav_header_rep));
+        textView_nav_header_rep.setText(String.valueOf(User.getUser().getRep())+" ★");
+
         switch (item.getItemId()) {
             case R.id.nav_dashboard:
                 showDashboard();

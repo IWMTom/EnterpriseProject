@@ -57,6 +57,8 @@ public class ListingDetailFragment extends Fragment{
             FloatingActionButton fab = view.findViewById(R.id.fab_listing_detail);
 
             if (selectedListing.user_id() != User.getUser().id()) {
+                fab.setImageResource(R.drawable.ic_add_black_24dp);
+
                 fab.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -64,10 +66,17 @@ public class ListingDetailFragment extends Fragment{
                     }
                 });
             } else {
-                fab.setVisibility(View.GONE);
+                fab.setImageResource(R.drawable.ic_delete);
+
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        //TODO: delete listing
+                    }
+                });
             }
 
-            TextView listing_collection = view.findViewById(R.id.textView_listing_collection);
+            TextView listing_collection = view.findViewById(R.id.textView_confirm_collection);
             listing_collection.setText(selectedListing.collectionCity());
 
             TextView listing_delivery = view.findViewById(R.id.textView_confirm_delivery);
@@ -79,7 +88,7 @@ public class ListingDetailFragment extends Fragment{
             TextView listing_size = view.findViewById(R.id.textView_listing_size);
             listing_size.setText(String.format(Locale.ENGLISH, "%s%s", selectedListing.itemSize().substring(0, 1).toUpperCase(), selectedListing.itemSize().substring(1)));
 
-            TextView listing_important_details = view.findViewById(R.id.textView_confirm_important_details);
+            TextView listing_important_details = view.findViewById(R.id.textView_confirm_bidder_comment);
             listing_important_details.setText((selectedListing.importantDetails().equals("null") ? "" : selectedListing.importantDetails()));
 
             final ProgressBar progress = view.findViewById(R.id.progressBar_listing_detail);

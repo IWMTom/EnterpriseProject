@@ -55,7 +55,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
      * Collects all user provided data, and displays the step 2 fragment.
      *
      * @param profile_photo profile photo (bitmap)
-     * @param full_name     full name
+     * @param full_name     full title
      * @param known_as      known as
      * @param dob           date of birth (DD-MM-YYYY)
      */
@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
         transaction.addToBackStack(null);
         transaction.commit();
 
-        // Passes "known as" name to the step 2 fragment
+        // Passes "known as" title to the step 2 fragment
         Bundle args = new Bundle();
         args.putString("known_as", this.known_as);
 
