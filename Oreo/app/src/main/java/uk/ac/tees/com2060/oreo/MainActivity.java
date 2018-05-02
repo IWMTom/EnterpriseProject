@@ -38,7 +38,9 @@ public class MainActivity extends AppCompatActivity
         ViewProfileFragment.ViewProfileListener,
         PastListingsFragment.PastListingsListener,
         BrowseListingsFragment.BrowseListingsListener,
-        BidsAdapter.BidsAdapterListener
+        BidsAdapter.BidsAdapterListener,
+        BidConfirmFragment.BidConfirmListener
+
 {
 
     DashboardFragment dashboardFragment = new DashboardFragment();
@@ -329,5 +331,10 @@ public class MainActivity extends AppCompatActivity
         }else if(b.get("userid")!=null){
             openUserProfile(b.getInt("userid"));
         }
+    }
+
+    @Override
+    public void bidConfirmListener(Bundle b) {
+
     }
 }
