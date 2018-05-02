@@ -20,7 +20,6 @@ import com.stepstone.stepper.VerificationError;
 public class ListItemFragment extends Fragment implements StepperLayout.StepperListener {
     ListItemListener mCallback;
     private ListItemStepperAdapter stepperAdapter;
-    private boolean cantDestroy;
 
     public ListItemFragment() {
     }
@@ -55,9 +54,7 @@ public class ListItemFragment extends Fragment implements StepperLayout.StepperL
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        if (cantDestroy) {
-            return;
-        }
+
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
 
         for (Step step : stepperAdapter.getFragments()) {
@@ -85,21 +82,19 @@ public class ListItemFragment extends Fragment implements StepperLayout.StepperL
 
     @Override
     public void onError(VerificationError verificationError) {
+
     }
 
     @Override
     public void onStepSelected(int newStepPosition) {
+
     }
 
     @Override
     public void onReturn() {
+
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle savedInstanceState) {
-        cantDestroy = true;
-        super.onSaveInstanceState(savedInstanceState);
-    }
     /**
      * Handles the attachment of the Fragment to the Activity.
      * Throws an exception if the Activity doesn't implement the listener interface.

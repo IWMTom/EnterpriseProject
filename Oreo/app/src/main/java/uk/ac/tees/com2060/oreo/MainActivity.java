@@ -237,6 +237,7 @@ public class MainActivity extends AppCompatActivity
 
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.main_fragment_container, listingDetailFragment)
+                            .addToBackStack(null)
                             .commit();
                 }
             }
