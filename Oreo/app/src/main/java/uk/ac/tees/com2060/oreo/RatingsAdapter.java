@@ -50,9 +50,9 @@ public class RatingsAdapter extends BaseAdapter {
 
         Rating rating = (Rating) getItem(i);
 
-        CircleImageView profilePic = view.findViewById(R.id.ImageView_rating_profile);
-        CircleImageView iconPic = view.findViewById(R.id.imageView_rating_icon);
-        TextView message = view.findViewById(R.id.rating_message);
+        CircleImageView profilePic = rowView.findViewById(R.id.ImageView_rating_profile);
+        CircleImageView iconPic = rowView.findViewById(R.id.imageView_rating_icon);
+        TextView message = rowView.findViewById(R.id.rating_message);
 
         Picasso.get().load("https://getshipr.com/api/user/" + rating.raterId() + "/photo").placeholder(R.drawable.default_profile_photo).into(profilePic);
 

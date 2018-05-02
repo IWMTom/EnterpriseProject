@@ -74,7 +74,6 @@ public class ViewProfileFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_view_profile, container, false);
-
         mCallback = (ViewProfileListener) getActivity();
 
 
@@ -85,7 +84,8 @@ public class ViewProfileFragment extends Fragment {
         location = view.findViewById(R.id.textView_profile_location);
         progress = view.findViewById(R.id.progressBar_profile);
         noRatings = view.findViewById(R.id.textView_no_rating);
-        ratingsLayout = view.findViewById(R.id.confirm_constraint_hidden);
+        ratingsLayout = view.findViewById(R.id.profile_constraint_hidden);
+        ratingsList = view.findViewById(R.id.ListView_profile_ratings);
 
         Bundle args = this.getArguments();
         if (args != null) {
@@ -117,13 +117,16 @@ public class ViewProfileFragment extends Fragment {
 
                         Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
 
-                        if(response.getBodyArray() != null){
-                            ratings = Rating.getRatings(response.getBodyArray());
+                        if (response.getBody().getJSONArray("ratings") != null)
+                        {
+                            ratings = Rating.getRatings(response.getBody().getJSONArray("ratings"));
                             ratingsList.setAdapter(new RatingsAdapter(getContext(), ratings));
 
                             ratingsLayout.startAnimation(slideUp);
                             ratingsLayout.setVisibility(View.VISIBLE);
-                        }else{
+                        }
+                        else
+                        {
                             noRatings.startAnimation(slideUp);
                             noRatings.setVisibility(View.VISIBLE);
                         }
@@ -182,9 +185,10 @@ public class ViewProfileFragment extends Fragment {
                 title.setText("Trusted Shipr");
             } else if (reputation < 10000) {
                 title.setText("Trusted Shipr");
-                setHasOptionsMenu(false);
             }
         }
+
+        setHasOptionsMenu(false);
         return view;
     }
 
