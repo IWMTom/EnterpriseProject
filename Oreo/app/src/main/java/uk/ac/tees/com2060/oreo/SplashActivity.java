@@ -6,6 +6,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -38,6 +41,10 @@ public class SplashActivity extends AppCompatActivity {
 
         TextView version = findViewById(R.id.textView_version);
         version.setText(BuildConfig.VERSION_NAME);
+
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
+        version.startAnimation(slideUp);
+        version.setVisibility(View.VISIBLE);
 
         if (Utils.getUserAccessToken(activity) != null) {
             intent = new Intent(activity, MainActivity.class);
@@ -95,6 +102,8 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+
 
     }
 

@@ -1,5 +1,6 @@
 package uk.ac.tees.com2060.oreo;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -9,6 +10,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -30,7 +33,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 public class BrowseListingsFragment extends Fragment {
     BrowseListingsListener mCallback;
 
-    CollapsingToolbarLayout toolbar;
+    AppBarLayout toolbar;
     ListView listView;
     ArrayList<Listing> listings;
     ArrayList<Listing> filteredListings;
@@ -64,7 +67,7 @@ public class BrowseListingsFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_browse_listings, container, false);
 
-        toolbar = view.findViewById(R.id.listing_toolbar_layout);
+        toolbar = view.findViewById(R.id.appbar_listings);
         toolbar.setVisibility(View.GONE);
 
         listView = view.findViewById(R.id.listView_browse_listings);
@@ -146,7 +149,7 @@ public class BrowseListingsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Listing selectedListing = (listings).get(position);
+                Listing selectedListing = filteredListings.get(position);
 
                 callbackToActivity(selectedListing);
             }
@@ -178,7 +181,11 @@ public class BrowseListingsFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         item.setVisible(false);
+
+        Animation slideToolDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_tool_down);
+        toolbar.startAnimation(slideToolDown);
         toolbar.setVisibility(View.VISIBLE);
+
         return super.onOptionsItemSelected(item);
     }
 
@@ -204,16 +211,5 @@ public class BrowseListingsFragment extends Fragment {
             }
         });
         api.sendRequest();
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Listing selectedListing = (listings).get(position);
-
-                callbackToActivity(selectedListing);
-            }
-
-        });
     }
 }

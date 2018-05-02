@@ -67,6 +67,7 @@ public class BidConfirmFragment extends Fragment {
         hiddenControls = view.findViewById(R.id.confirm_constraint_hidden);
 
         Bundle args = this.getArguments();
+
         if(args.get("bid")!=null){
             args.getInt("bid");
         }
@@ -149,6 +150,7 @@ public class BidConfirmFragment extends Fragment {
      * Callback to the Activity
      */
     public void callbackToActivity(Bundle b) {
+        mCallback = (BidConfirmListener) getContext();
         mCallback.bidConfirmListener(b);
     }
 
