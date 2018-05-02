@@ -5,8 +5,12 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class FirebaseService extends FirebaseInstanceIdService {
 
     @Override
-    public void onTokenRefresh() {
-        User.getUser().updatePushToken(this);
+    public void onTokenRefresh()
+    {
+        if (Utils.getUserAccessToken(getApplicationContext()) != null)
+        {
+            User.getUser().updatePushToken(this);
+        }
     }
 
 }
