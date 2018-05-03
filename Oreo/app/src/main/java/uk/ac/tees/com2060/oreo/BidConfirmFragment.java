@@ -144,6 +144,7 @@ public class BidConfirmFragment extends Fragment {
 
         getUserData.sendRequest();
 
+        declineButton = view.findViewById(R.id.button_bid_decline);
         declineButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -167,6 +168,7 @@ public class BidConfirmFragment extends Fragment {
             }
         });
 
+        confirmButton = view.findViewById(R.id.button_bid_agree);
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

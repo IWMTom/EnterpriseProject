@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="83dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ImageView_rating_profile"
@@ -38,7 +39,7 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView_rating_icon"
         app:layout_constraintStart_toEndOf="@+id/ImageView_rating_profile"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="The courier was well good mate, took my parcel and everything, absloute boyo 10/10" />
+        tools:text="review" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/imageView_rating_icon"
