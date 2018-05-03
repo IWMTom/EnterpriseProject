@@ -2,6 +2,7 @@ package uk.ac.tees.com2060.oreo;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -51,15 +52,17 @@ public class RatingsAdapter extends BaseAdapter {
         Rating rating = (Rating) getItem(i);
 
         CircleImageView profilePic = rowView.findViewById(R.id.ImageView_rating_profile);
-        CircleImageView iconPic = rowView.findViewById(R.id.imageView_rating_icon);
         TextView message = rowView.findViewById(R.id.rating_message);
+        TextView type = rowView.findViewById(R.id.rating_type);
 
         Picasso.get().load("https://getshipr.com/api/user/" + rating.raterId() + "/photo").placeholder(R.drawable.default_profile_photo).into(profilePic);
 
-        if(rating.type.equals("good")){
-            //todo good icon
-        }else{
-            //todo bad icon
+        type.setText(rating.type().toUpperCase());
+
+        if (rating.type.equals("good")) {
+            type.setTextColor(ContextCompat.getColor(mContext, R.color.colorGreen));
+        } else {
+            type.setTextColor(ContextCompat.getColor(mContext, R.color.colorRed));
         }
 
         message.setText(rating.message);

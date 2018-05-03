@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity
     PastListingsFragment pastListingsFragment = new PastListingsFragment();
     BrowseListingsFragment browseListingsFragment = new BrowseListingsFragment();
     BidConfirmFragment bidConfirmFragment = new BidConfirmFragment();
+    MyShipmentsFragment myShipmentsFragment = new MyShipmentsFragment();
+    MyJobsFragment myJobsFragment = new MyJobsFragment();
 
     public MainActivity() {
 
@@ -145,6 +147,12 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_browse_listings:
                 showBrowseListings();
                 break;
+            case R.id.nav_my_shipments:
+                showMyShipments();
+                break;
+            case R.id.nav_my_jobs:
+                showMyJobs();
+                break;
             case R.id.nav_my_listings:
                 showPastListings();
                 break;
@@ -159,6 +167,18 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void showMyShipments() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, myShipmentsFragment).addToBackStack(null)
+                .commit();
+    }
+
+    private void showMyJobs() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, myJobsFragment).addToBackStack(null)
+                .commit();
     }
 
     private void showProfile() {
