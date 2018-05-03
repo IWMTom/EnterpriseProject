@@ -16,8 +16,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.gson.Gson;
-
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
@@ -41,7 +39,9 @@ public class MainActivity extends AppCompatActivity
         BrowseListingsFragment.BrowseListingsListener,
         BidsAdapter.BidsAdapterListener,
         BidConfirmFragment.BidConfirmListener,
-        BidConfirmFragment.DeleteBidListener
+        BidConfirmFragment.DeleteBidListener,
+        MyJobsFragment.MyJobsFragmentListener,
+        MyShipmentsFragment.MyShipmentsFragmentListener
 
 {
 
@@ -369,5 +369,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void deleteBidListener() {
         getSupportFragmentManager().popBackStack();
+    }
+
+    @Override
+    public void myJobsFragmentListener(Contract contract) {
+
+    }
+
+    @Override
+    public void myShipmentsFragmentListener(Contract contract) {
+
     }
 }
