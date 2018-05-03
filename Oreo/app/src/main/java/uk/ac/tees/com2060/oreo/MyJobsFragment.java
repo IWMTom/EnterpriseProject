@@ -69,7 +69,7 @@ public class MyJobsFragment extends Fragment {
         final ArrayList[] contracts = new ArrayList[1];
 
 
-        ApiCall api = new ApiCall("/contract/list/courier", getContext());
+        ApiCall api = new ApiCall("contract/list/courier", getContext());
         api.addResponseListener(new ResponseListener() {
             @Override
             public void responseReceived(ApiResponse response) {
