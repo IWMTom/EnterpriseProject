@@ -23,6 +23,10 @@
                     android:icon="@drawable/ic_history"
                     android:checkable="true"
                     android:title="@string/menu_past_listings" />
+                <item
+                    android:id="@+id/nav_my_shipments"
+                    android:checkable="true"
+                    android:title="My Shipments" />
             </menu>
         </item>
 
@@ -33,6 +37,10 @@
                     android:icon="@drawable/ic_browse"
                     android:checkable="true"
                     android:title="Browse Listings" />
+                <item
+                    android:id="@+id/nav_my_jobs"
+                    android:checkable="true"
+                    android:title="My Jobs" />
             </menu>
         </item>
 

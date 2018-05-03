@@ -117,7 +117,7 @@ public class ViewProfileFragment extends Fragment {
 
                         Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
 
-                        if (response.getBody().getJSONArray("ratings") != null)
+                        if (response.getBody().getJSONArray("ratings").length() > 0)
                         {
                             ratings = Rating.getRatings(response.getBody().getJSONArray("ratings"));
                             ratingsList.setAdapter(new RatingsAdapter(getContext(), ratings));

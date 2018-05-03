@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
@@ -67,6 +68,14 @@ public class DashboardFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
         getActivity().setTitle(R.string.fragment_dashboard_title);
 
+        TextView name = view.findViewById(R.id.textView_dash_name);
+        name.setText(User.getUser().fullName());
+        TextView rep = view.findViewById(R.id.textView_dash_rep);
+        rep.setText(String.valueOf(User.getUser().getRep())+ " ★");
+
+        Button listings = view.findViewById(R.id.button_dash_my_listings);
+        Button shipments = view.findViewById(R.id.button_dash_my_listings);
+        Button jobs = view.findViewById(R.id.button_dash_my_listings);
 
 
         setHasOptionsMenu(true);

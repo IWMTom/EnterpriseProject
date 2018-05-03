@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:minHeight="83dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ImageView_rating_profile"
@@ -26,34 +27,30 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_toEndOf="@+id/ImageView_rating_profile"
         android:ellipsize="end"
         android:textAppearance="@style/AppTheme.Title"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageView_rating_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/ImageView_rating_profile"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="The courier was well good mate, took my parcel and everything, absloute boyo 10/10" />
+        app:layout_constraintTop_toBottomOf="@+id/rating_type"
+        tools:text="review" />
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView_rating_icon"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_alignParentStart="true"
-        android:layout_centerVertical="true"
-        android:layout_marginBottom="8dp"
+    <TextView
+        android:id="@+id/rating_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
-        android:elevation="2dp"
-        android:src="@drawable/ic_thumb_up_white_24dp"
-        app:civ_border_color="@color/colorWhite"
-        app:civ_border_width="2dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="w,1:1"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        android:textAppearance="@style/AppTheme.Title"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

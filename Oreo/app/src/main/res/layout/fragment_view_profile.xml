@@ -135,6 +135,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/colorWhite"
+            android:maxHeight="300dp"
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -146,26 +147,26 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginStart="16dp"
+                android:text="Community Ratings"
                 android:textAlignment="center"
                 android:textAppearance="@style/AppTheme.Title"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Community Ratings" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ListView
                 android:id="@+id/ListView_profile_ratings"
                 android:layout_width="0dp"
-                android:layout_height="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:scrollbars="vertical"
                 android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_profile_rating_title"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toBottomOf="@+id/textView_profile_rating_title" />
 
         </android.support.constraint.ConstraintLayout>
 
