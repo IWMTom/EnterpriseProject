@@ -138,24 +138,24 @@ public class ViewProfileFragment extends Fragment {
                         }
 
                         if (profileID == 21 || profileID == 23) {
-                            title.setText("Shipr Developer");
+                            title.setText(R.string.rank_dev);
                         } else if (reputation < 0) {
-                            title.setText("BANNED");
+                            title.setText(R.string.rank_banned);
                         } else if (reputation < 100) {
-                            title.setText("Fresh Shipr");
+                            title.setText(R.string.rank_0);
                         } else if (reputation < 250) {
-                            title.setText("Novice Shipr");
+                            title.setText(R.string.rank_1);
                         } else if (reputation < 500) {
-                            title.setText("Adept Shipr");
+                            title.setText(R.string.rank_2);
                         } else if (reputation < 1000) {
-                            title.setText("Experienced Shipr");
+                            title.setText(R.string.rank_3);
                         } else if (reputation < 2000) {
-                            title.setText("Trusted Shipr");
+                            title.setText(R.string.rank_4);
                         } else if (reputation < 10000) {
-                            title.setText("Trusted Shipr");
+                            title.setText(R.string.rank_5);
                         }
 
-                        if(ownProfile){title.setText("Welcome back!");}
+                        if(ownProfile){title.setText(R.string.profile_welcom);}
 
                         alias.setVisibility(View.VISIBLE);
                         title.setVisibility(View.VISIBLE);
@@ -175,7 +175,7 @@ public class ViewProfileFragment extends Fragment {
         getUserData.sendRequest();
 
         if (ownProfile) {
-            getActivity().setTitle("Your Profile!");
+            getActivity().setTitle("Your Profile");
             image.setImageBitmap(User.getUser().profilePhoto());
             setHasOptionsMenu(true);
 

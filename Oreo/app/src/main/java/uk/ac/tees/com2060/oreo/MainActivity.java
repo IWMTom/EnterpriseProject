@@ -141,7 +141,30 @@ public class MainActivity extends AppCompatActivity
                         viewProfileFragment.pop();
                     }
                 }
-                stackSize = viewProfileFragment.size();
+
+                if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == dashboardFragment) {
+                    navigationView.setCheckedItem(R.id.nav_dashboard);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == listItemFragment) {
+                    navigationView.setCheckedItem(R.id.nav_list);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == pastListingsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_my_listings);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == myShipmentsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_my_shipments);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == browseListingsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_browse_listings);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == myJobsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_my_jobs);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == editProfileFragment) {
+                    navigationView.setCheckedItem(R.id.nav_settings);
+                }
+
+                if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                    navigationView.setCheckedItem(R.id.nav_dashboard);
+                }
+
+                stackSize = getSupportFragmentManager().getBackStackEntryCount();
+
+
             }
         });
 
@@ -172,8 +195,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-                navigationView.getHeaderView(0)
-                        .findViewById((R.id.textView_nav_header_rep));
+        navigationView.getHeaderView(0)
+                .findViewById((R.id.textView_nav_header_rep));
 
         switch (item.getItemId()) {
             case R.id.nav_dashboard:

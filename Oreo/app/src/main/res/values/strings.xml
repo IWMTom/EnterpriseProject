@@ -246,5 +246,14 @@
     <string name="bid_confirm_8">Can you sign for this?</string>
     <string name="bid_confirm_9">Courier on deck Cap\'n!</string>
     <string name="bid_confirm_10">All hands on deck!</string>
+    <string name="rank_dev">Shipr Developer</string>
+    <string name="rank_banned">BANNED</string>
+    <string name="rank_0">Fresh Shipr</string>
+    <string name="rank_1">Novice Shipr</string>
+    <string name="rank_2">Adept Shipr</string>
+    <string name="rank_3">Experienced Shipr</string>
+    <string name="rank_4">Trusted Shipr</string>
+    <string name="rank_5">Trusted Shipr</string>
+    <string name="profile_welcom">Welcome back!</string>
 
 </resources>
