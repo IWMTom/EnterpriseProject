@@ -111,6 +111,15 @@ public class RegisterStep1Fragment extends Fragment
             profilePhoto.setImageBitmap(profile_photo);
         }
 
+        profilePhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent pickPhotoIntent = new Intent(Intent.ACTION_PICK);
+                pickPhotoIntent.setType("image/*");
+                startActivityForResult(pickPhotoIntent, 1);
+            }
+        });
+
         /**
          * Listens for when the date picker dialog has been used, and sets the text
          * in the date of birth field to be the selected date

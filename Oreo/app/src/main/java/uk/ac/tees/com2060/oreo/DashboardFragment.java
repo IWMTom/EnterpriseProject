@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,8 +19,10 @@ import android.widget.TextView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
@@ -38,7 +42,7 @@ public class DashboardFragment extends Fragment {
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface DashboardListener {
-        public void dashboardListener();
+        void dashboardListener(int i);
     }
 
     /**
@@ -71,12 +75,87 @@ public class DashboardFragment extends Fragment {
         TextView name = view.findViewById(R.id.textView_dash_name);
         name.setText(User.getUser().fullName());
         TextView rep = view.findViewById(R.id.textView_dash_rep);
-        rep.setText(String.valueOf(User.getUser().getRep())+ " ★");
 
-        Button listings = view.findViewById(R.id.button_dash_my_listings);
-        Button shipments = view.findViewById(R.id.button_dash_my_listings);
-        Button jobs = view.findViewById(R.id.button_dash_my_listings);
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        rep.setText(formatter.format((User.getUser().getRep()))+ " ★");
 
+        CircleImageView profile = view.findViewById(R.id.imageView_dash_profile_picture);
+        profile.setImageBitmap(User.getUser().profilePhoto());
+
+        profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCallback = (DashboardListener) getActivity();
+                mCallback.dashboardListener(0);
+            }
+        });
+
+        final Button listings = view.findViewById(R.id.button_dash_my_listings);
+        final Button shipments = view.findViewById(R.id.button_dash_my_shipments);
+        final Button jobs = view.findViewById(R.id.button_dash_my_jobs);
+
+        final ApiCall getData = new ApiCall("user/dashboard",getContext());
+        getData.addResponseListener(new ResponseListener() {
+            @Override
+            public void responseReceived(ApiResponse response) {
+                if(response.success()){
+                    try
+                    {
+                        Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
+                        if(response.getBody().getInt("active_listings") > 0){
+                            listings.setText("View your " + response.getBody().getInt("active_listings") + " listings!");
+                            listings.startAnimation(slideUp);
+                            listings.setVisibility(View.VISIBLE);
+
+                            listings.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mCallback = (DashboardListener) getActivity();
+                                    mCallback.dashboardListener(1);
+                                }
+                            });
+
+                        }
+
+                        if(response.getBody().getInt("inactive_listings") > 0){
+                            shipments.setText("View your " + response.getBody().getInt("inactive_listings") + " shipments!");
+                            shipments.startAnimation(slideUp);
+                            shipments.setVisibility(View.VISIBLE);
+
+                            shipments.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mCallback = (DashboardListener) getActivity();
+                                    mCallback.dashboardListener(2);
+                                }
+                            });
+
+                        }
+
+                        if(response.getBody().getInt("remaining_jobs") > 0){
+                            jobs.setText("View your " + response.getBody().getInt("remaining_jobs") + " jobs!");
+                            jobs.startAnimation(slideUp);
+                            jobs.setVisibility(View.VISIBLE);
+
+                            jobs.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    mCallback = (DashboardListener) getActivity();
+                                    mCallback.dashboardListener(3);
+                                }
+                            });
+
+                        }
+
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+
+        getData.sendRequest();
 
         setHasOptionsMenu(true);
         return view;
@@ -85,7 +164,8 @@ public class DashboardFragment extends Fragment {
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity() {
-        mCallback.dashboardListener();
+    public void callbackToActivity(int i) {
+
+        mCallback.dashboardListener(i);
     }
 }

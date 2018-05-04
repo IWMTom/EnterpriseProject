@@ -3,6 +3,7 @@ package uk.ac.tees.com2060.oreo;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +16,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
+import java.util.Stack;
 
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiCall;
 import uk.ac.tees.com2060.oreo.ApiCallLib.ApiResponse;
@@ -41,7 +45,9 @@ public class MainActivity extends AppCompatActivity
         BidConfirmFragment.BidConfirmListener,
         BidConfirmFragment.DeleteBidListener,
         MyJobsFragment.MyJobsFragmentListener,
-        MyShipmentsFragment.MyShipmentsFragmentListener
+        MyShipmentsFragment.MyShipmentsFragmentListener,
+        RatingsAdapter.RatingsAdapterListener,
+        ContractViewFragment.ContractViewListener
 
 {
 
@@ -49,13 +55,15 @@ public class MainActivity extends AppCompatActivity
     ListItemFragment listItemFragment = new ListItemFragment();
     ListingDetailFragment listingDetailFragment = new ListingDetailFragment();
     NewBidFragment newBidFragment = new NewBidFragment();
-    ViewProfileFragment viewProfileFragment = new ViewProfileFragment();
+    Stack<ViewProfileFragment> viewProfileFragment = new Stack<>();
+    int stackSize = 0;
     EditProfileFragment editProfileFragment = new EditProfileFragment();
     PastListingsFragment pastListingsFragment = new PastListingsFragment();
     BrowseListingsFragment browseListingsFragment = new BrowseListingsFragment();
     BidConfirmFragment bidConfirmFragment = new BidConfirmFragment();
     MyShipmentsFragment myShipmentsFragment = new MyShipmentsFragment();
     MyJobsFragment myJobsFragment = new MyJobsFragment();
+    ContractViewFragment contractViewFragment = new ContractViewFragment();
 
     public MainActivity() {
 
@@ -63,21 +71,32 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        /** START BOILERPLATE */
+        viewProfileFragment.push(new ViewProfileFragment());
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.listing_toolbar);
         setSupportActionBar(toolbar);
 
+        final NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
+            @Override
+            public void onDrawerStateChanged(int newState) {
+                if (newState == DrawerLayout.STATE_IDLE) {
+                    TextView header_rep =
+                            navigationView.getHeaderView(0)
+                                    .findViewById((R.id.textView_nav_header_rep));
+                    DecimalFormat formatter = new DecimalFormat("#,###,###");
+                    header_rep.setText(formatter.format(User.getUser().getRep()) + " ★");
+                }
+            }
+        };
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        /** END BOILERPLATE */
 
         User.getUser().updatePushToken(this);
 
@@ -97,13 +116,57 @@ public class MainActivity extends AppCompatActivity
         TextView textView_nav_header_rep =
                 navigationView.getHeaderView(0)
                         .findViewById((R.id.textView_nav_header_rep));
-        textView_nav_header_rep.setText(String.valueOf(User.getUser().getRep())+" ★");
+        DecimalFormat formatter = new DecimalFormat("#,###,###");
+        textView_nav_header_rep.setText(formatter.format((User.getUser().getRep())) + " ★");
 
         TextView textView_nav_header_name = navigationView.getHeaderView(0)
                 .findViewById(R.id.textView_nav_header_name);
         textView_nav_header_name.setText(User.getUser().fullName());
 
         imageView_nav_header_profile_photo.setImageBitmap(User.getUser().profilePhoto());
+
+
+        getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    if (getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1) != dashboardFragment) {
+                        dashboardFragment = new DashboardFragment();
+                    }
+                }
+
+                if (stackSize > getSupportFragmentManager().getFragments().size()) {
+                    if (viewProfileFragment.size() > 1) {
+                        viewProfileFragment.pop();
+                    }
+                }
+
+                if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == dashboardFragment) {
+                    navigationView.setCheckedItem(R.id.nav_dashboard);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == listItemFragment) {
+                    navigationView.setCheckedItem(R.id.nav_list);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == pastListingsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_my_listings);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == myShipmentsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_my_shipments);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == browseListingsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_browse_listings);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == myJobsFragment) {
+                    navigationView.setCheckedItem(R.id.nav_my_jobs);
+                } else if (getSupportFragmentManager().getFragments().get(getSupportFragmentManager().getFragments().size() - 1) == editProfileFragment) {
+                    navigationView.setCheckedItem(R.id.nav_settings);
+                }
+
+                if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                    navigationView.setCheckedItem(R.id.nav_dashboard);
+                }
+
+                stackSize = getSupportFragmentManager().getBackStackEntryCount();
+
+
+            }
+        });
 
         // Displays dashboard fragment by default
         if (findViewById(R.id.main_fragment_container) != null) {
@@ -132,10 +195,8 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        TextView textView_nav_header_rep =
-                navigationView.getHeaderView(0)
-                        .findViewById((R.id.textView_nav_header_rep));
-        textView_nav_header_rep.setText(String.valueOf(User.getUser().getRep())+" ★");
+        navigationView.getHeaderView(0)
+                .findViewById((R.id.textView_nav_header_rep));
 
         switch (item.getItemId()) {
             case R.id.nav_dashboard:
@@ -154,7 +215,7 @@ public class MainActivity extends AppCompatActivity
                 showMyJobs();
                 break;
             case R.id.nav_my_listings:
-                showPastListings();
+                showMyListings();
                 break;
             case R.id.nav_settings:
                 showEditProfile();
@@ -207,7 +268,7 @@ public class MainActivity extends AppCompatActivity
                 .commit();
     }
 
-    private void showPastListings() {
+    private void showMyListings() {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, pastListingsFragment).addToBackStack(null)
                 .commit();
@@ -241,8 +302,21 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void dashboardListener() {
-
+    public void dashboardListener(int i) {
+        switch (i) {
+            case 1:
+                showMyListings();
+                break;
+            case 2:
+                showMyShipments();
+                break;
+            case 3:
+                showMyJobs();
+                break;
+            case 0:
+                showProfile();
+                break;
+        }
     }
 
     private void showListingDetail(final int id) {
@@ -296,9 +370,9 @@ public class MainActivity extends AppCompatActivity
                 Toast toast = Toast.makeText(this, "Oooh, what's this?", Toast.LENGTH_SHORT);
                 toast.show();
 
-                viewProfileFragment.setArguments(b);
+                viewProfileFragment.peek().setArguments(b);
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.main_fragment_container, viewProfileFragment)
+                        .replace(R.id.main_fragment_container, viewProfileFragment.peek())
                         .addToBackStack(null).commit();
 
             } else {
@@ -340,18 +414,18 @@ public class MainActivity extends AppCompatActivity
     public void openUserProfile(int userid) {
         Bundle b = new Bundle();
         b.putInt("userid", userid);
-        viewProfileFragment.setArguments(b);
+        viewProfileFragment.peek().setArguments(b);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_fragment_container, viewProfileFragment)
+                .replace(R.id.main_fragment_container, viewProfileFragment.peek())
                 .addToBackStack(null).commit();
     }
 
     @Override
     public void bidsAdapterListener(Bundle b) {
 
-        if(b.get("bid")!=null){
+        if (b.get("bid") != null) {
             showConfirmBid(b);
-        }else if(b.get("userid")!=null){
+        } else if (b.get("userid") != null) {
             openUserProfile(b.getInt("userid"));
         }
     }
@@ -373,11 +447,35 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void myJobsFragmentListener(Contract contract) {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable("contract", contract);
+        listingDetailFragment.setArguments(arguments);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, contractViewFragment)
+                .addToBackStack(null).commit();
     }
 
     @Override
     public void myShipmentsFragmentListener(Contract contract) {
+        Bundle arguments = new Bundle();
+        arguments.putSerializable("contract", contract);
+        listingDetailFragment.setArguments(arguments);
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_fragment_container, contractViewFragment)
+                .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void ratingsAdapterListener(Bundle b) {
+        viewProfileFragment.push(new ViewProfileFragment());
+        Log.d("profile stack size", String.valueOf(viewProfileFragment.size()));
+        openUserProfile(b.getInt("userid"));
+    }
+
+    @Override
+    public void ContractViewListener() {
+        getSupportFragmentManager().popBackStack();
     }
 }

@@ -32,4 +32,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/my_listings_no_results"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Looks like there's nothing here."
+        android:textAppearance="@style/AppTheme.BodyText"
+        android:textSize="24sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+/>
+
 </android.support.constraint.ConstraintLayout>

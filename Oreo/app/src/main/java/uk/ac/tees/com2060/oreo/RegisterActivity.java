@@ -29,6 +29,8 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
     RegisterStep1Fragment step1Fragment = new RegisterStep1Fragment();
     RegisterStep2Fragment step2Fragment = new RegisterStep2Fragment();
 
+    Boolean requesting = false;
+
     Bitmap profile_photo;
     String full_name, known_as, dob, postcode, phone_number, email_address, password, confirm_password;
 
@@ -118,6 +120,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
         doRegister.addResponseListener(new ResponseListener() {
             @Override
             public void responseReceived(ApiResponse response) {
+                requesting = false;
                 if (response.success()) {
                     try {
 
@@ -138,8 +141,12 @@ public class RegisterActivity extends AppCompatActivity implements RegisterStep1
                 }
             }
         });
-        doRegister.sendRequest();
-        Toast.makeText(this, R.string.submitting, Toast.LENGTH_SHORT).show();
+
+        if (!requesting) {
+            doRegister.sendRequest();
+            Toast.makeText(this, R.string.submitting, Toast.LENGTH_SHORT).show();
+            requesting = true;
+        }
     }
 
     /**

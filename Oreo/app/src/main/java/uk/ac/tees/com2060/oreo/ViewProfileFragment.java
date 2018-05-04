@@ -22,6 +22,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -92,7 +93,11 @@ public class ViewProfileFragment extends Fragment {
 
             profileID = args.getInt("userid");
 
-            ownProfile = profileID == User.getUser().id();
+            if (profileID == User.getUser().id()) {
+                ownProfile = true;
+            }else{
+                ownProfile = false;
+            }
 
         } else {
             profileID = User.getUser().id();
@@ -106,11 +111,12 @@ public class ViewProfileFragment extends Fragment {
             public void responseReceived(ApiResponse response) {
                 if (response.success()) {
                     try {
-                        alias.setText(response.getBody().getString("known_as"));
-                        getActivity().setTitle(response.getBody().getString("known_as"));
+                      alias.setText(response.getBody().getString("known_as"));
+                    if(!ownProfile){getActivity().setTitle(response.getBody().getString("known_as"));}
                         location.setText(response.getBody().getString("city"));
 
-                        rep.setText(String.format("%s ★", String.valueOf(response.getBody().getInt("reputation"))));
+                        DecimalFormat formatter = new DecimalFormat("#,###,###");
+                        rep.setText(formatter.format(response.getBody().getInt("reputation")) + " ★");
                         if(ownProfile){User.getUser().setRep(response.getBody().getInt("reputation"));}
 
                         reputation = response.getBody().getInt("reputation");
@@ -131,6 +137,26 @@ public class ViewProfileFragment extends Fragment {
                             noRatings.setVisibility(View.VISIBLE);
                         }
 
+                        if (profileID == 21 || profileID == 23) {
+                            title.setText(R.string.rank_dev);
+                        } else if (reputation < 0) {
+                            title.setText(R.string.rank_banned);
+                        } else if (reputation < 100) {
+                            title.setText(R.string.rank_0);
+                        } else if (reputation < 250) {
+                            title.setText(R.string.rank_1);
+                        } else if (reputation < 500) {
+                            title.setText(R.string.rank_2);
+                        } else if (reputation < 1000) {
+                            title.setText(R.string.rank_3);
+                        } else if (reputation < 2000) {
+                            title.setText(R.string.rank_4);
+                        } else if (reputation < 10000) {
+                            title.setText(R.string.rank_5);
+                        }
+
+                        if(ownProfile){title.setText(R.string.profile_welcom);}
+
                         alias.setVisibility(View.VISIBLE);
                         title.setVisibility(View.VISIBLE);
                         rep.setVisibility(View.VISIBLE);
@@ -149,12 +175,10 @@ public class ViewProfileFragment extends Fragment {
         getUserData.sendRequest();
 
         if (ownProfile) {
-            getActivity().setTitle("Your Profile!");
+            getActivity().setTitle("Your Profile");
             image.setImageBitmap(User.getUser().profilePhoto());
-
-            title.setText("Welcome back!");
-
             setHasOptionsMenu(true);
+
         } else {
             Picasso.get().load("https://getshipr.com/api/user/" + profileID + "/photo").placeholder(R.drawable.default_profile_photo).into(image, new Callback() {
                 @Override
@@ -167,28 +191,9 @@ public class ViewProfileFragment extends Fragment {
                     progress.setVisibility(View.INVISIBLE);
                 }
             });
-
-
-            if (profileID == 21 || profileID == 23) {
-                title.setText("Shipr Developer");
-            } else if (reputation < 0) {
-                title.setText("BANNED");
-            } else if (reputation < 100) {
-                title.setText("Fresh Shipr");
-            } else if (reputation < 250) {
-                title.setText("Novice Shipr");
-            } else if (reputation < 500) {
-                title.setText("Adept Shipr");
-            } else if (reputation < 1000) {
-                title.setText("Experienced Shipr");
-            } else if (reputation < 2000) {
-                title.setText("Trusted Shipr");
-            } else if (reputation < 10000) {
-                title.setText("Trusted Shipr");
-            }
+        setHasOptionsMenu(false);
         }
 
-        setHasOptionsMenu(false);
         return view;
     }
 
@@ -220,7 +225,6 @@ public class ViewProfileFragment extends Fragment {
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
         inflater.inflate(R.menu.menu_edit, menu);
 
         super.onCreateOptionsMenu(menu, inflater);

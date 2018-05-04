@@ -149,7 +149,7 @@ public class ListingDetailFragment extends Fragment{
                         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                                Log.d("123", listView.getItemAtPosition(i).toString());
+
                             }
                         });
                         progress.setVisibility(View.INVISIBLE);

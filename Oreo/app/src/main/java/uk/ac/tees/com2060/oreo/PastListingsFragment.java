@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -76,8 +77,16 @@ public class PastListingsFragment extends Fragment {
                 if (response.success()) {
                     listings[0] = Listing.getListings(response.getBodyArray());
                     listView.setAdapter(new ListingAdapter(getContext(), listings[0]));
-                    listView.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
+
+                    TextView nothingToSee = getView().findViewById(R.id.my_listings_no_results);
+                    if(listings[0].size() == 0){
+                        listView.setVisibility(View.INVISIBLE);
+                        nothingToSee.setVisibility(View.VISIBLE);
+                    }else{
+                        nothingToSee.setVisibility(View.INVISIBLE);
+                        listView.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         });

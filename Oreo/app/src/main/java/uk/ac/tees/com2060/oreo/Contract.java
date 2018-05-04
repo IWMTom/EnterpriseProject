@@ -4,9 +4,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Contract {
+public class Contract implements Serializable {
     String item_description, courier_alias, sender_alias, bid_message;
     int id, courierId, senderId, listing_id;
     double bid_amount;
