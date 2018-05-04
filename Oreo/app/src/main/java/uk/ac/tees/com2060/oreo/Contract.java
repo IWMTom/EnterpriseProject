@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class Contract implements Serializable {
     String item_description, courier_alias, sender_alias, bid_message;
-    int id, courierId, senderId, listing_id;
+    int courierId, senderId, listing_id, id;
     double bid_amount;
     boolean collected, delivered, confirmed;
 
     public Contract(String item_description, String courier_alias, String sender_alias,
-                    int sender_id, int courier_id, int listing_id,
+                    int sender_id, int courier_id, int id, int listing_id,
                     boolean collected, boolean delivered, boolean confirmed,
                     String bid_message, double bid_amount) {
 
@@ -24,6 +24,7 @@ public class Contract implements Serializable {
         this.sender_alias = sender_alias;
         this.courierId = courier_id;
         this.senderId = sender_id;
+        this.id = id;
         this.bid_message = bid_message;
         this.bid_amount = bid_amount;
         this.collected = collected;
@@ -42,13 +43,14 @@ public class Contract implements Serializable {
 
                         object.getString("item_description"),
                         object.getString("courier_alias"),
-                        object.getString("sender_alias"),
-                        object.getInt("sender_id"),
+                        object.getString("shipper_alias"),
+                        object.getInt("shipper_id"),
                         object.getInt("courier_id"),
+                        object.getInt("id"),
                         object.getInt("listing_id"),
-                        object.getBoolean("collected"),
-                        object.getBoolean("delivered"),
-                        object.getBoolean("confirmed"),
+                        object.getInt("collected") == 1,
+                        object.getInt("delivered") == 1,
+                        object.getInt("confirmed") == 1,
                         object.getString("bid_message"),
                         object.getDouble("bid_amount")
                 ));

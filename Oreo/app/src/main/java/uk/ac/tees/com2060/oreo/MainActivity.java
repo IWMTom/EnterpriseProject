@@ -431,8 +431,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void bidConfirmListener(Bundle b) {
-
+    public void bidConfirmListener() {
+        showMyShipments();
     }
 
     @Override
@@ -449,7 +449,7 @@ public class MainActivity extends AppCompatActivity
     public void myJobsFragmentListener(Contract contract) {
         Bundle arguments = new Bundle();
         arguments.putSerializable("contract", contract);
-        listingDetailFragment.setArguments(arguments);
+        contractViewFragment.setArguments(arguments);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, contractViewFragment)
@@ -460,7 +460,7 @@ public class MainActivity extends AppCompatActivity
     public void myShipmentsFragmentListener(Contract contract) {
         Bundle arguments = new Bundle();
         arguments.putSerializable("contract", contract);
-        listingDetailFragment.setArguments(arguments);
+        contractViewFragment.setArguments(arguments);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_fragment_container, contractViewFragment)

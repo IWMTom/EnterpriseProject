@@ -38,6 +38,8 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
  */
 public class ContractViewFragment extends Fragment {
     ContractViewListener mCallback;
+    Contract contract;
+
     Boolean reviewing = false;
 
     public ContractViewFragment() {
@@ -56,9 +58,9 @@ public class ContractViewFragment extends Fragment {
      * Sets the title in the title bar and displays the fragment layout file.
      */
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Bundle arguments = getArguments();
-        Contract contract = (Contract) arguments.getSerializable("contract");
+    public View onCreateView(LayoutInflater inflater, final ViewGroup container, Bundle savedInstanceState) {
+        Bundle arguments = this.getArguments();
+        contract = (Contract) arguments.getSerializable("contract");
 
         mCallback = (ContractViewListener) getActivity();
         final View view = inflater.inflate(R.layout.fragment_contract_view, container, false);
@@ -70,104 +72,193 @@ public class ContractViewFragment extends Fragment {
 
         Animation slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
 
-            if (contract.senderId == User.getUser().id()) {
+        if (contract.senderId == User.getUser().id()) {
 
-                if (!contract.collected) {
-                    status.setText("Waiting for collection");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            if (contract.confirmed) {
+                status.setText("Delivery completed");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGreen));
 
-                    badButton.setText("Cancel collection");
-                    badButton.setVisibility(View.VISIBLE);
-                    badButton.setAnimation(slideUp);
+                goodButton.setText("Review this interaction");
+                goodButton.setVisibility(View.VISIBLE);
+                goodButton.setAnimation(slideUp);
+                badButton.setText("Report Theft");
+                badButton.setVisibility(View.VISIBLE);
+                badButton.setAnimation(slideUp);
 
-                } else if (contract.collected) {
-                    status.setText("Enroute to destination");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+            } else if (contract.delivered) {
+                status.setText("Please confirm delivery made");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
 
-                } else if (contract.delivered) {
-                    status.setText("Please confirm delivery made");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
+                goodButton.setText("Confirm delivery");
+                goodButton.setVisibility(View.VISIBLE);
+                goodButton.setAnimation(slideUp);
+                badButton.setText("Report Theft");
+                badButton.setVisibility(View.VISIBLE);
+                badButton.setAnimation(slideUp);
 
-                    goodButton.setText("Confirm delivery");
-                    goodButton.setVisibility(View.VISIBLE);
-                    goodButton.setAnimation(slideUp);
-                    badButton.setText("Report Theft");
-                    badButton.setVisibility(View.VISIBLE);
-                    badButton.setAnimation(slideUp);
+            } else if (contract.collected) {
 
+                status.setText("Enroute to destination");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
 
-                } else if (contract.confirmed) {
-                    status.setText("Delivery completed");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGreen));
+            } else if (!contract.collected) {
 
-                    goodButton.setText("Review this interaction");
-                    goodButton.setVisibility(View.VISIBLE);
-                    goodButton.setAnimation(slideUp);
-                    badButton.setText("Report Theft");
-                    badButton.setVisibility(View.VISIBLE);
-                    badButton.setAnimation(slideUp);
-                }
+                status.setText("Waiting for collection");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
 
-            } else {
+                badButton.setText("Cancel collection");
+                badButton.setVisibility(View.VISIBLE);
+                badButton.setAnimation(slideUp);
+            }
 
-
-                if (!contract.collected) {
-                    status.setText("Waiting for you to collect from shipper");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
-
-                    goodButton.setText("Confirm collection");
-                    goodButton.setVisibility(View.VISIBLE);
-                    goodButton.setAnimation(slideUp);
-                    badButton.setText("Cancel collection");
-                    badButton.setVisibility(View.VISIBLE);
-                    badButton.setAnimation(slideUp);
-
-                } else if (contract.collected) {
-                    status.setText("You have this item in possesion");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
-
-                    goodButton.setText("Confirm delivery");
-                    goodButton.setVisibility(View.VISIBLE);
-                    goodButton.setAnimation(slideUp);
-
-                } else if (contract.delivered) {
-                    status.setText("Waiting for shipper to validate");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
+        } else {
 
 
-                } else if (contract.confirmed) {
-                    status.setText("Job Complete!");
-                    status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGreen));
+            if (contract.confirmed) {
+                status.setText("Job Complete!");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorGreen));
 
-                    goodButton.setText("Review this interaction");
-                    goodButton.setVisibility(View.VISIBLE);
-                    goodButton.setAnimation(slideUp);
+                goodButton.setText("Review this interaction");
+                goodButton.setVisibility(View.VISIBLE);
+                goodButton.setAnimation(slideUp);
 
-                }
+            } else if (contract.delivered) {
+
+                status.setText("Waiting for shipper to validate");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
+
+            } else if (contract.collected) {
+
+                status.setText("You have this item in possesion");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorWhite));
+
+                goodButton.setText("Confirm delivery");
+                goodButton.setVisibility(View.VISIBLE);
+                goodButton.setAnimation(slideUp);
+
+
+            } else if (!contract.collected) {
+                status.setText("Waiting for you to collect from shipper");
+                status.setTextColor(ContextCompat.getColor(getContext(), R.color.colorRed));
+
+                goodButton.setText("Confirm collection");
+                goodButton.setVisibility(View.VISIBLE);
+                goodButton.setAnimation(slideUp);
+                badButton.setText("Cancel collection");
+                badButton.setVisibility(View.VISIBLE);
+                badButton.setAnimation(slideUp);
 
             }
+
+        }
 
         goodButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if (contract.senderId == User.getUser().id()) {
+
+                    if (contract.confirmed) {
+
+                    } else if (contract.delivered) {
+                        ApiCall call = new ApiCall("contract/" + contract.id + "/setConfirmed", getContext());
+                        call.addResponseListener(new ResponseListener() {
+                            @Override
+                            public void responseReceived(ApiResponse response) {
+                                callbackToActivity();
+                            }
+                        });
+                        call.sendRequest();
+                    }
+                } else {
+                    if (contract.confirmed) {
+
+                    } else if (contract.collected) {
+                        ApiCall call = new ApiCall("contract/" + contract.id + "/setDelivered", getContext());
+                        call.addResponseListener(new ResponseListener() {
+                            @Override
+                            public void responseReceived(ApiResponse response) {
+                                callbackToActivity();
+                            }
+                        });
+                        call.sendRequest();
+                    } else if (!contract.collected) {
+                        ApiCall call = new ApiCall("contract/" + contract.id + "/setCollected", getContext());
+                        call.addResponseListener(new ResponseListener() {
+                            @Override
+                            public void responseReceived(ApiResponse response) {
+                                callbackToActivity();
+                            }
+                        });
+                        call.sendRequest();
+                    }
+                }
             }
-        });
+    });
 
-        badButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+
+        badButton.setOnClickListener(new View.OnClickListener()
+
+    {
+        @Override
+        public void onClick (View v){
+
+        if (contract.senderId == User.getUser().id()) {
+
+            if (contract.confirmed) {
+
+            } else if (contract.collected) {
+
+            } else if (contract.delivered) {
+                ApiCall call = new ApiCall("contract/" + contract.id + "/setConfirmed", getContext());
+                call.addResponseListener(new ResponseListener() {
+                    @Override
+                    public void responseReceived(ApiResponse response) {
+                        callbackToActivity();
+                    }
+                });
+                call.sendRequest();
+            } else if (contract.confirmed) {
 
             }
-        });
 
-        setHasOptionsMenu(true);
-        return view;
+        } else {
+
+            if (!contract.collected) {
+                ApiCall call = new ApiCall("contract/" + contract.id + "/setCollected", getContext());
+                call.addResponseListener(new ResponseListener() {
+                    @Override
+                    public void responseReceived(ApiResponse response) {
+                        callbackToActivity();
+                    }
+                });
+                call.sendRequest();
+            } else if (contract.collected) {
+                ApiCall call = new ApiCall("contract/" + contract.id + "/setDelivered", getContext());
+                call.addResponseListener(new ResponseListener() {
+                    @Override
+                    public void responseReceived(ApiResponse response) {
+                        callbackToActivity();
+                    }
+                });
+                call.sendRequest();
+            } else if (contract.delivered) {
+
+            } else if (contract.confirmed) {
+
+            }
+        }
     }
+    });
+
+    setHasOptionsMenu(true);
+        return view;
+}
 
 
     public void callbackToActivity() {
         mCallback = (ContractViewListener) getActivity();
+
         mCallback.ContractViewListener();
     }
 }

@@ -53,14 +53,14 @@ public class ContractsAdapter extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        @SuppressLint("ViewHolder") View rowView = mInflater.inflate(R.layout.fragment_listing_detail_listview, viewGroup, false);
+        @SuppressLint("ViewHolder") View rowView = mInflater.inflate(R.layout.contract_list_view, viewGroup, false);
 
         final Contract contract = (Contract) getItem(i);
 
-        TextView name = view.findViewById(R.id.contract_list_package_name);
+        TextView name = rowView.findViewById(R.id.contract_list_package_name);
         name.setText(contract.item_description);
 
-        TextView status = view.findViewById(R.id.contract_list_package_status);
+        TextView status = rowView.findViewById(R.id.contract_list_package_status);
 
         if(contract.senderId == User.getUser().id()){
 
