@@ -57,7 +57,7 @@ public class BidConfirmFragment extends Fragment {
      * Interface for the Activity to implement - enables activity/fragment communication
      */
     public interface BidConfirmListener {
-        void bidConfirmListener(Bundle b);
+        void bidConfirmListener();
     }
 
     public interface DeleteBidListener {
@@ -186,7 +186,7 @@ public class BidConfirmFragment extends Fragment {
                     @Override
                     public void responseReceived(ApiResponse response) {
                         if (response.success()) {
-                            //TODO: navigate to bid screen
+                            callbackToActivity();
                         } else {
                             Toast toast = Toast.makeText(getContext(), "Server Error!", Toast.LENGTH_SHORT);
                             toast.show();
@@ -203,15 +203,15 @@ public class BidConfirmFragment extends Fragment {
     private void doGoToProfile(int i) {
         Bundle b = new Bundle();
         b.putInt("userid", i);
-        callbackToActivity(b);
+        callbackToActivity();
     }
 
     /**
      * Callback to the Activity
      */
-    public void callbackToActivity(Bundle b) {
+    public void callbackToActivity() {
         mCallback = (BidConfirmListener) getContext();
-        mCallback.bidConfirmListener(b);
+        mCallback.bidConfirmListener();
     }
 
     /**
