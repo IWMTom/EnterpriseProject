@@ -13,6 +13,7 @@ import android.util.Base64;
 import android.widget.Switch;
 
 import java.io.ByteArrayOutputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 /**
@@ -168,6 +169,12 @@ public class Utils {
             }
         }
         return returnList;
+    }
+
+    public static String formatCurrency(double amount)
+    {
+        NumberFormat formatter = NumberFormat.getCurrencyInstance();
+        return formatter.format(amount);
     }
 
 }

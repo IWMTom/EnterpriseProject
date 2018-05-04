@@ -75,6 +75,7 @@ public class BidsAdapter extends BaseAdapter {
                 b.putInt("userid", bid.user_id());
                 if (listing.user_id() == User.getUser().id()) {
                     b.putSerializable("bid", bid);
+                    b.putString("listing_title", listing.itemDescription());
                 }
                 callbackToActivity(b);
             }
@@ -89,6 +90,7 @@ public class BidsAdapter extends BaseAdapter {
                 b.putInt("userid", bid.user_id());
                 if (listing.user_id() == User.getUser().id()) {
                     b.putSerializable("bid", bid);
+                    b.putString("listing_title", listing.itemDescription());
                 }
                 callbackToActivity(b);
             }
@@ -102,6 +104,7 @@ public class BidsAdapter extends BaseAdapter {
                 b.putInt("userid",bid.user_id());
                 if(listing.user_id()==User.getUser().id()){
                     b.putSerializable("bid", bid);
+                    b.putString("listing_title", listing.itemDescription());
                 }
                 callbackToActivity(b);
             }

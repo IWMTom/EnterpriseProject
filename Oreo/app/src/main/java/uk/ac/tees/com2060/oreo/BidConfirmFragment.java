@@ -41,6 +41,8 @@ public class BidConfirmFragment extends Fragment {
     ConstraintLayout hiddenControls;
     TextView titleText;
     TextView locationText;
+    TextView confirm_bidder_comment;
+    TextView confirm_listing;
 
     Button confirmButton;
     Button declineButton;
@@ -77,6 +79,12 @@ public class BidConfirmFragment extends Fragment {
         Bundle args = this.getArguments();
 
         final Bid bid = (Bid) args.getSerializable("bid");
+
+        confirm_listing = view.findViewById(R.id.textView_confirm_listing);
+        confirm_listing.setText(args.getString("listing_title"));
+
+        confirm_bidder_comment = view.findViewById(R.id.textView_confirm_bidder_comment);
+        confirm_bidder_comment.setText(bid.message());
 
         profilePhoto = view.findViewById(R.id.imageView_confirm_profile_picture);
         profilePhoto.setOnClickListener(new View.OnClickListener() {
@@ -169,6 +177,7 @@ public class BidConfirmFragment extends Fragment {
         });
 
         confirmButton = view.findViewById(R.id.button_bid_agree);
+        confirmButton.setText("I AGREE TO PAY " + Utils.formatCurrency(bid.amount()));
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
