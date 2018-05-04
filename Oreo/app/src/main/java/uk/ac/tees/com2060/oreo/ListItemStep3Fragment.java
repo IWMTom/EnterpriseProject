@@ -26,6 +26,7 @@ import uk.ac.tees.com2060.oreo.ApiCallLib.ResponseListener;
 public class ListItemStep3Fragment extends Fragment implements BlockingStep {
 
     TextView collectionLocation, deliveryLocation, itemDescription, itemSize, importantDetails;
+    boolean canClick = true;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -103,6 +104,7 @@ public class ListItemStep3Fragment extends Fragment implements BlockingStep {
         api.addResponseListener(new ResponseListener() {
             @Override
             public void responseReceived(ApiResponse response) {
+                canClick = true;
                 if (response.success()) {
                     Utils.clearTemporaryStorage(getActivity());
 
@@ -126,7 +128,8 @@ public class ListItemStep3Fragment extends Fragment implements BlockingStep {
             }
         });
 
-        api.sendRequest();
+        if(canClick){api.sendRequest();}
+        canClick = false;
         Toast.makeText(getContext(), R.string.submitting, Toast.LENGTH_SHORT).show();
     }
 

@@ -40,6 +40,8 @@ public class NewBidFragment extends Fragment
     EditText bid_message;
     Listing selectedListing;
 
+    Boolean canClick = true;
+
     public NewBidFragment() {}
 
     /**
@@ -133,6 +135,7 @@ public class NewBidFragment extends Fragment
             @Override
             public void responseReceived(ApiResponse response)
             {
+                canClick = true;
                 if (response.success())
                 {
                     bid_amount.setText(null);
@@ -146,7 +149,8 @@ public class NewBidFragment extends Fragment
                 }
             }
         });
-        newBid.sendRequest();
+        if(canClick){newBid.sendRequest();}
+        canClick = false;
         Toast.makeText(getContext(), R.string.submitting, Toast.LENGTH_SHORT).show();
     }
 

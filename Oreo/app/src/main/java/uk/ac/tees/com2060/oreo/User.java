@@ -163,7 +163,7 @@ public class User implements Serializable {
             public void responseReceived(ApiResponse response) {
                 if (response.success()) {
                     try {
-                        rep = response.getBody().getInt("reputation");
+                       setRep(response.getBody().getInt("reputation"));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

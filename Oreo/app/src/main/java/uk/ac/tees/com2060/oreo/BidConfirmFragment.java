@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
+import java.text.DecimalFormat;
 import java.util.Random;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -75,9 +76,7 @@ public class BidConfirmFragment extends Fragment {
 
         Bundle args = this.getArguments();
 
-        if (args.get("bid") != null) {
-            args.getInt("bid");
-        }
+        final Bid bid = (Bid) args.getSerializable("bid");
 
         profilePhoto = view.findViewById(R.id.imageView_confirm_profile_picture);
         profilePhoto.setOnClickListener(new View.OnClickListener() {
@@ -122,7 +121,8 @@ public class BidConfirmFragment extends Fragment {
                         usernameText.setVisibility(View.VISIBLE);
                         locationText.setVisibility(View.VISIBLE);
 
-                        reputationText.setText(String.valueOf(response.getBody().get("reputation")) + " ★");
+                        DecimalFormat formatter = new DecimalFormat("#,###,###");
+                        reputationText.setText(formatter.format(response.getBody().get("reputation")) + " ★");
                         usernameText.setText((String) response.getBody().get("known_as"));
                         locationText.setText((String) response.getBody().get("city"));
 
@@ -177,7 +177,7 @@ public class BidConfirmFragment extends Fragment {
                     @Override
                     public void responseReceived(ApiResponse response) {
                         if (response.success()) {
-                            //todo bid accept screen
+                            //TODO: navigate to bid screen
                         } else {
                             Toast toast = Toast.makeText(getContext(), "Server Error!", Toast.LENGTH_SHORT);
                             toast.show();

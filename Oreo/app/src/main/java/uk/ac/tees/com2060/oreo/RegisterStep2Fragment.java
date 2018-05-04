@@ -20,6 +20,7 @@ import android.widget.TextView;
  */
 public class RegisterStep2Fragment extends Fragment
 {
+
     RegisterStep2Listener mCallback;
     TextView textView_hey;
     EditText editText_postcode;

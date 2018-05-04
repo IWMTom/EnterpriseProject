@@ -139,8 +139,16 @@ public class BrowseListingsFragment extends Fragment {
 
                 listView.setAdapter(new ListingAdapter(getContext(), filteredListings));
 
-                listView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.INVISIBLE);
+
+                TextView nothingToSee = getView().findViewById(R.id.listings_no_results);
+                if(filteredListings.size() == 0){
+                    listView.setVisibility(View.INVISIBLE);
+                    nothingToSee.setVisibility(View.VISIBLE);
+                }else{
+                    nothingToSee.setVisibility(View.INVISIBLE);
+                    listView.setVisibility(View.VISIBLE);
+                }
             }
         });
 
@@ -223,8 +231,16 @@ public class BrowseListingsFragment extends Fragment {
 
                     listView.setAdapter(new ListingAdapter(getContext(), filteredListings));
 
-                    listView.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.INVISIBLE);
+
+                    TextView nothingToSee = getView().findViewById(R.id.listings_no_results);
+                    if(filteredListings.size() == 0){
+                        listView.setVisibility(View.INVISIBLE);
+                        nothingToSee.setVisibility(View.VISIBLE);
+                    }else{
+                        nothingToSee.setVisibility(View.INVISIBLE);
+                        listView.setVisibility(View.VISIBLE);
+                    }
 
                 }
             }
